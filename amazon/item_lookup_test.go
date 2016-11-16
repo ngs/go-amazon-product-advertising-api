@@ -10,3 +10,9 @@ func TestItemLookup(t *testing.T) {
 	}
 	Test{client, req.Client}.Compare(t)
 }
+
+func TestItemLookupBuildQuery(t *testing.T) {
+	client, _ := New("AK", "SK", "JP")
+	q := client.ItemLookup().buildQuery()
+	Test{0, len(q)}.Compare(t)
+}

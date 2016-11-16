@@ -1,5 +1,7 @@
 package amazon
 
+import "net/http"
+
 // CartCreateResponseGroup represents constants those are capable ResponseGroups parameter
 type CartCreateResponseGroup string
 
@@ -25,13 +27,25 @@ type CartCreateResponse struct {
 	Error error
 }
 
-func (req *CartCreateRequest) buildQuery() map[string]string {
-	q := map[string]string{}
+func (req *CartCreateRequest) buildQuery() map[string]interface{} {
+	q := map[string]interface{}{}
 	return q
 }
 
-// Do send request for the API
+func (req *CartCreateRequest) httpMethod() string {
+	return http.MethodGet
+}
+
+func (req *CartCreateRequest) operation() string {
+	return "CartCreate"
+}
+
+// Do sends request for the API
 func (req *CartCreateRequest) Do() (*CartCreateResponse, error) {
+	_, err := req.Client.DoRequest(req)
+	if err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 

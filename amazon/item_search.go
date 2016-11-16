@@ -1,5 +1,7 @@
 package amazon
 
+import "net/http"
+
 // ItemSearchResponseGroup represents constants those are capable ResponseGroups parameter
 type ItemSearchResponseGroup string
 
@@ -79,13 +81,25 @@ type ItemSearchResponse struct {
 	Error error
 }
 
-func (req *ItemSearchRequest) buildQuery() map[string]string {
-	q := map[string]string{}
+func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
+	q := map[string]interface{}{}
 	return q
 }
 
-// Do send request for the API
+func (req *ItemSearchRequest) httpMethod() string {
+	return http.MethodGet
+}
+
+func (req *ItemSearchRequest) operation() string {
+	return "ItemSearch"
+}
+
+// Do sends request for the API
 func (req *ItemSearchRequest) Do() (*ItemSearchResponse, error) {
+	_, err := req.Client.DoRequest(req)
+	if err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 

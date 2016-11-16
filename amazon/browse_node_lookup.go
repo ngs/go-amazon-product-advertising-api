@@ -1,5 +1,7 @@
 package amazon
 
+import "net/http"
+
 // BrowseNodeLookupResponseGroup represents constants those are capable ResponseGroups parameter
 type BrowseNodeLookupResponseGroup string
 
@@ -27,13 +29,25 @@ type BrowseNodeLookupResponse struct {
 	Error error
 }
 
-func (req *BrowseNodeLookupRequest) buildQuery() map[string]string {
-	q := map[string]string{}
+func (req *BrowseNodeLookupRequest) buildQuery() map[string]interface{} {
+	q := map[string]interface{}{}
 	return q
 }
 
-// Do send request for the API
+func (req *BrowseNodeLookupRequest) httpMethod() string {
+	return http.MethodGet
+}
+
+func (req *BrowseNodeLookupRequest) operation() string {
+	return "BrowseNodeLookup"
+}
+
+// Do sends request for the API
 func (req *BrowseNodeLookupRequest) Do() (*BrowseNodeLookupResponse, error) {
+	_, err := req.Client.DoRequest(req)
+	if err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 

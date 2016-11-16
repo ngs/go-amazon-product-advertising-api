@@ -10,3 +10,9 @@ func Test<%= operation %>(t *testing.T) {
   }
   Test{client, req.Client}.Compare(t)
 }
+
+func Test<%= operation %>BuildQuery(t *testing.T) {
+  client, _ := New("AK", "SK", "JP")
+  q := client.<%= operation %>().buildQuery()
+  Test{0, len(q)}.Compare(t)
+}

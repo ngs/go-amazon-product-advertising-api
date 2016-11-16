@@ -10,3 +10,9 @@ func TestCartClear(t *testing.T) {
 	}
 	Test{client, req.Client}.Compare(t)
 }
+
+func TestCartClearBuildQuery(t *testing.T) {
+	client, _ := New("AK", "SK", "JP")
+	q := client.CartClear().buildQuery()
+	Test{0, len(q)}.Compare(t)
+}

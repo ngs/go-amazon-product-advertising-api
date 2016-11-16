@@ -47,3 +47,21 @@ func (region Region) Endpoint() string {
 		RegionUS:      "webservices.amazon.com",
 	}[region]
 }
+
+// HTTPSEndpoint returns HTTPS endpoint
+func (region Region) HTTPSEndpoint() string {
+	ep := region.Endpoint()
+	if ep == "" {
+		return ""
+	}
+	return "https://" + ep + "/onca/xml"
+}
+
+// HTTPEndpoint returns HTTP endpoint
+func (region Region) HTTPEndpoint() string {
+	ep := region.Endpoint()
+	if ep == "" {
+		return ""
+	}
+	return "http://" + ep + "/onca/xml"
+}

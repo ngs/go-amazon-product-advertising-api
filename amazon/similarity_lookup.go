@@ -1,5 +1,7 @@
 package amazon
 
+import "net/http"
+
 // SimilarityLookupResponseGroup represents constants those are capable ResponseGroups parameter
 type SimilarityLookupResponseGroup string
 
@@ -59,13 +61,25 @@ type SimilarityLookupResponse struct {
 	Error error
 }
 
-func (req *SimilarityLookupRequest) buildQuery() map[string]string {
-	q := map[string]string{}
+func (req *SimilarityLookupRequest) buildQuery() map[string]interface{} {
+	q := map[string]interface{}{}
 	return q
 }
 
-// Do send request for the API
+func (req *SimilarityLookupRequest) httpMethod() string {
+	return http.MethodGet
+}
+
+func (req *SimilarityLookupRequest) operation() string {
+	return "SimilarityLookup"
+}
+
+// Do sends request for the API
 func (req *SimilarityLookupRequest) Do() (*SimilarityLookupResponse, error) {
+	_, err := req.Client.DoRequest(req)
+	if err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 

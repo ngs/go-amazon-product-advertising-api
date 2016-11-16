@@ -1,5 +1,7 @@
 package amazon
 
+import "net/http"
+
 // <%= operation %>ResponseGroup represents constants those are capable ResponseGroups parameter
 type <%= operation %>ResponseGroup string
 
@@ -47,13 +49,25 @@ type <%= operation %>Response struct {
   Error error
 }
 
-func (req *<%= operation %>Request)buildQuery() map[string]string {
-  q := map[string]string{}
+func (req *<%= operation %>Request)buildQuery() map[string]interface{} {
+  q := map[string]interface{}{}
   return q
 }
 
-// Do send request for the API
+func (req *<%= operation %>Request)httpMethod() string {
+  return http.MethodGet
+}
+
+func (req *<%= operation %>Request)operation() string {
+  return "<%= operation %>"
+}
+
+// Do sends request for the API
 func (req *<%= operation %>Request)Do() (*<%= operation %>Response, error) {
+  _, err := req.Client.DoRequest(req)
+  if err != nil {
+    return nil, err
+  }
   return nil, nil
 }
 
