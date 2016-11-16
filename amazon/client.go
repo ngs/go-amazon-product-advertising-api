@@ -10,6 +10,7 @@ import (
 type Client struct {
 	AccessKeyID     string
 	SecretAccessKey string
+	AssociateTag    string
 	Region
 }
 

@@ -47,6 +47,11 @@ type <%= operation %>Response struct {
   Error error
 }
 
+func (req *<%= operation %>Request)buildQuery() map[string]string {
+  q := map[string]string{}
+  return q
+}
+
 // Do send request for the API
 func (req *<%= operation %>Request)Do() (*<%= operation %>Response, error) {
   return nil, nil

@@ -27,6 +27,11 @@ type BrowseNodeLookupResponse struct {
 	Error error
 }
 
+func (req *BrowseNodeLookupRequest) buildQuery() map[string]string {
+	q := map[string]string{}
+	return q
+}
+
 // Do send request for the API
 func (req *BrowseNodeLookupRequest) Do() (*BrowseNodeLookupResponse, error) {
 	return nil, nil

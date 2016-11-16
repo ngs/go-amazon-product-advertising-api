@@ -59,6 +59,11 @@ type SimilarityLookupResponse struct {
 	Error error
 }
 
+func (req *SimilarityLookupRequest) buildQuery() map[string]string {
+	q := map[string]string{}
+	return q
+}
+
 // Do send request for the API
 func (req *SimilarityLookupRequest) Do() (*SimilarityLookupResponse, error) {
 	return nil, nil

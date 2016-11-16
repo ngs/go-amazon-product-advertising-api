@@ -25,6 +25,11 @@ type CartGetResponse struct {
 	Error error
 }
 
+func (req *CartGetRequest) buildQuery() map[string]string {
+	q := map[string]string{}
+	return q
+}
+
 // Do send request for the API
 func (req *CartGetRequest) Do() (*CartGetResponse, error) {
 	return nil, nil

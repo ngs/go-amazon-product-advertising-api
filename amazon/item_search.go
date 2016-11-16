@@ -79,6 +79,11 @@ type ItemSearchResponse struct {
 	Error error
 }
 
+func (req *ItemSearchRequest) buildQuery() map[string]string {
+	q := map[string]string{}
+	return q
+}
+
 // Do send request for the API
 func (req *ItemSearchRequest) Do() (*ItemSearchResponse, error) {
 	return nil, nil

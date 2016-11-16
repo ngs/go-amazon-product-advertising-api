@@ -19,6 +19,11 @@ type CartClearResponse struct {
 	Error error
 }
 
+func (req *CartClearRequest) buildQuery() map[string]string {
+	q := map[string]string{}
+	return q
+}
+
 // Do send request for the API
 func (req *CartClearRequest) Do() (*CartClearResponse, error) {
 	return nil, nil
