@@ -59,21 +59,21 @@ type ImageSet struct {
 	LargeImage     Image
 }
 
-// PublicationDate represents PublicationDate
-type PublicationDate struct {
+// Date represents short form date with yyyy-mm-dd date format
+type Date struct {
 	time.Time
 }
 
 // UnmarshalXML parse time
-func (c *PublicationDate) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	const shortForm = "2006-01-02" // yyyymmdd date format
+func (c *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	const shortForm = "2006-01-02" // yyyy-mm-dd date format
 	var v string
 	d.DecodeElement(&v, &start)
 	parse, err := time.Parse(shortForm, v)
 	if err != nil {
 		return err
 	}
-	*c = PublicationDate{parse}
+	*c = Date{parse}
 	return nil
 }
 
@@ -94,7 +94,7 @@ type ItemAttributes struct {
 	PackageDimensions PackageDimensions
 	ProductGroup      string
 	ProductTypeName   string
-	PublicationDate   *PublicationDate
+	PublicationDate   *Date
 	Publisher         string
 	Studio            string
 	Title             string
