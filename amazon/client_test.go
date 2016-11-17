@@ -3,6 +3,7 @@ package amazon
 import (
 	"net/http"
 	"os"
+	"reflect"
 	"testing"
 	"time"
 
@@ -23,6 +24,12 @@ type Test struct {
 
 func (test Test) Compare(t *testing.T) {
 	if test.expected != test.actual {
+		t.Errorf(`Expected "%v" but got "%v"`, test.expected, test.actual)
+	}
+}
+
+func (test Test) DeepEqual(t *testing.T) {
+	if !reflect.DeepEqual(test.expected, test.actual) {
 		t.Errorf(`Expected "%v" but got "%v"`, test.expected, test.actual)
 	}
 }
@@ -104,6 +111,8 @@ func (mop *mockOperation) buildQuery() map[string]interface{} {
 	return map[string]interface{}{
 		"string": "bar",
 		"array":  []string{"foo", "bar", "baz"},
+		"uint":   uint(200),
+		"int":    100,
 		"map": []map[string]string{
 			map[string]string{"foo1": "bar1", "baz1": "qux1"},
 			map[string]string{"foo2": "bar2", "baz2": "qux2"},
@@ -129,7 +138,7 @@ func TestClientSignedURL(t *testing.T) {
 	mockOp := &mockOperation{}
 	url := client.SignedURL(mockOp)
 	Test{
-		"https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=sXq9zvMEquJ7Jea5oDZ1xgv6WMLaStIGH7G0uAnlfzs%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar",
+		"https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=a8mPtL8sbgteMh0rKRDg4Cxi1H0i3D7M69zr5iXZBbA%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&int=100&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar&uint=200",
 		url,
 	}.Compare(t)
 }
@@ -138,7 +147,7 @@ func TestDoGetRequest(t *testing.T) {
 	defer gock.Off()
 	gock.DisableNetworking()
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
-	gock.New("https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=sXq9zvMEquJ7Jea5oDZ1xgv6WMLaStIGH7G0uAnlfzs%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar").
+	gock.New("https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=a8mPtL8sbgteMh0rKRDg4Cxi1H0i3D7M69zr5iXZBbA%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&int=100&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar&uint=200").
 		Reply(200).
 		BodyString("ok")
 	client, _ := New("AK", "SK", RegionJapan)
@@ -158,7 +167,7 @@ func TestDoPostRequest(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	gock.New("https://webservices.amazon.co.jp").
 		Post("/onca/xml").
-		BodyString("AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=-L0ZjzqKNEFDRaraUWSTXozRAAjyJE7A4gBXPfY5hlI%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar").
+		BodyString("AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=HPbku1B2gRuCGvfQYuNdZCRSDBplZ4t-IeXe8Fcxvc0%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&int=100&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar&uint=200").
 		Reply(200).
 		BodyString("ok")
 	client, _ := New("AK", "SK", RegionJapan)

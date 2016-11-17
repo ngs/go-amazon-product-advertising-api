@@ -4,7 +4,7 @@ import "testing"
 
 func TestBrowseNodeLookup(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	req := client.BrowseNodeLookup()
+	req := client.BrowseNodeLookup(BrowseNodeLookupParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
 	}
@@ -13,6 +13,6 @@ func TestBrowseNodeLookup(t *testing.T) {
 
 func TestBrowseNodeLookupBuildQuery(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	q := client.BrowseNodeLookup().buildQuery()
+	q := client.BrowseNodeLookup(BrowseNodeLookupParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }

@@ -4,7 +4,7 @@ import "testing"
 
 func TestCartClear(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	req := client.CartClear()
+	req := client.CartClear(CartClearParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
 	}
@@ -13,6 +13,6 @@ func TestCartClear(t *testing.T) {
 
 func TestCartClearBuildQuery(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	q := client.CartClear().buildQuery()
+	q := client.CartClear(CartClearParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }

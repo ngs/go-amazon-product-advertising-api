@@ -16,10 +16,15 @@ const (
 	CartAddResponseGroupCartTopSellers CartAddResponseGroup = "CartTopSellers"
 )
 
+// CartAddParameters represents parameters for CartAdd operation request
+type CartAddParameters struct {
+	ResponseGroups []CartAddResponseGroup
+}
+
 // CartAddRequest represents request for CartAdd operation
 type CartAddRequest struct {
-	ResponseGroups []CartAddResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters CartAddParameters
 }
 
 // CartAddResponse represents response for CartAdd operation
@@ -50,9 +55,9 @@ func (req *CartAddRequest) Do() (*CartAddResponse, error) {
 }
 
 // CartAdd returns new request for CartAdd
-func (client *Client) CartAdd(responseGroups ...CartAddResponseGroup) *CartAddRequest {
+func (client *Client) CartAdd(parameters CartAddParameters) *CartAddRequest {
 	return &CartAddRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

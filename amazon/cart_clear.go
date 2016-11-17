@@ -10,10 +10,15 @@ const (
 	CartClearResponseGroupCart CartClearResponseGroup = "Cart"
 )
 
+// CartClearParameters represents parameters for CartClear operation request
+type CartClearParameters struct {
+	ResponseGroups []CartClearResponseGroup
+}
+
 // CartClearRequest represents request for CartClear operation
 type CartClearRequest struct {
-	ResponseGroups []CartClearResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters CartClearParameters
 }
 
 // CartClearResponse represents response for CartClear operation
@@ -44,9 +49,9 @@ func (req *CartClearRequest) Do() (*CartClearResponse, error) {
 }
 
 // CartClear returns new request for CartClear
-func (client *Client) CartClear(responseGroups ...CartClearResponseGroup) *CartClearRequest {
+func (client *Client) CartClear(parameters CartClearParameters) *CartClearRequest {
 	return &CartClearRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

@@ -50,10 +50,15 @@ const (
 	SimilarityLookupResponseGroupVariationSummary SimilarityLookupResponseGroup = "VariationSummary"
 )
 
+// SimilarityLookupParameters represents parameters for SimilarityLookup operation request
+type SimilarityLookupParameters struct {
+	ResponseGroups []SimilarityLookupResponseGroup
+}
+
 // SimilarityLookupRequest represents request for SimilarityLookup operation
 type SimilarityLookupRequest struct {
-	ResponseGroups []SimilarityLookupResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters SimilarityLookupParameters
 }
 
 // SimilarityLookupResponse represents response for SimilarityLookup operation
@@ -84,9 +89,9 @@ func (req *SimilarityLookupRequest) Do() (*SimilarityLookupResponse, error) {
 }
 
 // SimilarityLookup returns new request for SimilarityLookup
-func (client *Client) SimilarityLookup(responseGroups ...SimilarityLookupResponseGroup) *SimilarityLookupRequest {
+func (client *Client) SimilarityLookup(parameters SimilarityLookupParameters) *SimilarityLookupRequest {
 	return &SimilarityLookupRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

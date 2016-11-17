@@ -18,10 +18,15 @@ const (
 	BrowseNodeLookupResponseGroupMostWishedFor BrowseNodeLookupResponseGroup = "MostWishedFor"
 )
 
+// BrowseNodeLookupParameters represents parameters for BrowseNodeLookup operation request
+type BrowseNodeLookupParameters struct {
+	ResponseGroups []BrowseNodeLookupResponseGroup
+}
+
 // BrowseNodeLookupRequest represents request for BrowseNodeLookup operation
 type BrowseNodeLookupRequest struct {
-	ResponseGroups []BrowseNodeLookupResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters BrowseNodeLookupParameters
 }
 
 // BrowseNodeLookupResponse represents response for BrowseNodeLookup operation
@@ -52,9 +57,9 @@ func (req *BrowseNodeLookupRequest) Do() (*BrowseNodeLookupResponse, error) {
 }
 
 // BrowseNodeLookup returns new request for BrowseNodeLookup
-func (client *Client) BrowseNodeLookup(responseGroups ...BrowseNodeLookupResponseGroup) *BrowseNodeLookupRequest {
+func (client *Client) BrowseNodeLookup(parameters BrowseNodeLookupParameters) *BrowseNodeLookupRequest {
 	return &BrowseNodeLookupRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

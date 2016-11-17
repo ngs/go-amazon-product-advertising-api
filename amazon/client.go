@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -79,6 +81,56 @@ func (client *Client) Endpoint() string {
 	return client.Region.HTTPEndpoint()
 }
 
+func setQueryValue(q url.Values, key string, value interface{}) url.Values {
+	refv := reflect.ValueOf(value)
+	refKind := refv.Kind()
+	if str, ok := value.(string); ok {
+		q.Set(key, str)
+		return q
+	}
+	if b, ok := value.(bool); ok {
+		if b {
+			q.Set(key, "True")
+		} else {
+			q.Set(key, "False")
+		}
+		return q
+	}
+	if refKind == reflect.String {
+		q.Set(key, refv.String())
+		return q
+	}
+	if num, ok := value.(int); ok {
+		q.Set(key, strconv.Itoa(num))
+		return q
+	}
+	if num, ok := value.(uint); ok {
+		q.Set(key, strconv.Itoa(int(num)))
+		return q
+	}
+	if refKind == reflect.Slice {
+		len := refv.Len()
+		if key == "ResponseGroup" {
+			rgs := make([]string, len)
+			for i := 0; i < len; i++ {
+				rgs[i] = refv.Index(i).String()
+			}
+			q.Set(key, strings.Join(rgs, ","))
+			return q
+		}
+		for i := 0; i < len; i++ {
+			q = setQueryValue(q, key+"."+strconv.Itoa(i+1), refv.Index(i).Interface())
+		}
+	}
+	if m, ok := value.(map[string]string); ok {
+		for k, v := range m {
+			q = setQueryValue(q, key+"."+k, v)
+		}
+		return q
+	}
+	return q
+}
+
 func (client *Client) fillQuery(op OperationRequest) url.Values {
 	ep := client.Endpoint()
 	q := url.Values{}
@@ -94,19 +146,7 @@ func (client *Client) fillQuery(op OperationRequest) url.Values {
 	ts := timeNowFunc().UTC().Format(timestampFormat)
 	q.Set("Timestamp", ts)
 	for k, v := range qmap {
-		if str, ok := v.(string); ok {
-			q.Set(k, str)
-		} else if strar, ok := v.([]string); ok {
-			for i, vv := range strar {
-				q.Set(k+"."+strconv.Itoa(i+1), vv)
-			}
-		} else if strar, ok := v.([]map[string]string); ok {
-			for i, m := range strar {
-				for kk, vv := range m {
-					q.Set(k+"."+strconv.Itoa(i+1)+"."+kk, vv)
-				}
-			}
-		}
+		q = setQueryValue(q, k, v)
 	}
 	msg := op.httpMethod() + "\n" + u.Host + "\n" + u.Path + "\n" + q.Encode()
 	mac := hmac.New(sha256.New, []byte(client.SecretAccessKey))

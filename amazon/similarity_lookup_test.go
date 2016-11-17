@@ -4,7 +4,7 @@ import "testing"
 
 func TestSimilarityLookup(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	req := client.SimilarityLookup()
+	req := client.SimilarityLookup(SimilarityLookupParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
 	}
@@ -13,6 +13,6 @@ func TestSimilarityLookup(t *testing.T) {
 
 func TestSimilarityLookupBuildQuery(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	q := client.SimilarityLookup().buildQuery()
+	q := client.SimilarityLookup(SimilarityLookupParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }

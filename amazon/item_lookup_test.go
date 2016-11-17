@@ -4,7 +4,7 @@ import "testing"
 
 func TestItemLookup(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	req := client.ItemLookup()
+	req := client.ItemLookup(ItemLookupParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
 	}
@@ -13,6 +13,6 @@ func TestItemLookup(t *testing.T) {
 
 func TestItemLookupBuildQuery(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	q := client.ItemLookup().buildQuery()
+	q := client.ItemLookup(ItemLookupParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }

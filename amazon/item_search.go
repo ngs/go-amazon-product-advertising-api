@@ -70,10 +70,81 @@ const (
 	ItemSearchResponseGroupVariationSummary ItemSearchResponseGroup = "VariationSummary"
 )
 
-// ItemSearchRequest represents request for ItemSearch operation
-type ItemSearchRequest struct {
+// ItemSearchParameters represents parameters for ItemSearch operation request
+type ItemSearchParameters struct {
+	// Actor name associated with the item. You can enter all or part of the name.
+	Actor string
+	// Artist name associated with the item. You can enter all or part of the name.
+	Artist string
+	// Movie ratings based on MPAA ratings or age, depending on locale.
+	// You can specify one or more values in a comma-separated list
+	AudienceRating string
+	// Author name associated with the item. You can enter all or part of the name.
+	Author string
+	// Returns available items only
+	OnlyAvailable bool
+	// Brand name associated with the item. You can enter all or part of the name.
+	Brand string
+	// Browse nodes are numbers that identify product categories. For example, the browse node for Literature & Fiction is 17, while the browse node for Outdoors & Nature is 290060.
+	BrowseNode string
+	// Composer name associated with the item. You can enter all or part of the name.
+	Composer string
+	// Condition filters offers by condition type. By default, Condition equals New. When the Availability parameter is set to Available, the Condition parameter cannot be set to New.
+	Condition
+	// Conductor Conductor name associated with the item. You can enter all or part of the name.
+	Conductor string
+	// Director Director name associated with the item. You can enter all or part of the name.
+	Director string
+	// IncludeReviewsSummary Returns the reviews summary URL.
+	IncludeReviewsSummary *bool
+	// ItemPage returns a specific page of items from the available search results. Up to ten items are returned per page.
+	// If you do not include ItemPage in your request, the first page is returned. The total number of pages found is returned in the TotalPages response element.
+	// If Condition is set to All, ItemSearch returns additional offers for those items, one offer per condition type.
+	// Valid values: 1 to 10 (1 to 5 when search index is All)
+	ItemPage int
+	// Keywords A word or phrase that describes an item, including author, artist, description, manufacturer, title, and so on.
+	// For example, when SearchIndex is set to MusicTracks, the Keywords parameter can search for song title.
+	Keywords string
+	// Manufacturer Manufacturer name associated with the item. You can enter all or part of the name.
+	Manufacturer string
+	// MaxPrice Specifies the maximum item price in the response. Prices appear in the lowest currency denomination. For example, 3241 is $32.41. MaximumPrice can be used with every index, except All and Blended.
+	MaximumPrice int
+	// MerchantId Filters search results and offer listings to items sold by Amazon. By default, the Product Advertising API returns items sold by merchants and Amazon.
+	MerchantID string
+	// MinimumPrice Specifies the minimum item price in the response. Prices appear in the lowest currency denomination. For example, 3241 is $32.41. MinimumPrice can be used with every index, except All and Blended.
+	MinimumPrice int
+	// MinPercentageOff Specifies the minimum percentage off the item price.
+	MinPercentageOff int
+	// Orchestra Orchestra name associated with the item. You can enter all or part of the name.
+	Orchestra string
+	// Power Performs a book search with a complex query string. The parameter can be used only when SearchIndex is set to Books.
+	// See http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
+	Power string
+	// Publisher Publisher name associated with the item. You can enter all or part of the name.
+	Publisher string
+	// RelatedItemPage Returns a specific page of related items from the available search results. Up to ten items are returned per page. This parameter can be used with the RelatedItems response group.
+	RelatedItemPage int
+	// RelationshipType This parameter is required when the RelatedItems response group is used. The type of related item returned is specified by the RelationshipType parameter. Sample values include Episode, Season, and Tracks.
+	RelationshipType
+	// SearchIndex The product category to search.
+	SearchIndex
+	// Sort The way in which items in the response are ordered.
+	Sort string
+	// Title Title associated with the item. You can enter all or part of the title. Title searches are a subset of Keyword searches. Use a Keywords search if a Title search does not return the items you want.
+	Title string
+	// TruncateReviewsAt By default, reviews are truncated to 1000 characters. Choose a value to specify a length. To return the entire review, use 0 .
+	TruncateReviewsAt *int
+	// VariationPage Returns a specific page of variations. For example, set VariationPage to 2 to return offers 11 to 20 . The total number of pages appears in the TotalPages element.
+	VariationPage *int
+	// Specifies the types of values to return. Separate
 	ResponseGroups []ItemSearchResponseGroup
-	Client         *Client
+}
+
+// ItemSearchRequest represents request for ItemSearch operation
+// http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
+type ItemSearchRequest struct {
+	Client     *Client
+	Parameters ItemSearchParameters
 }
 
 // ItemSearchResponse represents response for ItemSearch operation
@@ -83,6 +154,97 @@ type ItemSearchResponse struct {
 
 func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
+	p := req.Parameters
+	if p.Actor != "" {
+		q["Actor"] = p.Actor
+	}
+	if p.Artist != "" {
+		q["Artist"] = p.Artist
+	}
+	if p.AudienceRating != "" {
+		q["AudienceRating"] = p.AudienceRating
+	}
+	if p.Author != "" {
+		q["Author"] = p.Author
+	}
+	if p.OnlyAvailable {
+		q["Availability"] = "Available"
+	}
+	if p.Brand != "" {
+		q["Brand"] = p.Brand
+	}
+	if p.BrowseNode != "" {
+		q["BrowseNode"] = p.BrowseNode
+	}
+	if p.Composer != "" {
+		q["Composer"] = p.Composer
+	}
+	if p.Condition != "" {
+		q["Condition"] = p.Condition
+	}
+	if p.Conductor != "" {
+		q["Conductor"] = p.Conductor
+	}
+	if p.Director != "" {
+		q["Director"] = p.Director
+	}
+	if p.IncludeReviewsSummary != nil {
+		q["IncludeReviewsSummary"] = *p.IncludeReviewsSummary
+	}
+	if p.ItemPage > 0 {
+		q["ItemPage"] = p.ItemPage
+	}
+	if p.Keywords != "" {
+		q["Keywords"] = p.Keywords
+	}
+	if p.Manufacturer != "" {
+		q["Manufacturer"] = p.Manufacturer
+	}
+	if p.MaximumPrice > 0 {
+		q["MaximumPrice"] = p.MaximumPrice
+	}
+	if p.MerchantID != "" {
+		q["MerchantID"] = p.MerchantID
+	}
+	if p.MinimumPrice > 0 {
+		q["MinimumPrice"] = p.MinimumPrice
+	}
+	if p.MinPercentageOff > 0 {
+		q["MinPercentageOff"] = p.MinPercentageOff
+	}
+	if p.Orchestra != "" {
+		q["Orchestra"] = p.Orchestra
+	}
+	if p.Power != "" {
+		q["Power"] = p.Power
+	}
+	if p.Publisher != "" {
+		q["Publisher"] = p.Publisher
+	}
+	if p.RelatedItemPage > 0 {
+		q["RelatedItemPage"] = p.RelatedItemPage
+	}
+	if p.RelationshipType != "" {
+		q["RelationshipType"] = p.RelationshipType
+	}
+	if p.SearchIndex != "" {
+		q["SearchIndex"] = p.SearchIndex
+	}
+	if p.Sort != "" {
+		q["Sort"] = p.Sort
+	}
+	if p.Title != "" {
+		q["Title"] = p.Title
+	}
+	if p.TruncateReviewsAt != nil {
+		q["TruncateReviewsAt"] = *p.TruncateReviewsAt
+	}
+	if p.VariationPage != nil {
+		q["VariationPage"] = *p.VariationPage
+	}
+	if len(p.ResponseGroups) > 0 {
+		q["ResponseGroup"] = p.ResponseGroups
+	}
 	return q
 }
 
@@ -104,9 +266,9 @@ func (req *ItemSearchRequest) Do() (*ItemSearchResponse, error) {
 }
 
 // ItemSearch returns new request for ItemSearch
-func (client *Client) ItemSearch(responseGroups ...ItemSearchResponseGroup) *ItemSearchRequest {
+func (client *Client) ItemSearch(parameters ItemSearchParameters) *ItemSearchRequest {
 	return &ItemSearchRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

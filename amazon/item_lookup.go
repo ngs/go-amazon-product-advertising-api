@@ -72,10 +72,15 @@ const (
 	ItemLookupResponseGroupVariationSummary ItemLookupResponseGroup = "VariationSummary"
 )
 
+// ItemLookupParameters represents parameters for ItemLookup operation request
+type ItemLookupParameters struct {
+	ResponseGroups []ItemLookupResponseGroup
+}
+
 // ItemLookupRequest represents request for ItemLookup operation
 type ItemLookupRequest struct {
-	ResponseGroups []ItemLookupResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters ItemLookupParameters
 }
 
 // ItemLookupResponse represents response for ItemLookup operation
@@ -106,9 +111,9 @@ func (req *ItemLookupRequest) Do() (*ItemLookupResponse, error) {
 }
 
 // ItemLookup returns new request for ItemLookup
-func (client *Client) ItemLookup(responseGroups ...ItemLookupResponseGroup) *ItemLookupRequest {
+func (client *Client) ItemLookup(parameters ItemLookupParameters) *ItemLookupRequest {
 	return &ItemLookupRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

@@ -16,10 +16,15 @@ const (
 	CartGetResponseGroupCartNewReleases CartGetResponseGroup = "CartNewReleases"
 )
 
+// CartGetParameters represents parameters for CartGet operation request
+type CartGetParameters struct {
+	ResponseGroups []CartGetResponseGroup
+}
+
 // CartGetRequest represents request for CartGet operation
 type CartGetRequest struct {
-	ResponseGroups []CartGetResponseGroup
-	Client         *Client
+	Client     *Client
+	Parameters CartGetParameters
 }
 
 // CartGetResponse represents response for CartGet operation
@@ -50,9 +55,9 @@ func (req *CartGetRequest) Do() (*CartGetResponse, error) {
 }
 
 // CartGet returns new request for CartGet
-func (client *Client) CartGet(responseGroups ...CartGetResponseGroup) *CartGetRequest {
+func (client *Client) CartGet(parameters CartGetParameters) *CartGetRequest {
 	return &CartGetRequest{
-		Client:         client,
-		ResponseGroups: responseGroups,
+		Client:     client,
+		Parameters: parameters,
 	}
 }

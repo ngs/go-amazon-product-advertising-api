@@ -4,7 +4,7 @@ import "testing"
 
 func TestCartGet(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	req := client.CartGet()
+	req := client.CartGet(CartGetParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
 	}
@@ -13,6 +13,6 @@ func TestCartGet(t *testing.T) {
 
 func TestCartGetBuildQuery(t *testing.T) {
 	client, _ := New("AK", "SK", "JP")
-	q := client.CartGet().buildQuery()
+	q := client.CartGet(CartGetParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }
