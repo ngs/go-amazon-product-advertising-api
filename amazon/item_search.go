@@ -9,6 +9,94 @@ import (
 type ItemSearchResponseGroup string
 
 const (
+	// ItemSearchResponseGroupTags is a constant for Tags response group
+	ItemSearchResponseGroupTags ItemSearchResponseGroup = "Tags"
+	// ItemSearchResponseGroupHelp is a constant for Help response group
+	ItemSearchResponseGroupHelp ItemSearchResponseGroup = "Help"
+	// ItemSearchResponseGroupListMinimum is a constant for ListMinimum response group
+	ItemSearchResponseGroupListMinimum ItemSearchResponseGroup = "ListMinimum"
+	// ItemSearchResponseGroupTransactionDetails is a constant for TransactionDetails response group
+	ItemSearchResponseGroupTransactionDetails ItemSearchResponseGroup = "TransactionDetails"
+	// ItemSearchResponseGroupVariationImages is a constant for VariationImages response group
+	ItemSearchResponseGroupVariationImages ItemSearchResponseGroup = "VariationImages"
+	// ItemSearchResponseGroupPartBrandBinsSummary is a constant for PartBrandBinsSummary response group
+	ItemSearchResponseGroupPartBrandBinsSummary ItemSearchResponseGroup = "PartBrandBinsSummary"
+	// ItemSearchResponseGroupCustomerFull is a constant for CustomerFull response group
+	ItemSearchResponseGroupCustomerFull ItemSearchResponseGroup = "CustomerFull"
+	// ItemSearchResponseGroupCartNewReleases is a constant for CartNewReleases response group
+	ItemSearchResponseGroupCartNewReleases ItemSearchResponseGroup = "CartNewReleases"
+	// ItemSearchResponseGroupItemIds is a constant for ItemIds response group
+	ItemSearchResponseGroupItemIds ItemSearchResponseGroup = "ItemIds"
+	// ItemSearchResponseGroupTagsSummary is a constant for TagsSummary response group
+	ItemSearchResponseGroupTagsSummary ItemSearchResponseGroup = "TagsSummary"
+
+	// ItemSearchResponseGroupFitments is a constant for Fitments response group
+	ItemSearchResponseGroupFitments ItemSearchResponseGroup = "Fitments"
+	// ItemSearchResponseGroupPartBrowseNodeBinsSummary is a constant for PartBrowseNodeBinsSummary response group
+	ItemSearchResponseGroupPartBrowseNodeBinsSummary ItemSearchResponseGroup = "PartBrowseNodeBinsSummary"
+	// ItemSearchResponseGroupTopSellers is a constant for TopSellers response group
+	ItemSearchResponseGroupTopSellers ItemSearchResponseGroup = "TopSellers"
+	// ItemSearchResponseGroupRequest is a constant for Request response group
+	ItemSearchResponseGroupRequest ItemSearchResponseGroup = "Request"
+	// ItemSearchResponseGroupHasPartCompatibility is a constant for HasPartCompatibility response group
+	ItemSearchResponseGroupHasPartCompatibility ItemSearchResponseGroup = "HasPartCompatibility"
+	// ItemSearchResponseGroupListFull is a constant for ListFull response group
+	ItemSearchResponseGroupListFull ItemSearchResponseGroup = "ListFull"
+	// ItemSearchResponseGroupSeller is a constant for Seller response group
+	ItemSearchResponseGroupSeller ItemSearchResponseGroup = "Seller"
+	// ItemSearchResponseGroupVehicleMakes is a constant for VehicleMakes response group
+	ItemSearchResponseGroupVehicleMakes ItemSearchResponseGroup = "VehicleMakes"
+	// ItemSearchResponseGroupTaggedItems is a constant for TaggedItems response group
+	ItemSearchResponseGroupTaggedItems ItemSearchResponseGroup = "TaggedItems"
+	// ItemSearchResponseGroupVehicleParts is a constant for VehicleParts response group
+	ItemSearchResponseGroupVehicleParts ItemSearchResponseGroup = "VehicleParts"
+	// ItemSearchResponseGroupBrowseNodeInfo is a constant for BrowseNodeInfo response group
+	ItemSearchResponseGroupBrowseNodeInfo ItemSearchResponseGroup = "BrowseNodeInfo"
+	// ItemSearchResponseGroupItemAttributes is a constant for ItemAttributes response group
+	ItemSearchResponseGroupItemAttributes ItemSearchResponseGroup = "ItemAttributes"
+	// ItemSearchResponseGroupVehicleOptions is a constant for VehicleOptions response group
+	ItemSearchResponseGroupVehicleOptions ItemSearchResponseGroup = "VehicleOptions"
+	// ItemSearchResponseGroupListItems is a constant for ListItems response group
+	ItemSearchResponseGroupListItems ItemSearchResponseGroup = "ListItems"
+	// ItemSearchResponseGroupTaggedGuides is a constant for TaggedGuides response group
+	ItemSearchResponseGroupTaggedGuides ItemSearchResponseGroup = "TaggedGuides"
+	// ItemSearchResponseGroupNewReleases is a constant for NewReleases response group
+	ItemSearchResponseGroupNewReleases ItemSearchResponseGroup = "NewReleases"
+	// ItemSearchResponseGroupVehiclePartFit is a constant for VehiclePartFit response group
+	ItemSearchResponseGroupVehiclePartFit ItemSearchResponseGroup = "VehiclePartFit"
+	// ItemSearchResponseGroupCartSimilarities is a constant for CartSimilarities response group
+	ItemSearchResponseGroupCartSimilarities ItemSearchResponseGroup = "CartSimilarities"
+	// ItemSearchResponseGroupShippingCharges is a constant for ShippingCharges response group
+	ItemSearchResponseGroupShippingCharges ItemSearchResponseGroup = "ShippingCharges"
+	// ItemSearchResponseGroupShippingOptions is a constant for ShippingOptions response group
+	ItemSearchResponseGroupShippingOptions ItemSearchResponseGroup = "ShippingOptions"
+	// ItemSearchResponseGroupCustomerInfo is a constant for CustomerInfo response group
+	ItemSearchResponseGroupCustomerInfo ItemSearchResponseGroup = "CustomerInfo"
+	// ItemSearchResponseGroupPartnerTransactionDetails is a constant for PartnerTransactionDetails response group
+	ItemSearchResponseGroupPartnerTransactionDetails ItemSearchResponseGroup = "PartnerTransactionDetails"
+	// ItemSearchResponseGroupVehicleYears is a constant for VehicleYears response group
+	ItemSearchResponseGroupVehicleYears ItemSearchResponseGroup = "VehicleYears"
+	// ItemSearchResponseGroupVehicleTrims is a constant for VehicleTrims response group
+	ItemSearchResponseGroupVehicleTrims ItemSearchResponseGroup = "VehicleTrims"
+	// ItemSearchResponseGroupCustomerReviews is a constant for CustomerReviews response group
+	ItemSearchResponseGroupCustomerReviews ItemSearchResponseGroup = "CustomerReviews"
+	// ItemSearchResponseGroupSellerListing is a constant for SellerListing response group
+	ItemSearchResponseGroupSellerListing ItemSearchResponseGroup = "SellerListing"
+	// ItemSearchResponseGroupCart is a constant for Cart response group
+	ItemSearchResponseGroupCart ItemSearchResponseGroup = "Cart"
+	// ItemSearchResponseGroupTaggedListmaniaLists is a constant for TaggedListmaniaLists response group
+	ItemSearchResponseGroupTaggedListmaniaLists ItemSearchResponseGroup = "TaggedListmaniaLists"
+	// ItemSearchResponseGroupVehicleModels is a constant for VehicleModels response group
+	ItemSearchResponseGroupVehicleModels ItemSearchResponseGroup = "VehicleModels"
+	// ItemSearchResponseGroupListInfo is a constant for ListInfo response group
+	ItemSearchResponseGroupListInfo ItemSearchResponseGroup = "ListInfo"
+	// ItemSearchResponseGroupCustomerLists is a constant for CustomerLists response group
+	ItemSearchResponseGroupCustomerLists ItemSearchResponseGroup = "CustomerLists"
+	// ItemSearchResponseGroupCartTopSellers is a constant for CartTopSellers response group
+	ItemSearchResponseGroupCartTopSellers ItemSearchResponseGroup = "CartTopSellers"
+	// ItemSearchResponseGroupCollections is a constant for Collections response group
+	ItemSearchResponseGroupCollections ItemSearchResponseGroup = "Collections"
+
 	// ItemSearchResponseGroupAccessories is a constant for Accessories response group
 	ItemSearchResponseGroupAccessories ItemSearchResponseGroup = "Accessories"
 	// ItemSearchResponseGroupAlternateVersions is a constant for AlternateVersions response group

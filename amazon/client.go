@@ -46,12 +46,15 @@ type Client struct {
 }
 
 // New returns new client
-func New(accessKeyID string, secretAccessKey string, region Region) (*Client, error) {
+func New(accessKeyID string, secretAccessKey string, associateTag string, region Region) (*Client, error) {
 	if accessKeyID == "" {
 		return nil, errors.New("AccessKeyID is not specified")
 	}
 	if secretAccessKey == "" {
 		return nil, errors.New("SecretAccessKey is not specified")
+	}
+	if associateTag == "" {
+		return nil, errors.New("AssociateTag is not specified")
 	}
 	if region == "" {
 		return nil, errors.New("Region is not specified")
@@ -63,6 +66,7 @@ func New(accessKeyID string, secretAccessKey string, region Region) (*Client, er
 		AccessKeyID:     accessKeyID,
 		SecretAccessKey: secretAccessKey,
 		Region:          region,
+		AssociateTag:    associateTag,
 		Secure:          true,
 	}, nil
 }
@@ -72,6 +76,7 @@ func NewFromEnvionment() (*Client, error) {
 	return New(
 		os.Getenv("AWS_ACCESS_KEY_ID"),
 		os.Getenv("AWS_SECRET_ACCESS_KEY"),
+		os.Getenv("AWS_ASSOCIATE_TAG"),
 		Region(os.Getenv("AWS_PRODUCT_REGION")),
 	)
 }
@@ -168,7 +173,6 @@ func (client *Client) fillQuery(op OperationRequest) url.Values {
 	mac.Write([]byte(msg))
 	signature := base64.StdEncoding.EncodeToString(mac.Sum(nil))
 	q.Set("Signature", signature)
-	// fmt.Println(q.Encode())
 	return q
 }
 

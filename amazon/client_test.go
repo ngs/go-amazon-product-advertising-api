@@ -40,10 +40,11 @@ func (test Test) DeepEqual(t *testing.T) {
 }
 
 func TestNew(t *testing.T) {
-	client, _ := New("AK", "SK", "JP")
+	client, _ := New("AK", "SK", "ngsio-22", "JP")
 	for _, test := range []Test{
 		Test{"AK", client.AccessKeyID},
 		Test{"SK", client.SecretAccessKey},
+		Test{"ngsio-22", client.AssociateTag},
 		Test{RegionJapan, client.Region},
 	} {
 		test.Compare(t)
@@ -51,7 +52,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestNewInvalidRegion(t *testing.T) {
-	client, err := New("AK", "SK", "JAPAN")
+	client, err := New("AK", "SK", "ngsio-22", "JAPAN")
 	Test{"Invalid Region JAPAN", err.Error()}.Compare(t)
 	if client != nil {
 		t.Errorf(`Expected nil but got "%v"`, client)
@@ -59,7 +60,7 @@ func TestNewInvalidRegion(t *testing.T) {
 }
 
 func TestNewEmptyRegion(t *testing.T) {
-	client, err := New("AK", "SK", "")
+	client, err := New("AK", "SK", "ngsio-22", "")
 	Test{"Region is not specified", err.Error()}.Compare(t)
 	if client != nil {
 		t.Errorf(`Expected nil but got "%v"`, client)
@@ -67,15 +68,23 @@ func TestNewEmptyRegion(t *testing.T) {
 }
 
 func TestNewEmptyAccessKeyID(t *testing.T) {
-	client, err := New("", "SK", RegionJapan)
+	client, err := New("", "SK", "ngsio-22", RegionJapan)
 	Test{"AccessKeyID is not specified", err.Error()}.Compare(t)
 	if client != nil {
 		t.Errorf(`Expected nil but got "%v"`, client)
 	}
 }
 
+func TestNewEmptyAssociateTag(t *testing.T) {
+	client, err := New("AK", "SK", "", RegionJapan)
+	Test{"AssociateTag is not specified", err.Error()}.Compare(t)
+	if client != nil {
+		t.Errorf(`Expected nil but got "%v"`, client)
+	}
+}
+
 func TestNewEmptySecretAccessKey(t *testing.T) {
-	client, err := New("AK", "", RegionJapan)
+	client, err := New("AK", "", "ngsio-22", RegionJapan)
 	Test{"SecretAccessKey is not specified", err.Error()}.Compare(t)
 	if client != nil {
 		t.Errorf(`Expected nil but got "%v"`, client)
@@ -86,10 +95,12 @@ func TestNewFromEnvionment(t *testing.T) {
 	os.Setenv("AWS_ACCESS_KEY_ID", "AK")
 	os.Setenv("AWS_SECRET_ACCESS_KEY", "SK")
 	os.Setenv("AWS_PRODUCT_REGION", "JP")
+	os.Setenv("AWS_ASSOCIATE_TAG", "ngsio-22")
 	client, _ := NewFromEnvionment()
 	for _, test := range []Test{
 		Test{"AK", client.AccessKeyID},
 		Test{"SK", client.SecretAccessKey},
+		Test{"ngsio-22", client.AssociateTag},
 		Test{RegionJapan, client.Region},
 	} {
 		test.Compare(t)
@@ -97,8 +108,8 @@ func TestNewFromEnvionment(t *testing.T) {
 }
 
 func TestClientEndpoint(t *testing.T) {
-	secureClient, _ := New("AK", "SK", RegionJapan)
-	insecureClient, _ := New("AK", "SK", RegionJapan)
+	secureClient, _ := New("AK", "SK", "ngsio-22", RegionJapan)
+	insecureClient, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	insecureClient.Secure = false
 	for _, test := range []Test{
 		Test{"https://webservices.amazon.co.jp/onca/xml", secureClient.Endpoint()},
@@ -144,7 +155,7 @@ func (mop *mockOperation) operation() string {
 }
 
 func TestClientSignedURL(t *testing.T) {
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	mockOp := &mockOperation{}
@@ -163,7 +174,7 @@ func TestDoGetRequest(t *testing.T) {
 	gock.New("https://webservices.amazon.co.jp/onca/xml?" + expectedGetBody).
 		Reply(200).
 		BodyString("<mock><result>OK</result></mock>")
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{}
 	mockResp := mockResponse{}
@@ -184,7 +195,7 @@ func TestDoPostRequest(t *testing.T) {
 		BodyString(expectedPostBody).
 		Reply(200).
 		BodyString("<mock><result>OK</result></mock>")
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{
 		method: http.MethodPost,
@@ -200,7 +211,7 @@ func TestDoPostRequest(t *testing.T) {
 
 func TestDoInvalidMethodRequest(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{
 		method: http.MethodDelete,
@@ -218,7 +229,7 @@ func TestDoHTTPError(t *testing.T) {
 	gock.New("https://webservices.amazon.co.jp/onca/xml").
 		BodyString(expectedGetBody).
 		ReplyError(errors.New("oops"))
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{}
 	mockResp := mockResponse{}
@@ -237,7 +248,7 @@ func TestDoInvalidXML(t *testing.T) {
 		BodyString(expectedGetBody).
 		Reply(200).
 		BodyString("<invalidmock><result>OK</result></invalidmock>")
-	client, _ := New("AK", "SK", RegionJapan)
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{}
 	mockResp := mockResponse{}
@@ -268,7 +279,7 @@ func TestDoErrorResponse(t *testing.T) {
 			BodyString(expectedGetBody).
 			Reply(200).
 			Body(fixtureIO)
-		client, _ := New("AK", "SK", RegionJapan)
+		client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 		client.AssociateTag = "ngsio-22"
 		setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 		mockOp := &mockOperation{}

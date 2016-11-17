@@ -3,7 +3,7 @@ package amazon
 import "testing"
 
 func TestCartGet(t *testing.T) {
-	client, _ := New("AK", "SK", "JP")
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	req := client.CartGet(CartGetParameters{})
 	if req == nil {
 		t.Error("Expected not nil but got nil")
@@ -12,7 +12,7 @@ func TestCartGet(t *testing.T) {
 }
 
 func TestCartGetBuildQuery(t *testing.T) {
-	client, _ := New("AK", "SK", "JP")
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	q := client.CartGet(CartGetParameters{}).buildQuery()
 	Test{0, len(q)}.Compare(t)
 }

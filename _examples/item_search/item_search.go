@@ -14,7 +14,7 @@ func main() {
 	}
 	res, err := client.ItemSearch(amazon.ItemSearchParameters{
 		ResponseGroups: []amazon.ItemSearchResponseGroup{
-			amazon.ItemSearchResponseGroupMedium,
+			amazon.ItemSearchResponseGroupLarge,
 		},
 		SearchIndex: amazon.SearchIndexBooks,
 		Keywords:    "Go 言語",
