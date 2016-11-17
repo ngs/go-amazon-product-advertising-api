@@ -13,7 +13,7 @@ type requestNode struct {
 	Errors  errorsNode
 }
 
-func (req requestNode) Error() error {
+func (req requestNode) error() error {
 	if req.Errors.Error() != "" {
 		return req.Errors
 	}

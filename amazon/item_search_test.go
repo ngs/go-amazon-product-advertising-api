@@ -1,6 +1,7 @@
 package amazon
 
 import (
+	"errors"
 	"net/url"
 	"os"
 	"testing"
@@ -138,7 +139,7 @@ func TestItemSearchBuildQuery(t *testing.T) {
 	}
 }
 
-func TestItemSearchDoError(t *testing.T) {
+func TestItemSearchDoErrorResponse(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestRequest(client)
@@ -154,8 +155,21 @@ func TestItemSearchDoError(t *testing.T) {
 	}
 }
 
+func TestItemSearchDoError(t *testing.T) {
+	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
+	op := createTestRequest(client)
+	gock.New(expectedItemSearchSignedURL).
+		ReplyError(errors.New("omg"))
+	res, err := op.Do()
+	if err == nil {
+		t.Errorf("Expected not nil but got nil res: %v", res)
+	} else {
+		Test{"Get " + expectedItemSearchSignedURL + ": omg", err.Error()}.Compare(t)
+	}
+}
+
 func TestItemSearchDo(t *testing.T) {
-	t.SkipNow()
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestRequest(client)
@@ -167,5 +181,122 @@ func TestItemSearchDo(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected nil but got %v", err)
 	}
-	t.Skipf("Not yet implemented: %v", res)
+	for _, test := range []Test{
+		Test{190, res.TotalResults()},
+		Test{19, res.TotalPages()},
+		Test{"https://www.amazon.co.jp/gp/redirect.html?linkCode=xm2&SubscriptionId=AKIAITPH62XKCOOT7AKA&location=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3DGo%2B%25E8%25A8%2580%25E8%25AA%259E%26url%3Dsearch-alias%253Dbooks-single-index&tag=atsushnagased-22&creative=5143&camp=2025", res.MoreSearchResultsURL()},
+		Test{10, len(res.Items())},
+		Test{"4621300253", res.Items()[0].ASIN},
+		Test{"https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EGo-ADDISON-WESLEY-PROFESSIONAL-COMPUTING-Donovan/dp/4621300253%3FSubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4621300253", res.Items()[0].DetailPageURL},
+		Test{12609, res.Items()[0].SalesRank},
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL75_.jpg", res.Items()[0].SmallImage.URL},
+		Test{59, res.Items()[0].SmallImage.Width.Value},
+		Test{"pixels", res.Items()[0].SmallImage.Width.Units},
+		Test{75, res.Items()[0].SmallImage.Height.Value},
+		Test{"pixels", res.Items()[0].SmallImage.Height.Units},
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL160_.jpg", res.Items()[0].MediumImage.URL},
+		Test{127, res.Items()[0].MediumImage.Width.Value},
+		Test{"pixels", res.Items()[0].MediumImage.Width.Units},
+		Test{160, res.Items()[0].MediumImage.Height.Value},
+		Test{"pixels", res.Items()[0].MediumImage.Height.Units},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L.jpg", res.Items()[0].LargeImage.URL},
+		Test{396, res.Items()[0].LargeImage.Width.Value},
+		Test{"pixels", res.Items()[0].LargeImage.Width.Units},
+
+		Test{500, res.Items()[0].LargeImage.Height.Value},
+		Test{"pixels", res.Items()[0].LargeImage.Height.Units},
+
+		Test{1, len(res.Items()[0].ImageSets.ImageSet)},
+		Test{"primary", res.Items()[0].ImageSets.ImageSet[0].Category},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL30_.jpg", res.Items()[0].ImageSets.ImageSet[0].SwatchImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].SwatchImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].SwatchImage.Width.Units},
+		Test{30, res.Items()[0].ImageSets.ImageSet[0].SwatchImage.Height.Value},
+		Test{24, res.Items()[0].ImageSets.ImageSet[0].SwatchImage.Width.Value},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL75_.jpg", res.Items()[0].ImageSets.ImageSet[0].SmallImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].SmallImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].SmallImage.Width.Units},
+		Test{75, res.Items()[0].ImageSets.ImageSet[0].SmallImage.Height.Value},
+		Test{59, res.Items()[0].ImageSets.ImageSet[0].SmallImage.Width.Value},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL75_.jpg", res.Items()[0].ImageSets.ImageSet[0].ThumbnailImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].ThumbnailImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].ThumbnailImage.Width.Units},
+		Test{75, res.Items()[0].ImageSets.ImageSet[0].ThumbnailImage.Height.Value},
+		Test{59, res.Items()[0].ImageSets.ImageSet[0].ThumbnailImage.Width.Value},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL110_.jpg", res.Items()[0].ImageSets.ImageSet[0].TinyImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].TinyImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].TinyImage.Width.Units},
+		Test{110, res.Items()[0].ImageSets.ImageSet[0].TinyImage.Height.Value},
+		Test{87, res.Items()[0].ImageSets.ImageSet[0].TinyImage.Width.Value},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL160_.jpg", res.Items()[0].ImageSets.ImageSet[0].MediumImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].MediumImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].MediumImage.Width.Units},
+		Test{160, res.Items()[0].ImageSets.ImageSet[0].MediumImage.Height.Value},
+		Test{127, res.Items()[0].ImageSets.ImageSet[0].MediumImage.Width.Value},
+
+		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L.jpg", res.Items()[0].ImageSets.ImageSet[0].LargeImage.URL},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].LargeImage.Height.Units},
+		Test{"pixels", res.Items()[0].ImageSets.ImageSet[0].LargeImage.Width.Units},
+		Test{500, res.Items()[0].ImageSets.ImageSet[0].LargeImage.Height.Value},
+		Test{396, res.Items()[0].ImageSets.ImageSet[0].LargeImage.Width.Value},
+
+		Test{4, len(res.Items()[0].ItemLinks.ItemLink)},
+		Test{"Add To Wishlist", res.Items()[0].ItemLinks.ItemLink[0].Description},
+		Test{"https://www.amazon.co.jp/gp/registry/wishlist/add-item.html%3Fasin.0%3D4621300253%26SubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D4621300253", res.Items()[0].ItemLinks.ItemLink[0].URL},
+
+		Test{"Tell A Friend", res.Items()[0].ItemLinks.ItemLink[1].Description},
+		Test{"https://www.amazon.co.jp/gp/pdp/taf/4621300253%3FSubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D4621300253", res.Items()[0].ItemLinks.ItemLink[1].URL},
+
+		Test{"All Customer Reviews", res.Items()[0].ItemLinks.ItemLink[2].Description},
+		Test{"https://www.amazon.co.jp/review/product/4621300253%3FSubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D4621300253", res.Items()[0].ItemLinks.ItemLink[2].URL},
+
+		Test{"All Offers", res.Items()[0].ItemLinks.ItemLink[3].Description},
+		Test{"https://www.amazon.co.jp/gp/offer-listing/4621300253%3FSubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D4621300253", res.Items()[0].ItemLinks.ItemLink[3].URL},
+
+		Test{2, len(res.Items()[0].ItemAttributes.Author)},
+		Test{"Alan A.A. Donovan", res.Items()[0].ItemAttributes.Author[0]},
+		Test{"Brian W. Kernighan", res.Items()[0].ItemAttributes.Author[1]},
+		Test{"単行本（ソフトカバー）", res.Items()[0].ItemAttributes.Binding},
+		Test{"翻訳", res.Items()[0].ItemAttributes.Creator.Role},
+		Test{"柴田 芳樹", res.Items()[0].ItemAttributes.Creator.Name},
+		Test{"9784621300251", res.Items()[0].ItemAttributes.EAN},
+		Test{1, len(res.Items()[0].ItemAttributes.EANList.Element)},
+		Test{"9784621300251", res.Items()[0].ItemAttributes.EANList.Element[0]},
+		Test{false, res.Items()[0].ItemAttributes.IsAdultProduct},
+		Test{"4621300253", res.Items()[0].ItemAttributes.ISBN},
+		Test{"丸善出版", res.Items()[0].ItemAttributes.Label},
+		Test{2, len(res.Items()[0].ItemAttributes.Languages.Language)},
+		Test{"日本語", res.Items()[0].ItemAttributes.Languages.Language[0].Name},
+		Test{"Published", res.Items()[0].ItemAttributes.Languages.Language[0].Type},
+		Test{"日本語", res.Items()[0].ItemAttributes.Languages.Language[1].Name},
+		Test{"Unknown", res.Items()[0].ItemAttributes.Languages.Language[1].Type},
+		Test{"4104", res.Items()[0].ItemAttributes.ListPrice.Amount},
+		Test{"JPY", res.Items()[0].ItemAttributes.ListPrice.CurrencyCode},
+		Test{"￥ 4,104", res.Items()[0].ItemAttributes.ListPrice.FormattedPrice},
+		Test{"丸善出版", res.Items()[0].ItemAttributes.Manufacturer},
+		Test{462, res.Items()[0].ItemAttributes.NumberOfPages},
+		Test{"hundredths-inches", res.Items()[0].ItemAttributes.PackageDimensions.Width.Units},
+		Test{732, res.Items()[0].ItemAttributes.PackageDimensions.Width.Value},
+		Test{"hundredths-inches", res.Items()[0].ItemAttributes.PackageDimensions.Height.Units},
+		Test{110, res.Items()[0].ItemAttributes.PackageDimensions.Height.Value},
+		Test{"hundredths-pounds", res.Items()[0].ItemAttributes.PackageDimensions.Weight.Units},
+		Test{171, res.Items()[0].ItemAttributes.PackageDimensions.Weight.Value},
+		Test{"hundredths-inches", res.Items()[0].ItemAttributes.PackageDimensions.Length.Units},
+		Test{909, res.Items()[0].ItemAttributes.PackageDimensions.Length.Value},
+		Test{"Book", res.Items()[0].ItemAttributes.ProductGroup},
+		Test{"ABIS_BOOK", res.Items()[0].ItemAttributes.ProductTypeName},
+		Test{"丸善出版", res.Items()[0].ItemAttributes.Publisher},
+		Test{"丸善出版", res.Items()[0].ItemAttributes.Studio},
+		Test{"プログラミング言語Go (ADDISON-WESLEY PROFESSIONAL COMPUTING SERIES)", res.Items()[0].ItemAttributes.Title},
+		Test{time.Date(2016, 6, 20, 0, 0, 0, 0, time.UTC).UnixNano(), res.Items()[0].ItemAttributes.PublicationDate.UnixNano()},
+	} {
+		test.Compare(t)
+	}
+	// fmt.Printf("res %v\n", res)
 }
