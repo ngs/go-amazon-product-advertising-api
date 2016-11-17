@@ -7,16 +7,21 @@ import (
 
 // Item represents item
 type Item struct {
-	XMLName        xml.Name `xml:"Item"`
-	ASIN           string
-	DetailPageURL  string
-	SalesRank      int
-	ItemLinks      ItemLinks
-	SmallImage     Image
-	MediumImage    Image
-	LargeImage     Image
-	ImageSets      ImageSets
-	ItemAttributes ItemAttributes
+	XMLName         xml.Name `xml:"Item"`
+	ASIN            string
+	DetailPageURL   string
+	SalesRank       int
+	ItemLinks       ItemLinks
+	SmallImage      Image
+	MediumImage     Image
+	LargeImage      Image
+	ImageSets       ImageSets
+	ItemAttributes  ItemAttributes
+	OfferSummary    OfferSummary
+	Offers          Offers
+	CustomerReviews CustomerReviews
+	SimilarProducts SimilarProducts
+	BrowseNodes     BrowseNodes
 }
 
 // ItemLinks represents ItemLinks
@@ -135,4 +140,87 @@ type PackageDimensions struct {
 	Length Size
 	Weight Size
 	Width  Size
+}
+
+// OfferSummary represents OfferSummary
+type OfferSummary struct {
+	LowestNewPrice   Price
+	LowestUsedPrice  Price
+	TotalNew         int
+	TotalUsed        int
+	TotalCollectible int
+	TotalRefurbished int
+}
+
+// Offers represents Offers
+type Offers struct {
+	TotalOffers     int
+	TotalOfferPages int
+	MoreOffersURL   string `xml:"MoreOffersUrl"`
+	Offer           []Offer
+}
+
+// Offer represents Offer
+type Offer struct {
+	OfferAttributes OfferAttributes
+	OfferListing    OfferListing
+	LoyaltyPoints   LoyaltyPoints
+}
+
+// OfferAttributes represents OfferAttributes
+type OfferAttributes struct {
+	Condition string
+}
+
+// OfferListing represents OfferListing
+type OfferListing struct {
+	OfferListingID                  string `xml:"OfferListingId"`
+	Price                           Price
+	Availability                    string
+	AvailabilityAttributes          AvailabilityAttributes
+	IsEligibleForSuperSaverShipping bool
+	IsEligibleForPrime              bool
+}
+
+// AvailabilityAttributes represents AvailabilityAttributes
+type AvailabilityAttributes struct {
+	AvailabilityType string
+	MinimumHours     int
+	MaximumHours     int
+}
+
+// LoyaltyPoints represents LoyaltyPoints
+type LoyaltyPoints struct {
+	Points                 int
+	TypicalRedemptionValue Price
+}
+
+// CustomerReviews represents CustomerReviews
+type CustomerReviews struct {
+	IFrameURL  string
+	HasReviews bool
+}
+
+// SimilarProducts represents SimilarProducts
+type SimilarProducts struct {
+	SimilarProduct []SimilarProduct
+}
+
+// SimilarProduct represents SimilarProduct
+type SimilarProduct struct {
+	ASIN  string
+	Title string
+}
+
+// BrowseNodes represents BrowseNodes
+type BrowseNodes struct {
+	BrowseNode []BrowseNode
+}
+
+// BrowseNode represents BrowseNode
+type BrowseNode struct {
+	ID        string `xml:"BrowseNodeId"`
+	Name      string
+	Ancestors BrowseNodes
+	Children  BrowseNodes
 }

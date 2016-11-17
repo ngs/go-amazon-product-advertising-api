@@ -2,6 +2,7 @@ package amazon
 
 import (
 	"errors"
+	"fmt"
 	"net/url"
 	"os"
 	"testing"
@@ -181,6 +182,7 @@ func TestItemSearchDo(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected nil but got %v", err)
 	}
+	fmt.Println(res.Items()[0])
 	for _, test := range []Test{
 		Test{190, res.TotalResults()},
 		Test{19, res.TotalPages()},
