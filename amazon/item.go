@@ -165,6 +165,12 @@ type Offer struct {
 	OfferAttributes OfferAttributes
 	OfferListing    OfferListing
 	LoyaltyPoints   LoyaltyPoints
+	Merchant        Merchant
+}
+
+// Merchant represents Merchant
+type Merchant struct {
+	Name string
 }
 
 // OfferAttributes represents OfferAttributes

@@ -2,7 +2,6 @@ package amazon
 
 import (
 	"errors"
-	"fmt"
 	"net/url"
 	"os"
 	"testing"
@@ -182,7 +181,7 @@ func TestItemSearchDo(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected nil but got %v", err)
 	}
-	fmt.Println(res.Items()[0])
+	// fmt.Println(res.Items()[0])
 	for _, test := range []Test{
 		Test{190, res.TotalResults()},
 		Test{19, res.TotalPages()},
@@ -190,7 +189,7 @@ func TestItemSearchDo(t *testing.T) {
 		Test{10, len(res.Items())},
 		Test{"4621300253", res.Items()[0].ASIN},
 		Test{"https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EGo-ADDISON-WESLEY-PROFESSIONAL-COMPUTING-Donovan/dp/4621300253%3FSubscriptionId%3DAKIAITPH62XKCOOT7AKA%26tag%3Datsushnagased-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4621300253", res.Items()[0].DetailPageURL},
-		Test{12609, res.Items()[0].SalesRank},
+		Test{14521, res.Items()[0].SalesRank},
 		Test{"http://ecx.images-amazon.com/images/I/410V3ulwP5L._SL75_.jpg", res.Items()[0].SmallImage.URL},
 		Test{59, res.Items()[0].SmallImage.Width.Value},
 		Test{"pixels", res.Items()[0].SmallImage.Width.Units},
