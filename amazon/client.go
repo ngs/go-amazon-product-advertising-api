@@ -69,7 +69,7 @@ func NewFromEnvionment() (*Client, error) {
 	return New(
 		os.Getenv("AWS_ACCESS_KEY_ID"),
 		os.Getenv("AWS_SECRET_ACCESS_KEY"),
-		Region(os.Getenv("AWS_REGION")),
+		Region(os.Getenv("AWS_PRODUCT_REGION")),
 	)
 }
 
