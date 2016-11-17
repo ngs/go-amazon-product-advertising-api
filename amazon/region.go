@@ -30,22 +30,24 @@ const (
 	RegionUS Region = "US"
 )
 
+var regionEndpointMap = map[Region]string{
+	RegionBrazil:  "webservices.amazon.com.br",
+	RegionCanada:  "webservices.amazon.ca",
+	RegionChina:   "webservices.amazon.cn",
+	RegionGermany: "webservices.amazon.de",
+	RegionSpain:   "webservices.amazon.es",
+	RegionFrance:  "webservices.amazon.fr",
+	RegionIndia:   "webservices.amazon.in",
+	RegionItaly:   "webservices.amazon.it",
+	RegionJapan:   "webservices.amazon.co.jp",
+	RegionMexico:  "webservices.amazon.com.mx",
+	RegionUK:      "webservices.amazon.co.uk",
+	RegionUS:      "webservices.amazon.com",
+}
+
 // Endpoint returns API endpoint for region
 func (region Region) Endpoint() string {
-	return map[Region]string{
-		RegionBrazil:  "webservices.amazon.com.br",
-		RegionCanada:  "webservices.amazon.ca",
-		RegionChina:   "webservices.amazon.cn",
-		RegionGermany: "webservices.amazon.de",
-		RegionSpain:   "webservices.amazon.es",
-		RegionFrance:  "webservices.amazon.fr",
-		RegionIndia:   "webservices.amazon.in",
-		RegionItaly:   "webservices.amazon.it",
-		RegionJapan:   "webservices.amazon.co.jp",
-		RegionMexico:  "webservices.amazon.com.mx",
-		RegionUK:      "webservices.amazon.co.uk",
-		RegionUS:      "webservices.amazon.com",
-	}[region]
+	return regionEndpointMap[region]
 }
 
 // HTTPSEndpoint returns HTTPS endpoint
@@ -64,4 +66,9 @@ func (region Region) HTTPEndpoint() string {
 		return ""
 	}
 	return "http://" + ep + "/onca/xml"
+}
+
+// IsValid returns region is valid
+func (region Region) IsValid() bool {
+	return region.Endpoint() != ""
 }

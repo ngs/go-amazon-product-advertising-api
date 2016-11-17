@@ -103,11 +103,11 @@ func (req *ItemLookupRequest) operation() string {
 
 // Do sends request for the API
 func (req *ItemLookupRequest) Do() (*ItemLookupResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := ItemLookupResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &respObj, nil
 }
 
 // ItemLookup returns new request for ItemLookup

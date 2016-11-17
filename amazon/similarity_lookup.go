@@ -81,11 +81,11 @@ func (req *SimilarityLookupRequest) operation() string {
 
 // Do sends request for the API
 func (req *SimilarityLookupRequest) Do() (*SimilarityLookupResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := SimilarityLookupResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &respObj, nil
 }
 
 // SimilarityLookup returns new request for SimilarityLookup

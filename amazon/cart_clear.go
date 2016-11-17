@@ -41,11 +41,11 @@ func (req *CartClearRequest) operation() string {
 
 // Do sends request for the API
 func (req *CartClearRequest) Do() (*CartClearResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := CartClearResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &respObj, nil
 }
 
 // CartClear returns new request for CartClear

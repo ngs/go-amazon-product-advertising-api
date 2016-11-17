@@ -49,11 +49,11 @@ func (req *BrowseNodeLookupRequest) operation() string {
 
 // Do sends request for the API
 func (req *BrowseNodeLookupRequest) Do() (*BrowseNodeLookupResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := BrowseNodeLookupResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &respObj, nil
 }
 
 // BrowseNodeLookup returns new request for BrowseNodeLookup

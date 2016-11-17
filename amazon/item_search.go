@@ -1,6 +1,9 @@
 package amazon
 
-import "net/http"
+import (
+	"encoding/xml"
+	"net/http"
+)
 
 // ItemSearchResponseGroup represents constants those are capable ResponseGroups parameter
 type ItemSearchResponseGroup string
@@ -149,7 +152,17 @@ type ItemSearchRequest struct {
 
 // ItemSearchResponse represents response for ItemSearch operation
 type ItemSearchResponse struct {
-	Error error
+	XMLName xml.Name `xml:"ItemSearchResponse"`
+	Items   itemSearchResponseItems
+}
+
+type itemSearchResponseItems struct {
+	XMLName xml.Name `xml:"Items"`
+	Request requestNode
+}
+
+func (res *ItemSearchResponse) Error() error {
+	return res.Items.Request.Error()
 }
 
 func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
@@ -258,11 +271,14 @@ func (req *ItemSearchRequest) operation() string {
 
 // Do sends request for the API
 func (req *ItemSearchRequest) Do() (*ItemSearchResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := ItemSearchResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	if err := respObj.Error(); err != nil {
+		return nil, err
+	}
+	return &respObj, nil
 }
 
 // ItemSearch returns new request for ItemSearch

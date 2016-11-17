@@ -2,11 +2,14 @@ package amazon
 
 import (
 	"net/url"
+	"os"
 	"testing"
 	"time"
 
 	gock "gopkg.in/h2non/gock.v1"
 )
+
+const expectedItemSearchSignedURL = "https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&Actor=Actor&Artist=Artist&AudienceRating=AudienceRating&Author=Author&Availability=Available&Brand=Brand&BrowseNode=BrowseNode&Composer=Composer&Condition=Condition&Conductor=Conductor&Director=Director&IncludeReviewsSummary=True&ItemPage=100&Keywords=Keywords&Manufacturer=Manufacturer&MaximumPrice=1000&MerchantID=MerchantID&MinPercentageOff=20&MinimumPrice=10&Operation=ItemSearch&Orchestra=Orchestra&Power=Power&Publisher=Publisher&RelatedItemPage=50&RelationshipType=RelationshipType&ResponseGroup=Accessories%2CAlternateVersions%2CBrowseNodes%2CEditorialReview%2CImages%2CItemAttributesItemIds%2CLarge%2CListmaniaLists%2CMedium%2CMerchantItemAttributes%2COfferFull%2COfferListings%2COffers%2COfferSummary%2CPromotionalTag%2CPromotionDetails%2CPromotionSummary%2CRelatedItems%2CReviews%2CSalesRank%2CSearchBins%2CSearchInside%2CSimilarities%2CSmall%2CSubjects%2CTracks%2CVariationMatrix%2CVariationMinimum%2CVariationOffers%2CVariations%2CVariationSummary&SearchIndex=Automotive&Service=AWSECommerceService&Signature=up4lYm%2FxGBEt8JRSVU8LaSVK13JC2q185vvA3PmyrV4%3D&Sort=Sort&Timestamp=2016-11-16T12%3A34%3A00Z&Title=Title&TruncateReviewsAt=60&VariationPage=30&Version=2013-08-01"
 
 func createTestRequest(client *Client) *ItemSearchRequest {
 	return client.ItemSearch(ItemSearchParameters{
@@ -91,7 +94,7 @@ func TestItemSearchBuildQuery(t *testing.T) {
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
 	Test{
-		"https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&Actor=Actor&Artist=Artist&AudienceRating=AudienceRating&Author=Author&Availability=Available&Brand=Brand&BrowseNode=BrowseNode&Composer=Composer&Condition=Condition&Conductor=Conductor&Director=Director&IncludeReviewsSummary=True&ItemPage=100&Keywords=Keywords&Manufacturer=Manufacturer&MaximumPrice=1000&MerchantID=MerchantID&MinPercentageOff=20&MinimumPrice=10&Operation=ItemSearch&Orchestra=Orchestra&Power=Power&Publisher=Publisher&RelatedItemPage=50&RelationshipType=RelationshipType&ResponseGroup=Accessories%2CAlternateVersions%2CBrowseNodes%2CEditorialReview%2CImages%2CItemAttributesItemIds%2CLarge%2CListmaniaLists%2CMedium%2CMerchantItemAttributes%2COfferFull%2COfferListings%2COffers%2COfferSummary%2CPromotionalTag%2CPromotionDetails%2CPromotionSummary%2CRelatedItems%2CReviews%2CSalesRank%2CSearchBins%2CSearchInside%2CSimilarities%2CSmall%2CSubjects%2CTracks%2CVariationMatrix%2CVariationMinimum%2CVariationOffers%2CVariations%2CVariationSummary&SearchIndex=Automotive&Service=AWSECommerceService&Signature=up4lYm_xGBEt8JRSVU8LaSVK13JC2q185vvA3PmyrV4%3D&Sort=Sort&Timestamp=2016-11-16T12%3A34%3A00Z&Title=Title&TruncateReviewsAt=60&VariationPage=30&Version=2013-08-01",
+		expectedItemSearchSignedURL,
 		signedURL,
 	}.Compare(t)
 	for _, test := range []Test{
@@ -123,7 +126,7 @@ func TestItemSearchBuildQuery(t *testing.T) {
 		Test{"Accessories,AlternateVersions,BrowseNodes,EditorialReview,Images,ItemAttributesItemIds,Large,ListmaniaLists,Medium,MerchantItemAttributes,OfferFull,OfferListings,Offers,OfferSummary,PromotionalTag,PromotionDetails,PromotionSummary,RelatedItems,Reviews,SalesRank,SearchBins,SearchInside,Similarities,Small,Subjects,Tracks,VariationMatrix,VariationMinimum,VariationOffers,Variations,VariationSummary", parsed.Query().Get("ResponseGroup")},
 		Test{"Automotive", parsed.Query().Get("SearchIndex")},
 		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"up4lYm_xGBEt8JRSVU8LaSVK13JC2q185vvA3PmyrV4=", parsed.Query().Get("Signature")},
+		Test{"up4lYm/xGBEt8JRSVU8LaSVK13JC2q185vvA3PmyrV4=", parsed.Query().Get("Signature")},
 		Test{"Sort", parsed.Query().Get("Sort")},
 		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
 		Test{"Title", parsed.Query().Get("Title")},
@@ -135,11 +138,28 @@ func TestItemSearchBuildQuery(t *testing.T) {
 	}
 }
 
-func TestItemSearchDo(t *testing.T) {
+func TestItemSearchDoError(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "JP")
 	op := createTestRequest(client)
-	gock.New("https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&Actor=Actor&Artist=Artist&AudienceRating=AudienceRating&Author=Author&Availability=Available&Brand=Brand&BrowseNode=BrowseNode&Composer=Composer&Condition=Condition&Conductor=Conductor&Director=Director&IncludeReviewsSummary=True&ItemPage=100&Keywords=Keywords&Manufacturer=Manufacturer&MaximumPrice=1000&MerchantID=MerchantID&MinPercentageOff=20&MinimumPrice=10&Operation=ItemSearch&Orchestra=Orchestra&Power=Power&Publisher=Publisher&RelatedItemPage=50&RelationshipType=RelationshipType&ResponseGroup=Accessories%2CAlternateVersions%2CBrowseNodes%2CEditorialReview%2CImages%2CItemAttributesItemIds%2CLarge%2CListmaniaLists%2CMedium%2CMerchantItemAttributes%2COfferFull%2COfferListings%2COffers%2COfferSummary%2CPromotionalTag%2CPromotionDetails%2CPromotionSummary%2CRelatedItems%2CReviews%2CSalesRank%2CSearchBins%2CSearchInside%2CSimilarities%2CSmall%2CSubjects%2CTracks%2CVariationMatrix%2CVariationMinimum%2CVariationOffers%2CVariations%2CVariationSummary&SearchIndex=Automotive&Service=AWSECommerceService&Signature=up4lYm_xGBEt8JRSVU8LaSVK13JC2q185vvA3PmyrV4%3D&Sort=Sort&Timestamp=2016-11-16T12%3A34%3A00Z&Title=Title&TruncateReviewsAt=60&VariationPage=30&Version=2013-08-01").
+	fixtureIO, _ := os.Open("_fixtures/ItemSearchResponseErrorItem.xml")
+	gock.New(expectedItemSearchSignedURL).
+		Reply(200).
+		Body(fixtureIO)
+	res, err := op.Do()
+	if err == nil {
+		t.Errorf("Expected not nil but got nil res: %v", res)
+	} else {
+		Test{"Error AWS.MissingParameters: リクエストには、必要なパラメータが含まれていません。必要なパラメータには、AssociateTagなどがあります。", err.Error()}.Compare(t)
+	}
+}
+
+func TestItemSearchDo(t *testing.T) {
+	t.SkipNow()
+	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	client, _ := New("AK", "SK", "JP")
+	op := createTestRequest(client)
+	gock.New(expectedItemSearchSignedURL).
 		Reply(200).
 		BodyString("ok") // TODO
 	res, err := op.Do()

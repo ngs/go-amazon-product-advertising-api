@@ -16,6 +16,8 @@ func main() {
 		ResponseGroups: []amazon.ItemSearchResponseGroup{
 			amazon.ItemSearchResponseGroupMedium,
 		},
+		SearchIndex: amazon.SearchIndexBooks,
+		Keywords:    "Go 言語",
 	}).Do()
 	if err != nil {
 		log.Fatal(err)

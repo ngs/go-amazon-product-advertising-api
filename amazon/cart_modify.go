@@ -47,11 +47,11 @@ func (req *CartModifyRequest) operation() string {
 
 // Do sends request for the API
 func (req *CartModifyRequest) Do() (*CartModifyResponse, error) {
-	_, err := req.Client.DoRequest(req)
-	if err != nil {
+	respObj := CartModifyResponse{}
+	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &respObj, nil
 }
 
 // CartModify returns new request for CartModify

@@ -4,12 +4,15 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
+	"encoding/xml"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
 	"reflect"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -53,7 +56,7 @@ func New(accessKeyID string, secretAccessKey string, region Region) (*Client, er
 	if region == "" {
 		return nil, errors.New("Region is not specified")
 	}
-	if region.Endpoint() == "" {
+	if !region.IsValid() {
 		return nil, fmt.Errorf("Invalid Region %v", region)
 	}
 	return &Client{
@@ -148,11 +151,24 @@ func (client *Client) fillQuery(op OperationRequest) url.Values {
 	for k, v := range qmap {
 		q = setQueryValue(q, k, v)
 	}
-	msg := op.httpMethod() + "\n" + u.Host + "\n" + u.Path + "\n" + q.Encode()
+	queryKeys := make([]string, 0, len(q))
+	for key := range q {
+		queryKeys = append(queryKeys, key)
+	}
+	sort.Strings(queryKeys)
+	queryKeysAndValues := make([]string, len(queryKeys))
+	for i, key := range queryKeys {
+		k := strings.Replace(url.QueryEscape(key), "+", "%20", -1)
+		v := strings.Replace(url.QueryEscape(q.Get(key)), "+", "%20", -1)
+		queryKeysAndValues[i] = k + "=" + v
+	}
+	query := strings.Join(queryKeysAndValues, "&")
+	msg := op.httpMethod() + "\n" + u.Host + "\n" + u.Path + "\n" + query
 	mac := hmac.New(sha256.New, []byte(client.SecretAccessKey))
 	mac.Write([]byte(msg))
-	signature := base64.URLEncoding.EncodeToString(mac.Sum(nil))
+	signature := base64.StdEncoding.EncodeToString(mac.Sum(nil))
 	q.Set("Signature", signature)
+	// fmt.Println(q.Encode())
 	return q
 }
 
@@ -166,14 +182,53 @@ func (client *Client) SignedURL(op OperationRequest) string {
 }
 
 // DoRequest sends HTTP request
-func (client *Client) DoRequest(op OperationRequest) (*http.Response, error) {
+func (client *Client) DoRequest(op OperationRequest, responseObject interface{}) (*http.Response, error) {
 	url := client.SignedURL(op)
 	method := op.httpMethod()
+	var res *http.Response
+	var err error
 	if method == http.MethodGet {
-		return http.Get(url)
+		res, err = http.Get(url)
+	} else if method == http.MethodPost {
+		res, err = http.PostForm(client.Endpoint(), client.fillQuery(op))
+	} else {
+		return nil, fmt.Errorf("Unsupported HTTP method: %v", method)
 	}
-	if method == http.MethodPost {
-		return http.PostForm(client.Endpoint(), client.fillQuery(op))
+	if err != nil {
+		return nil, err
 	}
-	return nil, fmt.Errorf("Unsupported HTTP method: %v", method)
+	if data, _ := ioutil.ReadAll(res.Body); data != nil {
+		// fmt.Println(string(data))
+		if err = xml.Unmarshal(data, responseObject); err != nil {
+			if e := newItemSearchErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newBrowseNodeLookupErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newItemLookupErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newSimilarityLookupErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newCartAddErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newCartClearErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newCartCreateErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newCartGetErrorResponse(data); e != nil {
+				return nil, e
+			}
+			if e := newCartModifyErrorResponse(data); e != nil {
+				return nil, e
+			}
+			return nil, err
+		}
+	}
+	return res, err
 }
