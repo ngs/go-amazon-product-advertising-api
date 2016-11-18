@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartCreateResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <Cart>
+    <Request>
+      <IsValid>False</IsValid>
+      <Errors>
+        <Error>
+          <Code>AWS.MissingParameters</Code>
+          <Message>リクエストには、必要なパラメータが含まれていません。必要なパラメータには、AssociateTagなどがあります。</Message>
+        </Error>
+      </Errors>
+    </Request>
+  </Cart>
+</CartCreateResponse>

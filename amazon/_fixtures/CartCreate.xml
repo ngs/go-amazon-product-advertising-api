@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartCreateResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>07a6eee3-017f-4124-bca3-2b8162fe0d6b</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="Item.1.ASIN" Value="4774182389"/>
+      <Argument Name="Item.1.Quantity" Value="2"/>
+      <Argument Name="Item.2.OfferListingId" Value="NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D"/>
+      <Argument Name="Item.2.Quantity" Value="4"/>
+      <Argument Name="Operation" Value="CartCreate"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="kbgQWCc3wa0ZZer/HXWg+vqPpkB6DPpR0fbYS47v8tY="/>
+      <Argument Name="Timestamp" Value="2016-11-18T19:35:33Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.16872093</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>True</IsValid>
+      <CartCreateRequest>
+        <Items>
+          <Item>
+            <ASIN>4774182389</ASIN>
+            <Quantity>2</Quantity>
+          </Item>
+          <Item>
+            <OfferListingId>NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D</OfferListingId>
+            <Quantity>4</Quantity>
+          </Item>
+        </Items>
+      </CartCreateRequest>
+    </Request>
+    <CartId>352-5038530-7983747</CartId>
+    <HMAC>l494DklLoQojeL3f8ajE/6fvalM=</HMAC>
+    <URLEncodedHMAC>l494DklLoQojeL3f8ajE%2F6fvalM%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-5038530-7983747%26associate-id=ngsio-22%26hmac=l494DklLoQojeL3f8ajE%2F6fvalM%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=352-5038530-7983747%26associate-id=ngsio-22%26hmac=l494DklLoQojeL3f8ajE%2F6fvalM%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <SubTotal>
+      <Amount>20692</Amount>
+      <CurrencyCode>JPY</CurrencyCode>
+      <FormattedPrice>￥ 20,692</FormattedPrice>
+    </SubTotal>
+    <CartItems>
+      <SubTotal>
+        <Amount>20692</Amount>
+        <CurrencyCode>JPY</CurrencyCode>
+        <FormattedPrice>￥ 20,692</FormattedPrice>
+      </SubTotal>
+      <CartItem>
+        <CartItemId>CYOXSP4DGCG16</CartItemId>
+        <ASIN>4774182389</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>Slack入門 [ChatOpsによるチーム開発の効率化]</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>2138</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 2,138</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>4276</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,276</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+      <CartItem>
+        <CartItemId>C30K5HAY097OZO</CartItemId>
+        <ASIN>4621300253</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>4</Quantity>
+        <Title>プログラミング言語Go (ADDISON-WESLEY PROFESSIONAL COMPUTING SERIES)</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>4104</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,104</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>16416</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 16,416</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+    </CartItems>
+  </Cart>
+</CartCreateResponse>

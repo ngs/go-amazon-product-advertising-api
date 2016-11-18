@@ -19,6 +19,11 @@ const (
 // CartAddParameters represents parameters for CartAdd operation request
 type CartAddParameters struct {
 	ResponseGroups []CartAddResponseGroup
+	ASIN           string
+	CartID         string
+	HMAC           string
+	OfferListingID string
+	Quantity       int
 }
 
 // CartAddRequest represents request for CartAdd operation
