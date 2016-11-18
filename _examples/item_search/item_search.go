@@ -13,15 +13,17 @@ func main() {
 		log.Fatal(err)
 	}
 	res, err := client.ItemSearch(amazon.ItemSearchParameters{
-		ResponseGroups: []amazon.ItemSearchResponseGroup{
-			amazon.ItemSearchResponseGroupLarge,
-			amazon.ItemSearchResponseGroupOfferFull,
-		},
 		SearchIndex: amazon.SearchIndexBooks,
 		Keywords:    "Go 言語",
 	}).Do()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%v", res)
+	fmt.Printf("%d results found\n\n", res.TotalResults())
+	for _, item := range res.Items() {
+		fmt.Printf(`-------------------------------
+[Title] %v
+[URL]   %v
+`, item.ItemAttributes.Title, item.DetailPageURL)
+	}
 }

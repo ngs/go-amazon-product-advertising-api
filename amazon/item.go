@@ -180,7 +180,7 @@ type OfferAttributes struct {
 
 // OfferListing represents OfferListing
 type OfferListing struct {
-	OfferListingID                  string `xml:"OfferListingId"`
+	ID                              string `xml:"OfferListingId"`
 	Price                           Price
 	Availability                    string
 	AvailabilityAttributes          AvailabilityAttributes
