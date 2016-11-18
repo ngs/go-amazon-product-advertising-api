@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// Items represents items
+type Items struct {
+	Request              Request
+	TotalResults         int
+	TotalPages           int
+	MoreSearchResultsURL string `xml:"MoreSearchResultsUrl"`
+	Item                 []Item
+}
+
 // Item represents item
 type Item struct {
 	XMLName         xml.Name `xml:"Item"`
@@ -216,17 +225,4 @@ type SimilarProducts struct {
 type SimilarProduct struct {
 	ASIN  string
 	Title string
-}
-
-// BrowseNodes represents BrowseNodes
-type BrowseNodes struct {
-	BrowseNode []BrowseNode
-}
-
-// BrowseNode represents BrowseNode
-type BrowseNode struct {
-	ID        string `xml:"BrowseNodeId"`
-	Name      string
-	Ancestors BrowseNodes
-	Children  BrowseNodes
 }

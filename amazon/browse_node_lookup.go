@@ -1,6 +1,9 @@
 package amazon
 
-import "net/http"
+import (
+	"encoding/xml"
+	"net/http"
+)
 
 // BrowseNodeLookupResponseGroup represents constants those are capable ResponseGroups parameter
 type BrowseNodeLookupResponseGroup string
@@ -21,6 +24,7 @@ const (
 // BrowseNodeLookupParameters represents parameters for BrowseNodeLookup operation request
 type BrowseNodeLookupParameters struct {
 	ResponseGroups []BrowseNodeLookupResponseGroup
+	BrowseNodeID   string
 }
 
 // BrowseNodeLookupRequest represents request for BrowseNodeLookup operation
@@ -31,11 +35,28 @@ type BrowseNodeLookupRequest struct {
 
 // BrowseNodeLookupResponse represents response for BrowseNodeLookup operation
 type BrowseNodeLookupResponse struct {
-	Error error
+	XMLName xml.Name    `xml:"BrowseNodeLookupResponse"`
+	Results BrowseNodes `xml:"BrowseNodes"`
+}
+
+// Error returns Error found
+func (res *BrowseNodeLookupResponse) Error() error {
+	if e := res.Results.Request.Errors; e != nil {
+		return e
+	}
+	return nil
+}
+
+// BrowseNodes returns found BrowseNodes
+func (res *BrowseNodeLookupResponse) BrowseNodes() []BrowseNode {
+	return res.Results.BrowseNode
 }
 
 func (req *BrowseNodeLookupRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
+	p := req.Parameters
+	q["BrowseNodeId"] = p.BrowseNodeID
+	q["ResponseGroup"] = p.ResponseGroups
 	return q
 }
 
@@ -51,6 +72,9 @@ func (req *BrowseNodeLookupRequest) operation() string {
 func (req *BrowseNodeLookupRequest) Do() (*BrowseNodeLookupResponse, error) {
 	respObj := BrowseNodeLookupResponse{}
 	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
+		return nil, err
+	}
+	if err := respObj.Error(); err != nil {
 		return nil, err
 	}
 	return &respObj, nil

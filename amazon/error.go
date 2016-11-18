@@ -5,14 +5,31 @@ import (
 	"fmt"
 )
 
-type errorNode struct {
-	XMLName xml.Name `xml:"Error"`
+// Errors represents Errors
+type Errors struct {
+	XMLName   xml.Name `xml:"Errors"`
+	ErrorNode []Error  `xml:"Error"`
+}
+
+// Error represents Error
+type Error struct {
 	Code    string
 	Message string
 }
 
-type errorsNode struct {
-	Errors []errorNode `xml:"Error"`
+func (e Error) Error() string {
+	if e.Code != "" {
+		return fmt.Sprintf("Error %v: %v", e.Code, e.Message)
+	}
+	return ""
+}
+
+// Error returns error string
+func (e Errors) Error() string {
+	if len(e.ErrorNode) > 0 {
+		return e.ErrorNode[0].Error()
+	}
+	return ""
 }
 
 // ErrorResponse represents error response from the API
@@ -22,45 +39,24 @@ type ErrorResponse interface {
 	Message() string
 }
 
-func (e errorResponseNode) code() string {
+func (e errorResponseNode) Code() string {
 	return e.ErrorNode.Code
 }
 
-func (e errorResponseNode) message() string {
+func (e errorResponseNode) Message() string {
 	return e.ErrorNode.Message
 }
 
 func (e errorResponseNode) Error() string {
-	if e.code() != "" {
-		return fmt.Sprintf("Error %v: %v (%v)", e.code(), e.message(), e.RequestID)
-	}
-	return ""
-}
-
-func (e errorsNode) code() string {
-	if len(e.Errors) > 0 {
-		return e.Errors[0].Code
-	}
-	return ""
-}
-
-func (e errorsNode) message() string {
-	if len(e.Errors) > 0 {
-		return e.Errors[0].Message
-	}
-	return ""
-}
-
-func (e errorsNode) Error() string {
-	if e.code() != "" {
-		return fmt.Sprintf("Error %v: %v", e.code(), e.message())
+	if e.Code() != "" {
+		return fmt.Sprintf("Error %v: %v (%v)", e.Code(), e.Message(), e.RequestID)
 	}
 	return ""
 }
 
 type errorResponseNode struct {
-	ErrorNode errorNode `xml:"Error"`
-	RequestID string    `xml:"RequestId"`
+	ErrorNode Error  `xml:"Error"`
+	RequestID string `xml:"RequestId"`
 }
 
 type itemSearchErrorResponse struct {

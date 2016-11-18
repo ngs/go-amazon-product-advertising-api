@@ -12,7 +12,7 @@ import (
 
 const expectedItemSearchSignedURL = "https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&Actor=Actor&Artist=Artist&AssociateTag=ngsio-22&AudienceRating=AudienceRating&Author=Author&Availability=Available&Brand=Brand&BrowseNode=BrowseNode&Composer=Composer&Condition=Condition&Conductor=Conductor&Director=Director&IncludeReviewsSummary=True&ItemPage=100&Keywords=Keywords&Manufacturer=Manufacturer&MaximumPrice=1000&MerchantID=MerchantID&MinPercentageOff=20&MinimumPrice=10&Operation=ItemSearch&Orchestra=Orchestra&Power=Power&Publisher=Publisher&RelatedItemPage=50&RelationshipType=RelationshipType&ResponseGroup=Accessories%2CAlternateVersions%2CBrowseNodes%2CEditorialReview%2CImages%2CItemAttributesItemIds%2CLarge%2CListmaniaLists%2CMedium%2CMerchantItemAttributes%2COfferFull%2COfferListings%2COffers%2COfferSummary%2CPromotionalTag%2CPromotionDetails%2CPromotionSummary%2CRelatedItems%2CReviews%2CSalesRank%2CSearchBins%2CSearchInside%2CSimilarities%2CSmall%2CSubjects%2CTracks%2CVariationMatrix%2CVariationMinimum%2CVariationOffers%2CVariations%2CVariationSummary&SearchIndex=Automotive&Service=AWSECommerceService&Signature=YaOeE3uFyK0g4hNInK%2F8AZDPAchPjpZxm2y57rQVp3o%3D&Sort=Sort&Timestamp=2016-11-16T12%3A34%3A00Z&Title=Title&TruncateReviewsAt=60&VariationPage=30&Version=2013-08-01"
 
-func createTestRequest(client *Client) *ItemSearchRequest {
+func createTestItemSearchRequest(client *Client) *ItemSearchRequest {
 	return client.ItemSearch(ItemSearchParameters{
 		Actor:                 "Actor",
 		Artist:                "Artist",
@@ -79,26 +79,14 @@ func createTestRequest(client *Client) *ItemSearchRequest {
 	})
 }
 
-func TestItemSearch(t *testing.T) {
-	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
-	req := client.ItemSearch(ItemSearchParameters{})
-	if req == nil {
-		t.Error("Expected not nil but got nil")
-	}
-	Test{client, req.Client}.Compare(t)
-}
-
-func TestItemSearchBuildQuery(t *testing.T) {
+func TestItemSearchSignedURL(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
-	op := createTestRequest(client)
+	op := createTestItemSearchRequest(client)
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
-	Test{
-		expectedItemSearchSignedURL,
-		signedURL,
-	}.Compare(t)
 	for _, test := range []Test{
+		Test{expectedItemSearchSignedURL, signedURL},
 		Test{"Actor", parsed.Query().Get("Actor")},
 		Test{"Artist", parsed.Query().Get("Artist")},
 		Test{"AudienceRating", parsed.Query().Get("AudienceRating")},
@@ -142,7 +130,7 @@ func TestItemSearchBuildQuery(t *testing.T) {
 func TestItemSearchDoErrorResponse(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
-	op := createTestRequest(client)
+	op := createTestItemSearchRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/ItemSearchResponseErrorItem.xml")
 	gock.New(expectedItemSearchSignedURL).
 		Reply(200).
@@ -158,7 +146,7 @@ func TestItemSearchDoErrorResponse(t *testing.T) {
 func TestItemSearchDoError(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
-	op := createTestRequest(client)
+	op := createTestItemSearchRequest(client)
 	gock.New(expectedItemSearchSignedURL).
 		ReplyError(errors.New("omg"))
 	res, err := op.Do()
@@ -172,7 +160,7 @@ func TestItemSearchDoError(t *testing.T) {
 func TestItemSearchDo(t *testing.T) {
 	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
-	op := createTestRequest(client)
+	op := createTestItemSearchRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/ItemSearchResponse.xml")
 	gock.New(expectedItemSearchSignedURL).
 		Reply(200).

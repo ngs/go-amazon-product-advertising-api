@@ -240,41 +240,36 @@ type ItemSearchRequest struct {
 
 // ItemSearchResponse represents response for ItemSearch operation
 type ItemSearchResponse struct {
-	XMLName   xml.Name `xml:"ItemSearchResponse"`
-	ItemsNode itemSearchResponseItems
+	XMLName xml.Name `xml:"ItemSearchResponse"`
+	Results Items    `xml:"Items"`
 }
 
-type itemSearchResponseItems struct {
-	XMLName              xml.Name `xml:"Items"`
-	Request              requestNode
-	TotalResults         int
-	TotalPages           int
-	MoreSearchResultsURL string `xml:"MoreSearchResultsUrl"`
-	Items                []Item `xml:"Item"`
-}
-
-func (res *ItemSearchResponse) error() error {
-	return res.ItemsNode.Request.error()
-}
-
-// TotalResults returns total number of items found.
-func (res *ItemSearchResponse) TotalResults() int {
-	return res.ItemsNode.TotalResults
-}
-
-// TotalPages returns total number of pages in the response. Each page can return up to ten items.
-func (res *ItemSearchResponse) TotalPages() int {
-	return res.ItemsNode.TotalPages
-}
-
-// MoreSearchResultsURL returns the URL that displays the complete search results.
-func (res *ItemSearchResponse) MoreSearchResultsURL() string {
-	return res.ItemsNode.MoreSearchResultsURL
+// Error returns Error found
+func (res *ItemSearchResponse) Error() error {
+	if e := res.Results.Request.Errors; e != nil {
+		return e
+	}
+	return nil
 }
 
 // Items returns found items
 func (res *ItemSearchResponse) Items() []Item {
-	return res.ItemsNode.Items
+	return res.Results.Item
+}
+
+// TotalResults returns total number of items found.
+func (res *ItemSearchResponse) TotalResults() int {
+	return res.Results.TotalResults
+}
+
+// TotalPages returns total number of pages in the response. Each page can return up to ten items.
+func (res *ItemSearchResponse) TotalPages() int {
+	return res.Results.TotalPages
+}
+
+// MoreSearchResultsURL returns the URL that displays the complete search results.
+func (res *ItemSearchResponse) MoreSearchResultsURL() string {
+	return res.Results.MoreSearchResultsURL
 }
 
 func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
@@ -367,9 +362,7 @@ func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
 	if p.VariationPage != nil {
 		q["VariationPage"] = *p.VariationPage
 	}
-	if len(p.ResponseGroups) > 0 {
-		q["ResponseGroup"] = p.ResponseGroups
-	}
+	q["ResponseGroup"] = p.ResponseGroups
 	return q
 }
 
@@ -387,7 +380,7 @@ func (req *ItemSearchRequest) Do() (*ItemSearchResponse, error) {
 	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
 		return nil, err
 	}
-	if err := respObj.error(); err != nil {
+	if err := respObj.Error(); err != nil {
 		return nil, err
 	}
 	return &respObj, nil
