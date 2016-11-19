@@ -83,7 +83,7 @@ func createCartCreateRequest(client *Client) *CartCreateRequest {
 }
 
 func TestCartCreateSignedURL(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createCartCreateRequest(client)
 	signedURL := client.SignedURL(op)
@@ -109,7 +109,7 @@ func TestCartCreateSignedURL(t *testing.T) {
 }
 
 func TestCartCreateDoErrorResponse(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createCartCreateRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/CartCreateResponseErrorItem.xml")
@@ -125,7 +125,7 @@ func TestCartCreateDoErrorResponse(t *testing.T) {
 }
 
 func TestCartCreateDoError(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createCartCreateRequest(client)
 	gock.New(expectedCartCreateSignedURL).
@@ -139,7 +139,7 @@ func TestCartCreateDoError(t *testing.T) {
 }
 
 func TestCartCreateDo(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createCartCreateRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/CartCreate.xml")

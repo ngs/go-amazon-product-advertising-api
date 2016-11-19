@@ -80,7 +80,7 @@ func createTestItemSearchRequest(client *Client) *ItemSearchRequest {
 }
 
 func TestItemSearchSignedURL(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestItemSearchRequest(client)
 	signedURL := client.SignedURL(op)
@@ -128,7 +128,7 @@ func TestItemSearchSignedURL(t *testing.T) {
 }
 
 func TestItemSearchDoErrorResponse(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestItemSearchRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/ItemSearchResponseErrorItem.xml")
@@ -144,7 +144,7 @@ func TestItemSearchDoErrorResponse(t *testing.T) {
 }
 
 func TestItemSearchDoError(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestItemSearchRequest(client)
 	gock.New(expectedItemSearchSignedURL).
@@ -158,7 +158,7 @@ func TestItemSearchDoError(t *testing.T) {
 }
 
 func TestItemSearchDo(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createTestItemSearchRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/ItemSearchResponse.xml")

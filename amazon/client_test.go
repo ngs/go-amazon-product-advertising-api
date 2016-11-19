@@ -15,10 +15,7 @@ import (
 const expectedGetBody = "AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=wHPsmXHNme%2B%2F1bb39wTxqB51YgB2xBRe2r5WOzfqViQ%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&falsy=False&int=100&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar&truthy=True&uint=200"
 const expectedPostBody = "AWSAccessKeyId=AK&AssociateTag=ngsio-22&Operation=Mock&Service=AWSECommerceService&Signature=yO2WsclEMEc357Q%2BCMSFn%2FNRh6DWbaJZM2zySysY%2F0A%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01&array.1=foo&array.2=bar&array.3=baz&falsy=False&int=100&map.1.baz1=qux1&map.1.foo1=bar1&map.2.baz2=qux2&map.2.foo2=bar2&string=bar&truthy=True&uint=200"
 
-func setNow(t time.Time, err error) {
-	if err != nil {
-		panic(err)
-	}
+func setNow(t time.Time) {
 	timeNowFunc = func() time.Time { return t }
 }
 
@@ -157,7 +154,7 @@ func (mop *mockOperation) operation() string {
 func TestClientSignedURL(t *testing.T) {
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	mockOp := &mockOperation{}
 	url := client.SignedURL(mockOp)
 	Test{
@@ -170,7 +167,7 @@ func TestDoGetRequest(t *testing.T) {
 	defer gock.Off()
 	t.SkipNow()
 	gock.DisableNetworking()
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	gock.New("https://webservices.amazon.co.jp/onca/xml?" + expectedGetBody).
 		Reply(200).
 		BodyString("<mock><result>OK</result></mock>")
@@ -189,7 +186,7 @@ func TestDoGetRequest(t *testing.T) {
 func TestDoPostRequest(t *testing.T) {
 	defer gock.Off()
 	gock.DisableNetworking()
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	gock.New("https://webservices.amazon.co.jp").
 		Post("/onca/xml").
 		BodyString(expectedPostBody).
@@ -210,7 +207,7 @@ func TestDoPostRequest(t *testing.T) {
 }
 
 func TestDoInvalidMethodRequest(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{
@@ -225,7 +222,7 @@ func TestDoInvalidMethodRequest(t *testing.T) {
 }
 
 func TestDoHTTPError(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	gock.New("https://webservices.amazon.co.jp/onca/xml").
 		BodyString(expectedGetBody).
 		ReplyError(errors.New("oops"))
@@ -243,7 +240,7 @@ func TestDoHTTPError(t *testing.T) {
 }
 
 func TestDoInvalidXML(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	gock.New("https://webservices.amazon.co.jp/onca/xml").
 		BodyString(expectedGetBody).
 		Reply(200).
@@ -262,7 +259,7 @@ func TestDoInvalidXML(t *testing.T) {
 }
 
 func TestDoErrorResponse(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	for _, op := range []string{
 		"ItemSearch",
 		"BrowseNodeLookup",
@@ -281,7 +278,7 @@ func TestDoErrorResponse(t *testing.T) {
 			Body(fixtureIO)
 		client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 		client.AssociateTag = "ngsio-22"
-		setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+		setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 		mockOp := &mockOperation{}
 		mockResp := mockResponse{}
 		res, err := client.DoRequest(mockOp, &mockResp)

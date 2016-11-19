@@ -26,7 +26,7 @@ func createBrowseNodeLookupRequest(client *Client) *BrowseNodeLookupRequest {
 }
 
 func TestBrowseNodeLookupSignedURL(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createBrowseNodeLookupRequest(client)
 	signedURL := client.SignedURL(op)
@@ -47,7 +47,7 @@ func TestBrowseNodeLookupSignedURL(t *testing.T) {
 }
 
 func TestBrowseNodeLookupDoErrorResponse(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createBrowseNodeLookupRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/BrowseNodeLookupResponseErrorItem.xml")
@@ -63,7 +63,6 @@ func TestBrowseNodeLookupDoErrorResponse(t *testing.T) {
 }
 
 func TestBrowseNodeLookupDoError(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createBrowseNodeLookupRequest(client)
 	gock.New(expectedBrowseNodeLookupSignedURL).
@@ -77,7 +76,7 @@ func TestBrowseNodeLookupDoError(t *testing.T) {
 }
 
 func TestBrowseNodeLookupDo(t *testing.T) {
-	setNow(time.Parse(time.RFC822, "16 Nov 16 21:34 JST"))
+	setNow(time.Date(2016, time.November, 16, 21, 34, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)))
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	op := createBrowseNodeLookupRequest(client)
 	fixtureIO, _ := os.Open("_fixtures/BrowseNodeLookup.xml")
