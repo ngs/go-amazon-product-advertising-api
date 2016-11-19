@@ -10,62 +10,6 @@ import (
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-func TestCartCreateItemQuery(t *testing.T) {
-	Test{
-		map[string]string{
-			"ASIN":     "test1",
-			"Quantity": "2",
-		},
-		CartCreateItem{
-			ASIN:     "test1",
-			Quantity: 2,
-		}.Query(),
-	}.DeepEqual(t)
-	Test{
-		map[string]string{
-			"OfferListingId": "test1",
-			"Quantity":       "2",
-		},
-		CartCreateItem{
-			OfferListingID: "test1",
-			Quantity:       2,
-		}.Query(),
-	}.DeepEqual(t)
-	Test{
-		map[string]string{
-			"ASIN": "test1",
-		},
-		CartCreateItem{
-			ASIN: "test1",
-		}.Query(),
-	}.DeepEqual(t)
-	Test{
-		map[string]string{
-			"OfferListingId": "test1",
-		},
-		CartCreateItem{
-			OfferListingID: "test1",
-		}.Query(),
-	}.DeepEqual(t)
-}
-
-func TestCartCreateParametersAddItem(t *testing.T) {
-	p := &CartCreateParameters{}
-	Test{0, len(p.Items)}.Compare(t)
-	p.AddItemWithASIN("test1", 2)
-	Test{1, len(p.Items)}.Compare(t)
-	Test{"test1", p.Items[0].ASIN}.Compare(t)
-	Test{2, p.Items[0].Quantity}.Compare(t)
-	p.AddItemWithOfferListingID("test2", 4)
-	Test{2, len(p.Items)}.Compare(t)
-	Test{"test1", p.Items[0].ASIN}.Compare(t)
-	Test{"", p.Items[0].OfferListingID}.Compare(t)
-	Test{2, p.Items[0].Quantity}.Compare(t)
-	Test{"", p.Items[1].ASIN}.Compare(t)
-	Test{"test2", p.Items[1].OfferListingID}.Compare(t)
-	Test{4, p.Items[1].Quantity}.Compare(t)
-}
-
 const expectedCartCreateSignedURL = "https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&Item.1.ASIN=4774182389&Item.1.Quantity=2&Item.2.OfferListingId=NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%252BbVV876t1%252Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%253D&Item.2.Quantity=4&Operation=CartCreate&Service=AWSECommerceService&Signature=Gx1wPKKFuodv6rxdbkeShOLj5SPWJ7JaNIYLapPlZew%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01"
 
 func createCartCreateRequest(client *Client) *CartCreateRequest {
@@ -77,8 +21,8 @@ func createCartCreateRequest(client *Client) *CartCreateRequest {
 			CartCreateResponseGroupCartTopSellers,
 		},
 	}
-	p.AddItemWithASIN("4774182389", 2)
-	p.AddItemWithOfferListingID("NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D", 4)
+	p.Items.AddASIN("4774182389", 2)
+	p.Items.AddOfferListingID("NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D", 4)
 	return client.CartCreate(p)
 }
 

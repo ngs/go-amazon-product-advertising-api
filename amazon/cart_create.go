@@ -3,7 +3,6 @@ package amazon
 import (
 	"encoding/xml"
 	"net/http"
-	"strconv"
 )
 
 // CartCreateResponseGroup represents constants those are capable ResponseGroups parameter
@@ -20,49 +19,11 @@ const (
 	CartCreateResponseGroupCartTopSellers CartCreateResponseGroup = "CartTopSellers"
 )
 
-// CartCreateItem items in cart
-type CartCreateItem struct {
-	ASIN           string
-	Quantity       int
-	OfferListingID string
-}
-
-// Query returns map key and value
-func (item CartCreateItem) Query() map[string]string {
-	q := map[string]string{}
-	if item.ASIN != "" {
-		q["ASIN"] = item.ASIN
-	}
-	if item.OfferListingID != "" {
-		q["OfferListingId"] = item.OfferListingID
-	}
-	if item.Quantity > 0 {
-		q["Quantity"] = strconv.Itoa(item.Quantity)
-	}
-	return q
-}
-
 // CartCreateParameters represents parameters for CartCreate operation request
 type CartCreateParameters struct {
 	ResponseGroups []CartCreateResponseGroup
 	ASIN           string
-	Items          []CartCreateItem
-}
-
-// AddItemWithASIN adds item with ASIN and Quantity
-func (p *CartCreateParameters) AddItemWithASIN(ASIN string, quantity int) {
-	p.Items = append(p.Items, CartCreateItem{
-		ASIN:     ASIN,
-		Quantity: quantity,
-	})
-}
-
-// AddItemWithOfferListingID adds item with OfferListingID and Quantity
-func (p *CartCreateParameters) AddItemWithOfferListingID(offerListingID string, quantity int) {
-	p.Items = append(p.Items, CartCreateItem{
-		OfferListingID: offerListingID,
-		Quantity:       quantity,
-	})
+	Items          CartRequestItems
 }
 
 // CartCreateRequest represents request for CartCreate operation
@@ -87,12 +48,7 @@ func (res *CartCreateResponse) Error() error {
 
 func (req *CartCreateRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
-	cartItems := req.Parameters.Items
-	items := make([]map[string]string, len(cartItems))
-	for i := range cartItems {
-		items[i] = cartItems[i].Query()
-	}
-	q["Item"] = items
+	q["Item"] = req.Parameters.Items.Query()
 	return q
 }
 

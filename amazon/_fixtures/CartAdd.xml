@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartAddResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>52f3b065-6db3-4955-8ac6-2afdd269c8da</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="CartId" Value="352-8545344-3979559"/>
+      <Argument Name="HMAC" Value="1vXVtADNKYIk3rCThiJfETmY+Uc="/>
+      <Argument Name="Item.1.ASIN" Value="4774182389"/>
+      <Argument Name="Item.1.Quantity" Value="2"/>
+      <Argument Name="Item.2.OfferListingId" Value="NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D"/>
+      <Argument Name="Item.2.Quantity" Value="4"/>
+      <Argument Name="Operation" Value="CartAdd"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="SnNj9ejDvnnHMNSQ+Ps1FQhu/dk8/tUCZQy6V+VLaCU="/>
+      <Argument Name="Timestamp" Value="2016-11-19T04:35:33Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.159322</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>True</IsValid>
+      <CartAddRequest>
+        <CartId>352-8545344-3979559</CartId>
+        <HMAC>1vXVtADNKYIk3rCThiJfETmY+Uc=</HMAC>
+        <Items>
+          <Item>
+            <ASIN>4774182389</ASIN>
+            <Quantity>2</Quantity>
+          </Item>
+          <Item>
+            <OfferListingId>NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D</OfferListingId>
+            <Quantity>4</Quantity>
+          </Item>
+        </Items>
+      </CartAddRequest>
+    </Request>
+    <CartId>352-8545344-3979559</CartId>
+    <HMAC>1vXVtADNKYIk3rCThiJfETmY+Uc=</HMAC>
+    <URLEncodedHMAC>1vXVtADNKYIk3rCThiJfETmY%2BUc%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <SubTotal>
+      <Amount>21952</Amount>
+      <CurrencyCode>JPY</CurrencyCode>
+      <FormattedPrice>￥ 21,952</FormattedPrice>
+    </SubTotal>
+    <CartItems>
+      <SubTotal>
+        <Amount>21952</Amount>
+        <CurrencyCode>JPY</CurrencyCode>
+        <FormattedPrice>￥ 21,952</FormattedPrice>
+      </SubTotal>
+      <CartItem>
+        <CartItemId>CYOXSP4DGCG16</CartItemId>
+        <ASIN>4774182389</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>Slack入門 [ChatOpsによるチーム開発の効率化]</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>2138</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 2,138</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>4276</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,276</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+      <CartItem>
+        <CartItemId>C30K5HAY097OZO</CartItemId>
+        <ASIN>4621300253</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>4</Quantity>
+        <Title>プログラミング言語Go (ADDISON-WESLEY PROFESSIONAL COMPUTING SERIES)</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>4104</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,104</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>16416</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 16,416</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+      <CartItem>
+        <CartItemId>C33X3SVC08ND0I</CartItemId>
+        <ASIN>B01JRDPAGO</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>WIRED VOL.25/特集 The Power of Blockchain ブロックチェーンは世界を変える</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>630</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 630</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>1260</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 1,260</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+    </CartItems>
+  </Cart>
+</CartAddResponse>

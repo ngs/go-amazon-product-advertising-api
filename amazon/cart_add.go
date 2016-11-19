@@ -1,6 +1,9 @@
 package amazon
 
-import "net/http"
+import (
+	"encoding/xml"
+	"net/http"
+)
 
 // CartAddResponseGroup represents constants those are capable ResponseGroups parameter
 type CartAddResponseGroup string
@@ -19,11 +22,9 @@ const (
 // CartAddParameters represents parameters for CartAdd operation request
 type CartAddParameters struct {
 	ResponseGroups []CartAddResponseGroup
-	ASIN           string
 	CartID         string
 	HMAC           string
-	OfferListingID string
-	Quantity       int
+	Items          CartRequestItems
 }
 
 // CartAddRequest represents request for CartAdd operation
@@ -34,11 +35,23 @@ type CartAddRequest struct {
 
 // CartAddResponse represents response for CartAdd operation
 type CartAddResponse struct {
-	Error error
+	XMLName xml.Name `xml:"CartAddResponse"`
+	Cart    Cart
+}
+
+// Error returns Error found
+func (res *CartAddResponse) Error() error {
+	if e := res.Cart.Request.Errors; e != nil {
+		return e
+	}
+	return nil
 }
 
 func (req *CartAddRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
+	q["CartId"] = req.Parameters.CartID
+	q["HMAC"] = req.Parameters.HMAC
+	q["Item"] = req.Parameters.Items.Query()
 	return q
 }
 
@@ -54,6 +67,9 @@ func (req *CartAddRequest) operation() string {
 func (req *CartAddRequest) Do() (*CartAddResponse, error) {
 	respObj := CartAddResponse{}
 	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
+		return nil, err
+	}
+	if err := respObj.Error(); err != nil {
 		return nil, err
 	}
 	return &respObj, nil
