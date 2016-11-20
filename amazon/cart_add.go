@@ -52,6 +52,7 @@ func (req *CartAddRequest) buildQuery() map[string]interface{} {
 	q["CartId"] = req.Parameters.CartID
 	q["HMAC"] = req.Parameters.HMAC
 	q["Item"] = req.Parameters.Items.Query()
+	q["ResponseGroup"] = req.Parameters.ResponseGroups
 	return q
 }
 

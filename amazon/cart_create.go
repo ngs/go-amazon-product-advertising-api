@@ -48,6 +48,7 @@ func (res *CartCreateResponse) Error() error {
 
 func (req *CartCreateRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
+	q["ResponseGroup"] = req.Parameters.ResponseGroups
 	q["Item"] = req.Parameters.Items.Query()
 	return q
 }

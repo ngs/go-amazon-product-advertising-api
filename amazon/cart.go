@@ -4,15 +4,18 @@ import "encoding/xml"
 
 // Cart represents Cart
 type Cart struct {
-	XMLName        xml.Name `xml:"Cart"`
-	Request        Request
-	ID             string `xml:"CartId"`
-	HMAC           string
-	URLEncodedHMAC string
-	PurchaseURL    string
-	MobileCartURL  string
-	SubTotal       Price
-	CartItems      CartItems
+	XMLName               xml.Name `xml:"Cart"`
+	Request               Request
+	ID                    string `xml:"CartId"`
+	HMAC                  string
+	URLEncodedHMAC        string
+	PurchaseURL           string
+	MobileCartURL         string
+	SubTotal              Price
+	CartItems             CartItems
+	SimilarProducts       SimilarProducts
+	NewReleases           NewReleases
+	SimilarViewedProducts SimilarViewedProducts
 }
 
 // CartItems represents CartItems

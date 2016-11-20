@@ -4,7 +4,7 @@
     <HTTPHeaders>
       <Header Name="UserAgent" Value="Go-http-client/1.1"/>
     </HTTPHeaders>
-    <RequestId>07a6eee3-017f-4124-bca3-2b8162fe0d6b</RequestId>
+    <RequestId>5ea76b41-90fa-4271-a1c0-e1997b1be0a3</RequestId>
     <Arguments>
       <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
       <Argument Name="AssociateTag" Value="ngsio-22"/>
@@ -13,12 +13,13 @@
       <Argument Name="Item.2.OfferListingId" Value="NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D"/>
       <Argument Name="Item.2.Quantity" Value="4"/>
       <Argument Name="Operation" Value="CartCreate"/>
+      <Argument Name="ResponseGroup" Value="Cart,CartNewReleases,CartSimilarities,CartTopSellers"/>
       <Argument Name="Service" Value="AWSECommerceService"/>
-      <Argument Name="Signature" Value="kbgQWCc3wa0ZZer/HXWg+vqPpkB6DPpR0fbYS47v8tY="/>
-      <Argument Name="Timestamp" Value="2016-11-18T19:35:33Z"/>
+      <Argument Name="Signature" Value="qL0kvD6VuJ7eo/Up9mOTdaWNyqaY1K6Ls6g9QN7xcg8="/>
+      <Argument Name="Timestamp" Value="2016-11-20T04:04:09Z"/>
       <Argument Name="Version" Value="2013-08-01"/>
     </Arguments>
-    <RequestProcessingTime>0.16872093</RequestProcessingTime>
+    <RequestProcessingTime>0.23874232</RequestProcessingTime>
   </OperationRequest>
   <Cart>
     <Request>
@@ -34,13 +35,17 @@
             <Quantity>4</Quantity>
           </Item>
         </Items>
+        <ResponseGroup>Cart</ResponseGroup>
+        <ResponseGroup>CartNewReleases</ResponseGroup>
+        <ResponseGroup>CartSimilarities</ResponseGroup>
+        <ResponseGroup>CartTopSellers</ResponseGroup>
       </CartCreateRequest>
     </Request>
-    <CartId>352-5038530-7983747</CartId>
-    <HMAC>l494DklLoQojeL3f8ajE/6fvalM=</HMAC>
-    <URLEncodedHMAC>l494DklLoQojeL3f8ajE%2F6fvalM%3D</URLEncodedHMAC>
-    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-5038530-7983747%26associate-id=ngsio-22%26hmac=l494DklLoQojeL3f8ajE%2F6fvalM%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
-    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=352-5038530-7983747%26associate-id=ngsio-22%26hmac=l494DklLoQojeL3f8ajE%2F6fvalM%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <CartId>351-9409673-0414064</CartId>
+    <HMAC>+ak+v8qGeDkkdQ/w0o+5uA2heQI=</HMAC>
+    <URLEncodedHMAC>%2Bak%2Bv8qGeDkkdQ%2Fw0o%2B5uA2heQI%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=351-9409673-0414064%26associate-id=ngsio-22%26hmac=%2Bak%2Bv8qGeDkkdQ%2Fw0o%2B5uA2heQI%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=351-9409673-0414064%26associate-id=ngsio-22%26hmac=%2Bak%2Bv8qGeDkkdQ%2Fw0o%2B5uA2heQI%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
     <SubTotal>
       <Amount>20692</Amount>
       <CurrencyCode>JPY</CurrencyCode>
@@ -89,5 +94,71 @@
         </ItemTotal>
       </CartItem>
     </CartItems>
+    <SimilarProducts>
+      <SimilarProduct>
+        <ASIN>4822237559</ASIN>
+        <Title>Amazon Web Services 定番業務システム12パターン 設計ガイド</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798142417</ASIN>
+        <Title>スターティングGo言語 (CodeZine BOOKS)</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4873117763</ASIN>
+        <Title>Docker</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798147605</ASIN>
+        <Title>DevOps導入指南 Infrastructure as Codeでチーム開発・サービス運用を効率化する (DEV Engineer’s Books)</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4873117607</ASIN>
+        <Title>マイクロサービスアーキテクチャ</Title>
+      </SimilarProduct>
+    </SimilarProducts>
+    <NewReleases>
+      <NewRelease>
+        <ASIN>4063958159</ASIN>
+        <Title>進撃の巨人(21): 週刊少年マガジン</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01MQG6O6O</ASIN>
+        <Title>狼の口 ヴォルフスムント 8巻&lt;狼の口 ヴォルフスムント> (ビームコミックス（ハルタ）)</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01N3KWO8L</ASIN>
+        <Title>Vジャンプ 2017年 01 月号 [雑誌]</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01M67T85Q</ASIN>
+        <Title>乃木坂46×週刊プレイボーイ2016</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>404892365X</ASIN>
+        <Title>とある魔術の禁書目録外伝 と ある科学の超電磁砲(12) (電撃コミックス)</Title>
+      </NewRelease>
+    </NewReleases>
+    <SimilarViewedProducts>
+      <SimilarViewedProduct>
+        <ASIN>4274219151</ASIN>
+        <Title>プログラミングElixir</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4774182427</ASIN>
+        <Title>WEB+DB PRESS Vol.93</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4844337718</ASIN>
+        <Title>UIデザインの心理学―わかりやすさ・使いやすさの法則</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4873117550</ASIN>
+        <Title>パフォーマンス向上のためのデザイン設計</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4873117526</ASIN>
+        <Title>Go言語によるWebアプリケーション開発</Title>
+      </SimilarViewedProduct>
+    </SimilarViewedProducts>
   </Cart>
 </CartCreateResponse>

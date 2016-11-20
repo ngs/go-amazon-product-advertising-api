@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartGetResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>3f87ec03-821e-4e11-be21-9ffb7d149c85</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="CartId" Value="354-9729779-1559716"/>
+      <Argument Name="CartItemId" Value="CYOXSP4DGCG16"/>
+      <Argument Name="HMAC" Value="/SYIxqIgnWMZ/NW2kIy+qXHp3xI="/>
+      <Argument Name="Operation" Value="CartGet"/>
+      <Argument Name="ResponseGroup" Value="Cart,CartTopSellers,CartSimilarities,CartNewReleases"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="DWLVyhpDjOnz3EwSrsA08N5Sutgr+J3jhqpFlgiEg0k="/>
+      <Argument Name="Timestamp" Value="2016-11-20T04:49:24Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.20312656</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>True</IsValid>
+      <CartGetRequest>
+        <CartId>354-9729779-1559716</CartId>
+        <HMAC>/SYIxqIgnWMZ/NW2kIy+qXHp3xI=</HMAC>
+        <ResponseGroup>Cart</ResponseGroup>
+        <ResponseGroup>CartTopSellers</ResponseGroup>
+        <ResponseGroup>CartSimilarities</ResponseGroup>
+        <ResponseGroup>CartNewReleases</ResponseGroup>
+      </CartGetRequest>
+    </Request>
+    <CartId>354-9729779-1559716</CartId>
+    <HMAC>/SYIxqIgnWMZ/NW2kIy+qXHp3xI=</HMAC>
+    <URLEncodedHMAC>%2FSYIxqIgnWMZ%2FNW2kIy%2BqXHp3xI%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=354-9729779-1559716%26associate-id=ngsio-22%26hmac=%2FSYIxqIgnWMZ%2FNW2kIy%2BqXHp3xI%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=354-9729779-1559716%26associate-id=ngsio-22%26hmac=%2FSYIxqIgnWMZ%2FNW2kIy%2BqXHp3xI%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <SubTotal>
+      <Amount>21952</Amount>
+      <CurrencyCode>JPY</CurrencyCode>
+      <FormattedPrice>￥ 21,952</FormattedPrice>
+    </SubTotal>
+    <CartItems>
+      <SubTotal>
+        <Amount>21952</Amount>
+        <CurrencyCode>JPY</CurrencyCode>
+        <FormattedPrice>￥ 21,952</FormattedPrice>
+      </SubTotal>
+      <CartItem>
+        <CartItemId>CYOXSP4DGCG16</CartItemId>
+        <ASIN>4774182389</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>Slack入門 [ChatOpsによるチーム開発の効率化]</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>2138</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 2,138</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>4276</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,276</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+      <CartItem>
+        <CartItemId>C30K5HAY097OZO</CartItemId>
+        <ASIN>4621300253</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>4</Quantity>
+        <Title>プログラミング言語Go (ADDISON-WESLEY PROFESSIONAL COMPUTING SERIES)</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>4104</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,104</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>16416</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 16,416</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+      <CartItem>
+        <CartItemId>C33X3SVC08ND0I</CartItemId>
+        <ASIN>B01JRDPAGO</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>WIRED VOL.25/特集 The Power of Blockchain ブロックチェーンは世界を変える</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>630</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 630</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>1260</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 1,260</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+    </CartItems>
+    <SimilarProducts>
+      <SimilarProduct>
+        <ASIN>4873117607</ASIN>
+        <Title>マイクロサービスアーキテクチャ</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4822285448</ASIN>
+        <Title>DevOps教科書</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798144576</ASIN>
+        <Title>プログラマのためのSQLグラフ原論 リレーショナルデータベースで木と階層構造を扱うために</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4274219151</ASIN>
+        <Title>プログラミングElixir</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798147400</ASIN>
+        <Title>詳解MySQL 5.7 止まらぬ進化に乗り遅れないためのテクニカルガイド (NEXT ONE)</Title>
+      </SimilarProduct>
+    </SimilarProducts>
+    <TopSellers>
+      <TopSeller>
+        <ASIN>4091038727</ASIN>
+        <Title>全部レンチン! やせるおかず 作りお き: 時短、手間なし、失敗なし (小学館実用シリーズ LADY BIRD)</Title>
+      </TopSeller>
+      <TopSeller>
+        <ASIN>4091038638</ASIN>
+        <Title>夫もやせるおかず 作りおき: お肉や麺もOKなガッツリ系 (LADY BIRD 小学館実用シリーズ)</Title>
+      </TopSeller>
+      <TopSeller>
+        <ASIN>4063958159</ASIN>
+        <Title>進撃の巨 人(21): 週刊少年マガジン</Title>
+      </TopSeller>
+      <TopSeller>
+        <ASIN>4091038549</ASIN>
+        <Title>やせるおかず 作りおき: 著者50代、1年で26キロ減、リバウンドなし! (小学館実用シリーズ LADY BIRD)</Title>
+      </TopSeller>
+      <TopSeller>
+        <ASIN>4594610994</ASIN>
+        <Title>簡単だから長続きする! 作りおきダイエットマリネ (扶桑社ムック)</Title>
+      </TopSeller>
+    </TopSellers>
+    <SimilarViewedProducts>
+      <SimilarViewedProduct>
+        <ASIN>4873117526</ASIN>
+        <Title>Go言語によるWebアプリケーション開発</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4757103670</ASIN>
+        <Title>ビットコインとブ ロックチェーン:暗号通貨を支える技術</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>0134190440</ASIN>
+        <Title>The Go Programming Language (Addison-Wesley Professional Computing Series)</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4822285448</ASIN>
+        <Title>DevOps教科書</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4274219151</ASIN>
+        <Title>プログラミングElixir</Title>
+      </SimilarViewedProduct>
+    </SimilarViewedProducts>
+  </Cart>
+</CartGetResponse>

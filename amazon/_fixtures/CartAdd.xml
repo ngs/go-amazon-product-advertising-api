@@ -4,30 +4,31 @@
     <HTTPHeaders>
       <Header Name="UserAgent" Value="Go-http-client/1.1"/>
     </HTTPHeaders>
-    <RequestId>52f3b065-6db3-4955-8ac6-2afdd269c8da</RequestId>
+    <RequestId>224f2442-c4f6-4d4f-b19b-f5cbd9e88656</RequestId>
     <Arguments>
       <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
       <Argument Name="AssociateTag" Value="ngsio-22"/>
-      <Argument Name="CartId" Value="352-8545344-3979559"/>
-      <Argument Name="HMAC" Value="1vXVtADNKYIk3rCThiJfETmY+Uc="/>
+      <Argument Name="CartId" Value="351-5204090-0802017"/>
+      <Argument Name="HMAC" Value="ba6oTpgnCNQTEfb67iNFlwqeLp8="/>
       <Argument Name="Item.1.ASIN" Value="4774182389"/>
       <Argument Name="Item.1.Quantity" Value="2"/>
       <Argument Name="Item.2.OfferListingId" Value="NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D"/>
       <Argument Name="Item.2.Quantity" Value="4"/>
       <Argument Name="Operation" Value="CartAdd"/>
+      <Argument Name="ResponseGroup" Value="Cart,CartNewReleases,CartSimilarities,CartTopSellers"/>
       <Argument Name="Service" Value="AWSECommerceService"/>
-      <Argument Name="Signature" Value="SnNj9ejDvnnHMNSQ+Ps1FQhu/dk8/tUCZQy6V+VLaCU="/>
-      <Argument Name="Timestamp" Value="2016-11-19T04:35:33Z"/>
+      <Argument Name="Signature" Value="II+YQevvBOFmA4+m3a9zJ85PXr9zNRdAGuWAtPZCXW4="/>
+      <Argument Name="Timestamp" Value="2016-11-20T04:00:10Z"/>
       <Argument Name="Version" Value="2013-08-01"/>
     </Arguments>
-    <RequestProcessingTime>0.159322</RequestProcessingTime>
+    <RequestProcessingTime>0.16841751</RequestProcessingTime>
   </OperationRequest>
   <Cart>
     <Request>
       <IsValid>True</IsValid>
       <CartAddRequest>
-        <CartId>352-8545344-3979559</CartId>
-        <HMAC>1vXVtADNKYIk3rCThiJfETmY+Uc=</HMAC>
+        <CartId>351-5204090-0802017</CartId>
+        <HMAC>ba6oTpgnCNQTEfb67iNFlwqeLp8=</HMAC>
         <Items>
           <Item>
             <ASIN>4774182389</ASIN>
@@ -38,13 +39,17 @@
             <Quantity>4</Quantity>
           </Item>
         </Items>
+        <ResponseGroup>Cart</ResponseGroup>
+        <ResponseGroup>CartNewReleases</ResponseGroup>
+        <ResponseGroup>CartSimilarities</ResponseGroup>
+        <ResponseGroup>CartTopSellers</ResponseGroup>
       </CartAddRequest>
     </Request>
-    <CartId>352-8545344-3979559</CartId>
-    <HMAC>1vXVtADNKYIk3rCThiJfETmY+Uc=</HMAC>
-    <URLEncodedHMAC>1vXVtADNKYIk3rCThiJfETmY%2BUc%3D</URLEncodedHMAC>
-    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
-    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <CartId>351-5204090-0802017</CartId>
+    <HMAC>ba6oTpgnCNQTEfb67iNFlwqeLp8=</HMAC>
+    <URLEncodedHMAC>ba6oTpgnCNQTEfb67iNFlwqeLp8%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=351-5204090-0802017%26associate-id=ngsio-22%26hmac=ba6oTpgnCNQTEfb67iNFlwqeLp8%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=351-5204090-0802017%26associate-id=ngsio-22%26hmac=ba6oTpgnCNQTEfb67iNFlwqeLp8%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
     <SubTotal>
       <Amount>21952</Amount>
       <CurrencyCode>JPY</CurrencyCode>
@@ -111,5 +116,71 @@
         </ItemTotal>
       </CartItem>
     </CartItems>
+    <SimilarProducts>
+      <SimilarProduct>
+        <ASIN>4774184322</ASIN>
+        <Title>WEB+DB PRESS Vol.95</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>B01M7NVDKF</ASIN>
+        <Title>WIRED VOL.26</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4822285448</ASIN>
+        <Title>DevOps教科書</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798142417</ASIN>
+        <Title>スターティングGo言語 (CodeZine BOOKS)</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>477418392X</ASIN>
+        <Title>みんなのGo言語【現場で使える実践テクニック】</Title>
+      </SimilarProduct>
+    </SimilarProducts>
+    <NewReleases>
+      <NewRelease>
+        <ASIN>4063958159</ASIN>
+        <Title>進撃の巨人(21): 週刊少年マガジン</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01MQG6O6O</ASIN>
+        <Title>狼の口 ヴォルフスムント 8巻&lt;狼の口 ヴォルフスムント> (ビームコミックス（ハルタ）)</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01N3KWO8L</ASIN>
+        <Title>Vジャンプ 2017年 01 月号 [雑誌]</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01M67T85Q</ASIN>
+        <Title>乃木坂46×週刊プレイボーイ2016</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>404892365X</ASIN>
+        <Title>とある魔術の禁書目録外伝 とある科学の超電磁砲(12) (電撃コミックス)</Title>
+      </NewRelease>
+    </NewReleases>
+    <SimilarViewedProducts>
+      <SimilarViewedProduct>
+        <ASIN>4774179930</ASIN>
+        <Title>サーバ/インフラエンジニア養成読本 DevOps編 [Infrastructure as Code を実践するノウハウが満載! ] (Software Design plus)</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>0399564063</ASIN>
+        <Title>Blockchain Revolution: How Blockchain Technology Will Change Money, Business and the World</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4822285448</ASIN>
+        <Title>DevOps教科書</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4863541783</ASIN>
+        <Title>改訂2版 基礎からわかる Go言語</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4798142417</ASIN>
+        <Title>スターティングGo言語 (CodeZine BOOKS)</Title>
+      </SimilarViewedProduct>
+    </SimilarViewedProducts>
   </Cart>
 </CartAddResponse>

@@ -11,7 +11,7 @@ import (
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-const expectedCartAddSignedURL = "https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&CartId=352-5038530-7983747&HMAC=l494DklLoQojeL3f8ajE%2F6fvalM%3D&Item.1.ASIN=4774182389&Item.1.Quantity=2&Item.2.OfferListingId=NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%252BbVV876t1%252Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%253D&Item.2.Quantity=4&Operation=CartAdd&Service=AWSECommerceService&Signature=mwWv%2FF%2BRUUeyjf6UdYumqxS%2BkjtDvatQztH7gwsjq%2F4%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01"
+const expectedCartAddSignedURL = "https://webservices.amazon.co.jp/onca/xml?AWSAccessKeyId=AK&AssociateTag=ngsio-22&CartId=352-5038530-7983747&HMAC=l494DklLoQojeL3f8ajE%2F6fvalM%3D&Item.1.ASIN=4774182389&Item.1.Quantity=2&Item.2.OfferListingId=NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%252BbVV876t1%252Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%253D&Item.2.Quantity=4&Operation=CartAdd&ResponseGroup=CartNewReleases%2CCartSimilarities%2CCartTopSellers&Service=AWSECommerceService&Signature=dTqTWl5sKok1Y5iMxKy4iysCr%2BjjwPbNrzbSW3AsfSo%3D&Timestamp=2016-11-16T12%3A34%3A00Z&Version=2013-08-01"
 
 func createCartAddRequest(client *Client) *CartAddRequest {
 	p := CartAddParameters{
@@ -45,8 +45,9 @@ func TestCartAddSignedURL(t *testing.T) {
 		Test{"NTPIbOCYgxigjLlkf1iTQhB6UfAcRHvlKju5nT%2BbVV876t1%2Bpt0pciArjHlsl9LS8iUJP9D5bajBzNN3VDdglcEAAS8lMPyCUArUG6CxF0A%3D", parsed.Query().Get("Item.2.OfferListingId")},
 		Test{"4", parsed.Query().Get("Item.2.Quantity")},
 		Test{"CartAdd", parsed.Query().Get("Operation")},
+		Test{"CartNewReleases,CartSimilarities,CartTopSellers", parsed.Query().Get("ResponseGroup")},
 		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"mwWv/F+RUUeyjf6UdYumqxS+kjtDvatQztH7gwsjq/4=", parsed.Query().Get("Signature")},
+		Test{"dTqTWl5sKok1Y5iMxKy4iysCr+jjwPbNrzbSW3AsfSo=", parsed.Query().Get("Signature")},
 		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
 		Test{"2013-08-01", parsed.Query().Get("Version")},
 	} {
@@ -97,11 +98,11 @@ func TestCartAddDo(t *testing.T) {
 		t.Errorf("Expected nil but got %v", err)
 	}
 	for _, test := range []Test{
-		Test{"352-8545344-3979559", res.Cart.ID},
-		Test{"1vXVtADNKYIk3rCThiJfETmY+Uc=", res.Cart.HMAC},
-		Test{"1vXVtADNKYIk3rCThiJfETmY%2BUc%3D", res.Cart.URLEncodedHMAC},
-		Test{"https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False", res.Cart.PurchaseURL},
-		Test{"https://www.amazon.jp/gp/aw/rcart?cart-id=352-8545344-3979559%26associate-id=ngsio-22%26hmac=1vXVtADNKYIk3rCThiJfETmY%2BUc%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO", res.Cart.MobileCartURL},
+		Test{"351-5204090-0802017", res.Cart.ID},
+		Test{"ba6oTpgnCNQTEfb67iNFlwqeLp8=", res.Cart.HMAC},
+		Test{"ba6oTpgnCNQTEfb67iNFlwqeLp8%3D", res.Cart.URLEncodedHMAC},
+		Test{"https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=351-5204090-0802017%26associate-id=ngsio-22%26hmac=ba6oTpgnCNQTEfb67iNFlwqeLp8%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False", res.Cart.PurchaseURL},
+		Test{"https://www.amazon.jp/gp/aw/rcart?cart-id=351-5204090-0802017%26associate-id=ngsio-22%26hmac=ba6oTpgnCNQTEfb67iNFlwqeLp8%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO", res.Cart.MobileCartURL},
 		Test{"21952", res.Cart.SubTotal.Amount},
 		Test{"JPY", res.Cart.SubTotal.CurrencyCode},
 		Test{"￥ 21,952", res.Cart.SubTotal.FormattedPrice},

@@ -32,6 +32,7 @@ func main() {
 	fmt.Println("Adding items to cart =================================")
 	p2 := amazon.CartAddParameters{
 		ResponseGroups: []amazon.CartAddResponseGroup{
+			amazon.CartAddResponseGroupCart,
 			amazon.CartAddResponseGroupCartNewReleases,
 			amazon.CartAddResponseGroupCartSimilarities,
 			amazon.CartAddResponseGroupCartTopSellers,
@@ -46,4 +47,20 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(res2.Cart.PurchaseURL)
+	time.Sleep(time.Second * 2)
+	res3, err := client.CartGet(amazon.CartGetParameters{
+		ResponseGroups: []amazon.CartGetResponseGroup{
+			amazon.CartGetResponseGroupCart,
+			amazon.CartGetResponseGroupCartTopSellers,
+			amazon.CartGetResponseGroupCartSimilarities,
+			amazon.CartGetResponseGroupCartNewReleases,
+		},
+		CartID:     res2.Cart.ID,
+		HMAC:       res2.Cart.HMAC,
+		CartItemID: res2.Cart.CartItems.CartItem[0].ID,
+	}).Do()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(res3.Cart.PurchaseURL)
 }

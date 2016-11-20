@@ -221,8 +221,56 @@ type SimilarProducts struct {
 	SimilarProduct []SimilarProduct
 }
 
-// SimilarProduct represents SimilarProduct
-type SimilarProduct struct {
+type asinTitle struct {
 	ASIN  string
 	Title string
+}
+
+// SimilarProduct represents SimilarProduct
+type SimilarProduct struct {
+	asinTitle
+}
+
+// TopSellers represents TopSellers
+type TopSellers struct {
+	TopSeller []TopSeller
+}
+
+// TopSeller represents TopSelle
+type TopSeller struct {
+	asinTitle
+}
+
+// NewReleases represents NewReleases
+type NewReleases struct {
+	NewRelease []NewRelease
+}
+
+// NewRelease represents NewRelease
+type NewRelease struct {
+	asinTitle
+}
+
+// SimilarViewedProducts represents SimilarViewedProducts
+type SimilarViewedProducts struct {
+	SimilarViewedProduct []SimilarViewedProduct
+}
+
+// SimilarViewedProduct represents SimilarViewedProduct
+type SimilarViewedProduct struct {
+	asinTitle
+}
+
+// TopItemSet represents TopItemSet
+type TopItemSet struct {
+	Type    string
+	TopItem []TopItem
+}
+
+// TopItem represents TopItem
+type TopItem struct {
+	asinTitle
+	DetailPageURL string
+	ProductGroup  string
+	Author        string
 }

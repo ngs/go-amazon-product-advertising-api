@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartGetResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>ee305d77-91b0-4d61-afda-9ce54a8c10d5</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="Operation" Value="CartAdd"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="nI32t2MczwHJW83JBmFBA43RfoUejd7eY0CdE03QSM0="/>
+      <Argument Name="Timestamp" Value="2016-11-19T04:31:19Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>2.43074E-4</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>False</IsValid>
+      <CartAddRequest>
+        <Items/>
+      </CartAddRequest>
+      <Errors>
+        <Error>
+          <Code>AWS.MissingParameters</Code>
+          <Message>リクエストには、必要なパラメータが含まれていません。必要なパラメータには、CartIdなどがあります。</Message>
+        </Error>
+        <Error>
+          <Code>AWS.MissingParameters</Code>
+          <Message>リクエストには、必要なパラメー タが含まれていません。必要なパラメータには、HMACなどがあります。</Message>
+        </Error>
+        <Error>
+          <Code>AWS.MissingParameters</Code>
+          <Message>リクエストには、必要なパラメータが含まれていません。必要なパラメータには、Itemsなどがあります。</Message>
+        </Error>
+      </Errors>
+    </Request>
+  </Cart>
+</CartGetResponse>
