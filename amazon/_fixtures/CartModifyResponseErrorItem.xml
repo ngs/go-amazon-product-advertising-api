@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartModifyResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>aea21eed-fd04-4eaf-8e1e-0c0172401859</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="CartId" Value="354-1005073-0078134"/>
+      <Argument Name="HMAC" Value="rNjUgLzTAiQVoRCSO/7L/j3u/VY="/>
+      <Argument Name="Item.1.Action" Value="MoveToCart"/>
+      <Argument Name="Item.1.CartItemId" Value="CYOXSP4DGCG16"/>
+      <Argument Name="Item.1.Quantity" Value="1"/>
+      <Argument Name="Item.2.Action" Value="MoveToCart"/>
+      <Argument Name="Item.2.CartItemId" Value="C30K5HAY097OZO"/>
+      <Argument Name="Item.2.Quantity" Value="1"/>
+      <Argument Name="Item.3.Action" Value="SaveForLater"/>
+      <Argument Name="Item.3.CartItemId" Value="C33X3SVC08ND0I"/>
+      <Argument Name="Item.3.Quantity" Value="2"/>
+      <Argument Name="Operation" Value="CartModify"/>
+      <Argument Name="ResponseGroup" Value="Cart,CartSimilarities,CartNewReleases,CartTopSellers"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="I4VR+GPaLUBZhYEx8FJmg+fhhOAyV9guvDBDpQ6gPT8="/>
+      <Argument Name="Timestamp" Value="2016-11-21T04:35:20Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.02617066</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>False</IsValid>
+      <CartModifyRequest>
+        <CartId>354-1005073-0078134</CartId>
+        <HMAC>rNjUgLzTAiQVoRCSO/7L/j3u/VY=</HMAC>
+        <Items>
+          <Item>
+            <Action>MoveToCart</Action>
+            <CartItemId>CYOXSP4DGCG16</CartItemId>
+            <Quantity>1</Quantity>
+          </Item>
+          <Item>
+            <Action>MoveToCart</Action>
+            <CartItemId>C30K5HAY097OZO</CartItemId>
+            <Quantity>1</Quantity>
+          </Item>
+          <Item>
+            <Action>SaveForLater</Action>
+            <CartItemId>C33X3SVC08ND0I</CartItemId>
+            <Quantity>2</Quantity>
+          </Item>
+        </Items>
+        <ResponseGroup>Cart</ResponseGroup>
+        <ResponseGroup>CartSimilarities</ResponseGroup>
+        <ResponseGroup>CartNewReleases</ResponseGroup>
+        <ResponseGroup>CartTopSellers</ResponseGroup>
+      </CartModifyRequest>
+      <Errors>
+        <Error>
+          <Code>AWS.ExactParameterRequirement</Code>
+          <Message>次のパラメータのうち、1個がリクエストに含まれている必要があります：Quantity, Action</Message>
+        </Error>
+        <Error>
+          <Code>AWS.ExactParameterRequirement</Code>
+          <Message>次のパラメータのうち、1個がリクエストに含まれている必要があります：Quantity, Action</Message>
+        </Error>
+        <Error>
+          <Code>AWS.ExactParameterRequirement</Code>
+          <Message>次のパラメータのうち、1個がリクエストに含まれている必要があります：Quantity, Action</Message>
+        </Error>
+      </Errors>
+    </Request>
+  </Cart>
+</CartModifyResponse>

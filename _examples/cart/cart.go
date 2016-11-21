@@ -48,6 +48,7 @@ func main() {
 	}
 	fmt.Println(res2.Cart.PurchaseURL)
 	time.Sleep(time.Second * 2)
+	fmt.Println("Getting items to cart =================================")
 	res3, err := client.CartGet(amazon.CartGetParameters{
 		ResponseGroups: []amazon.CartGetResponseGroup{
 			amazon.CartGetResponseGroupCart,
@@ -63,4 +64,21 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(res3.Cart.PurchaseURL)
+	time.Sleep(time.Second * 2)
+	fmt.Println("Modifying items =================================")
+	p4 := amazon.CartModifyParameters{
+		ResponseGroups: []amazon.CartModifyResponseGroup{
+			amazon.CartModifyResponseGroupCart,
+			amazon.CartModifyResponseGroupCartSimilarities,
+			amazon.CartModifyResponseGroupCartNewReleases,
+			amazon.CartModifyResponseGroupCartTopSellers,
+		},
+		CartID: res3.Cart.ID,
+		HMAC:   res3.Cart.HMAC,
+	}
+	p4.Items.ModifyQuantity(res3.Cart.CartItems.CartItem[0].ID, 0)
+	p4.Items.SaveForLater(res3.Cart.CartItems.CartItem[1].ID)
+	p4.Items.MoveToCart(res3.Cart.CartItems.CartItem[2].ID)
+	res4, err := client.CartModify(p4).Do()
+	fmt.Println(res4.Cart.PurchaseURL)
 }

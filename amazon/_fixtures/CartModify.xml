@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartModifyResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>035629d7-f0cb-4498-9eb2-f7fe3b29c9ab</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="CartId" Value="352-4323378-0926412"/>
+      <Argument Name="HMAC" Value="n//ORUPth7PDgBwHK3/W7LygJXA="/>
+      <Argument Name="Item.1.CartItemId" Value="CYOXSP4DGCG16"/>
+      <Argument Name="Item.1.Quantity" Value="0"/>
+      <Argument Name="Item.2.Action" Value="SaveForLater"/>
+      <Argument Name="Item.2.CartItemId" Value="C30K5HAY097OZO"/>
+      <Argument Name="Item.3.Action" Value="MoveToCart"/>
+      <Argument Name="Item.3.CartItemId" Value="C33X3SVC08ND0I"/>
+      <Argument Name="Operation" Value="CartModify"/>
+      <Argument Name="ResponseGroup" Value="Cart,CartSimilarities,CartNewReleases,CartTopSellers"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="hJQbEGleIPLhL23jYHuu2lRr3yTYOS55YOOJz0pmb8s="/>
+      <Argument Name="Timestamp" Value="2016-11-21T04:52:23Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.22023231</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>True</IsValid>
+      <CartModifyRequest>
+        <CartId>352-4323378-0926412</CartId>
+        <HMAC>n//ORUPth7PDgBwHK3/W7LygJXA=</HMAC>
+        <Items>
+          <Item>
+            <CartItemId>CYOXSP4DGCG16</CartItemId>
+            <Quantity>0</Quantity>
+          </Item>
+          <Item>
+            <Action>SaveForLater</Action>
+            <CartItemId>C30K5HAY097OZO</CartItemId>
+          </Item>
+          <Item>
+            <Action>MoveToCart</Action>
+            <CartItemId>C33X3SVC08ND0I</CartItemId>
+          </Item>
+        </Items>
+        <ResponseGroup>Cart</ResponseGroup>
+        <ResponseGroup>CartSimilarities</ResponseGroup>
+        <ResponseGroup>CartNewReleases</ResponseGroup>
+        <ResponseGroup>CartTopSellers</ResponseGroup>
+      </CartModifyRequest>
+    </Request>
+    <CartId>352-4323378-0926412</CartId>
+    <HMAC>n//ORUPth7PDgBwHK3/W7LygJXA=</HMAC>
+    <URLEncodedHMAC>n%2F%2FORUPth7PDgBwHK3%2FW7LygJXA%3D</URLEncodedHMAC>
+    <PurchaseURL>https://www.amazon.jp/gp/cart/aws-merge.html?cart-id=352-4323378-0926412%26associate-id=ngsio-22%26hmac=n%2F%2FORUPth7PDgBwHK3%2FW7LygJXA%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False</PurchaseURL>
+    <MobileCartURL>https://www.amazon.jp/gp/aw/rcart?cart-id=352-4323378-0926412%26associate-id=ngsio-22%26hmac=n%2F%2FORUPth7PDgBwHK3%2FW7LygJXA%3D%26SubscriptionId=AKIAITPH62XKCOOT7AKA%26MergeCart=False%26uid=NULLGWDOCOMO</MobileCartURL>
+    <SubTotal>
+      <Amount>17676</Amount>
+      <CurrencyCode>JPY</CurrencyCode>
+      <FormattedPrice>￥ 17,676</FormattedPrice>
+    </SubTotal>
+    <CartItems>
+      <SubTotal>
+        <Amount>1260</Amount>
+        <CurrencyCode>JPY</CurrencyCode>
+        <FormattedPrice>￥ 1,260</FormattedPrice>
+      </SubTotal>
+      <CartItem>
+        <CartItemId>C33X3SVC08ND0I</CartItemId>
+        <ASIN>B01JRDPAGO</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>2</Quantity>
+        <Title>WIRED VOL.25/特集 The Power of Blockchain ブロックチェーンは世界を変える</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>630</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 630</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>1260</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 1,260</FormattedPrice>
+        </ItemTotal>
+      </CartItem>
+    </CartItems>
+    <SavedForLaterItems>
+      <SubTotal>
+        <Amount>16416</Amount>
+        <CurrencyCode>JPY</CurrencyCode>
+        <FormattedPrice>￥ 16,416</FormattedPrice>
+      </SubTotal>
+      <SavedForLaterItem>
+        <CartItemId>S30K5HAY097OZO</CartItemId>
+        <ASIN>4621300253</ASIN>
+        <SellerNickname>Amazon.co.jp</SellerNickname>
+        <Quantity>4</Quantity>
+        <Title>プログラミング言語Go (ADDISON-WESLEY PROFESSIONAL COMPUTING SERIES)</Title>
+        <ProductGroup>Book</ProductGroup>
+        <Price>
+          <Amount>4104</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 4,104</FormattedPrice>
+        </Price>
+        <ItemTotal>
+          <Amount>16416</Amount>
+          <CurrencyCode>JPY</CurrencyCode>
+          <FormattedPrice>￥ 16,416</FormattedPrice>
+        </ItemTotal>
+      </SavedForLaterItem>
+    </SavedForLaterItems>
+    <SimilarProducts>
+      <SimilarProduct>
+        <ASIN>4865940391</ASIN>
+        <Title>Kotlinスタートブック -新しいAndroidプログラミング</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4774184322</ASIN>
+        <Title>WEB+DB PRESS Vol.95</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4798142417</ASIN>
+        <Title>スターティングGo言語 (CodeZine BOOKS)</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>B01M7NVDKF</ASIN>
+        <Title>WIRED VOL.26</Title>
+      </SimilarProduct>
+      <SimilarProduct>
+        <ASIN>4274219151</ASIN>
+        <Title>プログラミングElixir</Title>
+      </SimilarProduct>
+    </SimilarProducts>
+    <NewReleases>
+      <NewRelease>
+        <ASIN>B01M67T85Q</ASIN>
+        <Title>乃木坂46×週刊プレイボーイ2016</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01MA60R78</ASIN>
+        <Title>anan (アンアン) 2016/11/30[心理テストでわかる「真実」]</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01M8PWU8M</ASIN>
+        <Title>BUBKA2017年1月号増刊 100%SKE48 Vol.2</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01M10EUIL</ASIN>
+        <Title>ViVi(ヴィヴィ) 2017年 01 月号</Title>
+      </NewRelease>
+      <NewRelease>
+        <ASIN>B01N0BJDRK</ASIN>
+        <Title>SPUR(シュプール) 橘さくら版 2017年 01 月号 [雑誌]: SPUR(シュプール) 増刊</Title>
+      </NewRelease>
+    </NewReleases>
+    <SimilarViewedProducts>
+      <SimilarViewedProduct>
+        <ASIN>477418392X</ASIN>
+        <Title>みんなのGo言語【現場で使える実践テクニック】</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4863541783</ASIN>
+        <Title>改訂2版 基礎からわかる Go言語</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4757103670</ASIN>
+        <Title>ビットコインとブロックチェーン:暗号通貨を支える技術</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4865940413</ASIN>
+        <Title>Go言語入門</Title>
+      </SimilarViewedProduct>
+      <SimilarViewedProduct>
+        <ASIN>4274219151</ASIN>
+        <Title>プログラミングElixir</Title>
+      </SimilarViewedProduct>
+    </SimilarViewedProducts>
+  </Cart>
+</CartModifyResponse>

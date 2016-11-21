@@ -13,6 +13,7 @@ type Cart struct {
 	MobileCartURL         string
 	SubTotal              Price
 	CartItems             CartItems
+	SavedForLaterItems    SavedForLaterItems
 	SimilarProducts       SimilarProducts
 	NewReleases           NewReleases
 	SimilarViewedProducts SimilarViewedProducts
@@ -34,4 +35,15 @@ type CartItem struct {
 	ProductGroup   string
 	Price          Price
 	ItemTotal      Price
+}
+
+// SavedForLaterItems represents SavedForLaterItems
+type SavedForLaterItems struct {
+	SubTotal          Price
+	SavedForLaterItem []SavedForLaterItem
+}
+
+// SavedForLaterItem represents SavedForLaterItem
+type SavedForLaterItem struct {
+	CartItem
 }
