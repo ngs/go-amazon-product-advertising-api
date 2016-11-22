@@ -80,5 +80,21 @@ func main() {
 	p4.Items.SaveForLater(res3.Cart.CartItems.CartItem[1].ID)
 	p4.Items.MoveToCart(res3.Cart.CartItems.CartItem[2].ID)
 	res4, err := client.CartModify(p4).Do()
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println(res4.Cart.PurchaseURL)
+	time.Sleep(time.Second * 2)
+	fmt.Println("Clearing items =================================")
+	res5, err := client.CartClear(amazon.CartClearParameters{
+		CartID: res3.Cart.ID,
+		HMAC:   res3.Cart.HMAC,
+		ResponseGroups: []amazon.CartClearResponseGroup{
+			amazon.CartClearResponseGroupCart,
+		},
+	}).Do()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(res5.Cart.PurchaseURL)
 }

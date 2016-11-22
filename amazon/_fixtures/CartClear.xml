@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CartClearResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Go-http-client/1.1"/>
+    </HTTPHeaders>
+    <RequestId>34f7c982-91e6-4d5e-aaae-0417b3d31f4d</RequestId>
+    <Arguments>
+      <Argument Name="AWSAccessKeyId" Value="AKIAITPH62XKCOOT7AKA"/>
+      <Argument Name="AssociateTag" Value="ngsio-22"/>
+      <Argument Name="CartId" Value="353-7649034-4766017"/>
+      <Argument Name="HMAC" Value="Bm3dJFMNeBEFssGINJ3vvX3pKRc="/>
+      <Argument Name="Operation" Value="CartClear"/>
+      <Argument Name="ResponseGroup" Value="Cart"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="iIOPtfClxm7Kx7/ZCUopIpmafaQHT9dcMMh1SBqGW6s="/>
+      <Argument Name="Timestamp" Value="2016-11-22T07:55:12Z"/>
+      <Argument Name="Version" Value="2013-08-01"/>
+    </Arguments>
+    <RequestProcessingTime>0.016849868</RequestProcessingTime>
+  </OperationRequest>
+  <Cart>
+    <Request>
+      <IsValid>True</IsValid>
+      <CartClearRequest>
+        <CartId>353-7649034-4766017</CartId>
+        <HMAC>Bm3dJFMNeBEFssGINJ3vvX3pKRc=</HMAC>
+        <ResponseGroup>Cart</ResponseGroup>
+      </CartClearRequest>
+    </Request>
+    <CartId>353-7649034-4766017</CartId>
+    <HMAC>Bm3dJFMNeBEFssGINJ3vvX3pKRc=</HMAC>
+    <URLEncodedHMAC>Bm3dJFMNeBEFssGINJ3vvX3pKRc%3D</URLEncodedHMAC>
+  </Cart>
+</CartClearResponse>
