@@ -4,6 +4,8 @@ package amazon
 type Condition string
 
 const (
+	// ConditionNone unspecifed condition
+	ConditionNone Condition = ""
 	// ConditionNew constant "New"
 	ConditionNew Condition = "New"
 	// ConditionUsed constant "Used"
@@ -14,6 +16,22 @@ const (
 	ConditionRefurbished Condition = "Refurbished"
 	// ConditionAll constant "All"
 	ConditionAll Condition = "All"
+)
+
+// IDType typed constant for IDType parameter
+type IDType string
+
+const (
+	// IDTypeSKU constant "SKU"
+	IDTypeSKU IDType = "SKU"
+	// IDTypeUPC constant "UPC"
+	IDTypeUPC IDType = "UPC"
+	// IDTypeEAN constant "EAN"
+	IDTypeEAN IDType = "EAN"
+	// IDTypeISBN constant "ISBN"
+	IDTypeISBN IDType = "ISBN"
+	// IDTypeASIN constnt "ASI"
+	IDTypeASIN IDType = "ASIN"
 )
 
 // RelationshipType typed constant for RelationshipType parameter

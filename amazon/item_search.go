@@ -241,35 +241,15 @@ type ItemSearchRequest struct {
 // ItemSearchResponse represents response for ItemSearch operation
 type ItemSearchResponse struct {
 	XMLName xml.Name `xml:"ItemSearchResponse"`
-	Results Items    `xml:"Items"`
+	Items   Items    `xml:"Items"`
 }
 
 // Error returns Error found
 func (res *ItemSearchResponse) Error() error {
-	if e := res.Results.Request.Errors; e != nil {
+	if e := res.Items.Request.Errors; e != nil {
 		return e
 	}
 	return nil
-}
-
-// Items returns found items
-func (res *ItemSearchResponse) Items() []Item {
-	return res.Results.Item
-}
-
-// TotalResults returns total number of items found.
-func (res *ItemSearchResponse) TotalResults() int {
-	return res.Results.TotalResults
-}
-
-// TotalPages returns total number of pages in the response. Each page can return up to ten items.
-func (res *ItemSearchResponse) TotalPages() int {
-	return res.Results.TotalPages
-}
-
-// MoreSearchResultsURL returns the URL that displays the complete search results.
-func (res *ItemSearchResponse) MoreSearchResultsURL() string {
-	return res.Results.MoreSearchResultsURL
 }
 
 func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
