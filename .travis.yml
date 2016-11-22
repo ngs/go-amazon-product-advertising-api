@@ -14,4 +14,4 @@ matrix:
 before_install:
   - go get github.com/mattn/goveralls
 script:
-  - $HOME/gopath/bin/goveralls -service=travis-ci -ignore _examples/*
+  - $HOME/gopath/bin/goveralls -service=travis-ci
