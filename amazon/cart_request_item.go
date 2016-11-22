@@ -16,16 +16,16 @@ func (cartItems *CartRequestItems) Query() []map[string]string {
 	return items
 }
 
-// CartModifyRequestItemAction constant for cart modify operation action
-type CartModifyRequestItemAction string
+// CartModifyAction constant for cart modify operation action
+type CartModifyAction string
 
 const (
-	// CartModifyRequestItemActionNone "None"
-	CartModifyRequestItemActionNone CartModifyRequestItemAction = ""
-	// CartModifyRequestItemActionMoveToCart "MoveToCart"
-	CartModifyRequestItemActionMoveToCart CartModifyRequestItemAction = "MoveToCart"
-	// CartModifyRequestItemActionSaveForLater "SaveForLater"
-	CartModifyRequestItemActionSaveForLater CartModifyRequestItemAction = "SaveForLater"
+	// CartModifyActionNone "None"
+	CartModifyActionNone CartModifyAction = ""
+	// CartModifyActionMoveToCart "MoveToCart"
+	CartModifyActionMoveToCart CartModifyAction = "MoveToCart"
+	// CartModifyActionSaveForLater "SaveForLater"
+	CartModifyActionSaveForLater CartModifyAction = "SaveForLater"
 )
 
 // CartRequestItem represents items to send create or add cart request
@@ -84,7 +84,7 @@ func (cartItems *CartModifyRequestItems) Query() []map[string]string {
 type CartModifyRequestItem struct {
 	Quantity   *int
 	CartItemID string
-	Action     CartModifyRequestItemAction
+	Action     CartModifyAction
 }
 
 // ModifyQuantity modifies quantity for item
@@ -99,7 +99,7 @@ func (cartItems *CartModifyRequestItems) ModifyQuantity(cartItemID string, quant
 func (cartItems *CartModifyRequestItems) MoveToCart(cartItemID string) {
 	cartItems.Items = append(cartItems.Items, CartModifyRequestItem{
 		CartItemID: cartItemID,
-		Action:     CartModifyRequestItemActionMoveToCart,
+		Action:     CartModifyActionMoveToCart,
 	})
 }
 
@@ -107,7 +107,7 @@ func (cartItems *CartModifyRequestItems) MoveToCart(cartItemID string) {
 func (cartItems *CartModifyRequestItems) SaveForLater(cartItemID string) {
 	cartItems.Items = append(cartItems.Items, CartModifyRequestItem{
 		CartItemID: cartItemID,
-		Action:     CartModifyRequestItemActionSaveForLater,
+		Action:     CartModifyActionSaveForLater,
 	})
 }
 
@@ -120,7 +120,7 @@ func (item CartModifyRequestItem) Query() map[string]string {
 	if item.CartItemID != "" {
 		q["CartItemId"] = item.CartItemID
 	}
-	if item.Action != CartModifyRequestItemActionNone {
+	if item.Action != CartModifyActionNone {
 		q["Action"] = string(item.Action)
 	}
 	return q

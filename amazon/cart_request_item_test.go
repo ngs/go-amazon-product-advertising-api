@@ -76,7 +76,7 @@ func TestCartModifyRequestItemQuery(t *testing.T) {
 		},
 		CartModifyRequestItem{
 			CartItemID: "test1",
-			Action:     CartModifyRequestItemActionMoveToCart,
+			Action:     CartModifyActionMoveToCart,
 		}.Query(),
 	}.DeepEqual(t)
 	Test{
@@ -86,7 +86,7 @@ func TestCartModifyRequestItemQuery(t *testing.T) {
 		},
 		CartModifyRequestItem{
 			CartItemID: "test1",
-			Action:     CartModifyRequestItemActionSaveForLater,
+			Action:     CartModifyActionSaveForLater,
 		}.Query(),
 	}.DeepEqual(t)
 	Test{
@@ -106,46 +106,46 @@ func TestCartModifyRequestItemsAddItem(t *testing.T) {
 	Test{1, len(p.Items)}.Compare(t)
 	Test{"test1", p.Items[0].CartItemID}.Compare(t)
 	Test{1, *p.Items[0].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[0].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[0].Action}.Compare(t)
 	p.SaveForLater("test2")
 	Test{2, len(p.Items)}.Compare(t)
 	Test{"test1", p.Items[0].CartItemID}.Compare(t)
 	Test{1, *p.Items[0].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[0].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[0].Action}.Compare(t)
 	Test{"test2", p.Items[1].CartItemID}.Compare(t)
 	if p.Items[1].Quantity != nil {
 		t.Errorf("Expected nil but got %v", p.Items[1].Quantity)
 	}
-	Test{CartModifyRequestItemActionSaveForLater, p.Items[1].Action}.Compare(t)
+	Test{CartModifyActionSaveForLater, p.Items[1].Action}.Compare(t)
 	p.ModifyQuantity("test3", 0)
 	Test{3, len(p.Items)}.Compare(t)
 	Test{"test1", p.Items[0].CartItemID}.Compare(t)
 	Test{1, *p.Items[0].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[0].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[0].Action}.Compare(t)
 	Test{"test2", p.Items[1].CartItemID}.Compare(t)
 	if p.Items[1].Quantity != nil {
 		t.Errorf("Expected nil but got %v", p.Items[1].Quantity)
 	}
-	Test{CartModifyRequestItemActionSaveForLater, p.Items[1].Action}.Compare(t)
+	Test{CartModifyActionSaveForLater, p.Items[1].Action}.Compare(t)
 	Test{"test3", p.Items[2].CartItemID}.Compare(t)
 	Test{0, *p.Items[2].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[2].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[2].Action}.Compare(t)
 	p.MoveToCart("test4")
 	Test{4, len(p.Items)}.Compare(t)
 	Test{"test1", p.Items[0].CartItemID}.Compare(t)
 	Test{1, *p.Items[0].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[0].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[0].Action}.Compare(t)
 	Test{"test2", p.Items[1].CartItemID}.Compare(t)
 	if p.Items[1].Quantity != nil {
 		t.Errorf("Expected nil but got %v", p.Items[1].Quantity)
 	}
-	Test{CartModifyRequestItemActionSaveForLater, p.Items[1].Action}.Compare(t)
+	Test{CartModifyActionSaveForLater, p.Items[1].Action}.Compare(t)
 	Test{"test3", p.Items[2].CartItemID}.Compare(t)
 	Test{0, *p.Items[2].Quantity}.Compare(t)
-	Test{CartModifyRequestItemActionNone, p.Items[2].Action}.Compare(t)
+	Test{CartModifyActionNone, p.Items[2].Action}.Compare(t)
 	Test{"test4", p.Items[3].CartItemID}.Compare(t)
 	if p.Items[3].Quantity != nil {
 		t.Errorf("Expected nil but got %v", p.Items[3].Quantity)
 	}
-	Test{CartModifyRequestItemActionMoveToCart, p.Items[3].Action}.Compare(t)
+	Test{CartModifyActionMoveToCart, p.Items[3].Action}.Compare(t)
 }
