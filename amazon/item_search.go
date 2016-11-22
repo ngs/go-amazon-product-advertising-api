@@ -255,86 +255,48 @@ func (res *ItemSearchResponse) Error() error {
 func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
 	p := req.Parameters
-	if p.Actor != "" {
-		q["Actor"] = p.Actor
+	for k, strp := range map[string]string{
+		"Actor":            p.Actor,
+		"Artist":           p.Artist,
+		"AudienceRating":   p.AudienceRating,
+		"Author":           p.Author,
+		"Brand":            p.Brand,
+		"BrowseNode":       p.BrowseNode,
+		"Composer":         p.Composer,
+		"Condition":        string(p.Condition),
+		"Conductor":        p.Conductor,
+		"Director":         p.Director,
+		"Keywords":         p.Keywords,
+		"Manufacturer":     p.Manufacturer,
+		"MerchantID":       p.MerchantID,
+		"Orchestra":        p.Orchestra,
+		"Power":            p.Power,
+		"Publisher":        p.Publisher,
+		"SearchIndex":      string(p.SearchIndex),
+		"Sort":             p.Sort,
+		"Title":            p.Title,
+		"RelationshipType": string(p.RelationshipType),
+	} {
+		if strp != "" {
+			q[k] = strp
+		}
 	}
-	if p.Artist != "" {
-		q["Artist"] = p.Artist
-	}
-	if p.AudienceRating != "" {
-		q["AudienceRating"] = p.AudienceRating
-	}
-	if p.Author != "" {
-		q["Author"] = p.Author
+	for k, intp := range map[string]int{
+		"ItemPage":         p.ItemPage,
+		"MaximumPrice":     p.MaximumPrice,
+		"MinimumPrice":     p.MinimumPrice,
+		"MinPercentageOff": p.MinPercentageOff,
+		"RelatedItemPage":  p.RelatedItemPage,
+	} {
+		if intp > 0 {
+			q[k] = intp
+		}
 	}
 	if p.OnlyAvailable {
 		q["Availability"] = "Available"
 	}
-	if p.Brand != "" {
-		q["Brand"] = p.Brand
-	}
-	if p.BrowseNode != "" {
-		q["BrowseNode"] = p.BrowseNode
-	}
-	if p.Composer != "" {
-		q["Composer"] = p.Composer
-	}
-	if p.Condition != "" {
-		q["Condition"] = p.Condition
-	}
-	if p.Conductor != "" {
-		q["Conductor"] = p.Conductor
-	}
-	if p.Director != "" {
-		q["Director"] = p.Director
-	}
 	if p.IncludeReviewsSummary != nil {
 		q["IncludeReviewsSummary"] = *p.IncludeReviewsSummary
-	}
-	if p.ItemPage > 0 {
-		q["ItemPage"] = p.ItemPage
-	}
-	if p.Keywords != "" {
-		q["Keywords"] = p.Keywords
-	}
-	if p.Manufacturer != "" {
-		q["Manufacturer"] = p.Manufacturer
-	}
-	if p.MaximumPrice > 0 {
-		q["MaximumPrice"] = p.MaximumPrice
-	}
-	if p.MerchantID != "" {
-		q["MerchantID"] = p.MerchantID
-	}
-	if p.MinimumPrice > 0 {
-		q["MinimumPrice"] = p.MinimumPrice
-	}
-	if p.MinPercentageOff > 0 {
-		q["MinPercentageOff"] = p.MinPercentageOff
-	}
-	if p.Orchestra != "" {
-		q["Orchestra"] = p.Orchestra
-	}
-	if p.Power != "" {
-		q["Power"] = p.Power
-	}
-	if p.Publisher != "" {
-		q["Publisher"] = p.Publisher
-	}
-	if p.RelatedItemPage > 0 {
-		q["RelatedItemPage"] = p.RelatedItemPage
-	}
-	if p.RelationshipType != "" {
-		q["RelationshipType"] = p.RelationshipType
-	}
-	if p.SearchIndex != "" {
-		q["SearchIndex"] = p.SearchIndex
-	}
-	if p.Sort != "" {
-		q["Sort"] = p.Sort
-	}
-	if p.Title != "" {
-		q["Title"] = p.Title
 	}
 	if p.TruncateReviewsAt != nil {
 		q["TruncateReviewsAt"] = *p.TruncateReviewsAt
