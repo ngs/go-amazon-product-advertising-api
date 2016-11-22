@@ -252,7 +252,8 @@ func (res *ItemSearchResponse) Error() error {
 	return nil
 }
 
-func (req *ItemSearchRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *ItemSearchRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	p := req.Parameters
 	for k, strp := range map[string]string{

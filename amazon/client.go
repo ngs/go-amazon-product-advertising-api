@@ -33,7 +33,7 @@ const (
 type OperationRequest interface {
 	httpMethod() string
 	operation() string
-	buildQuery() map[string]interface{}
+	Query() map[string]interface{}
 }
 
 // Client AWAS Client
@@ -143,7 +143,7 @@ func (client *Client) fillQuery(op OperationRequest) url.Values {
 	ep := client.Endpoint()
 	q := url.Values{}
 	u, _ := url.Parse(ep)
-	qmap := op.buildQuery()
+	qmap := op.Query()
 	q.Set("Service", Service)
 	q.Set("AWSAccessKeyId", client.AccessKeyID)
 	q.Set("Version", Version)

@@ -87,7 +87,8 @@ func (res *SimilarityLookupResponse) Error() error {
 	return nil
 }
 
-func (req *SimilarityLookupRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *SimilarityLookupRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	if string(req.Parameters.Condition) != "" {
 		q["Condition"] = req.Parameters.Condition

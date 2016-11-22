@@ -47,7 +47,8 @@ func (res *CartModifyResponse) Error() error {
 	return nil
 }
 
-func (req *CartModifyRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *CartModifyRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	q["CartId"] = req.Parameters.CartID
 	q["HMAC"] = req.Parameters.HMAC

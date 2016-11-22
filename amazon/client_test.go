@@ -125,7 +125,7 @@ type mockResponse struct {
 	Result  string   `xml:"result"`
 }
 
-func (mop *mockOperation) buildQuery() map[string]interface{} {
+func (mop *mockOperation) Query() map[string]interface{} {
 	return map[string]interface{}{
 		"string": "bar",
 		"array":  []string{"foo", "bar", "baz"},

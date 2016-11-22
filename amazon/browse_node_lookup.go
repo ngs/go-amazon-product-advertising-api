@@ -52,7 +52,8 @@ func (res *BrowseNodeLookupResponse) BrowseNodes() []BrowseNode {
 	return res.Results.BrowseNode
 }
 
-func (req *BrowseNodeLookupRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *BrowseNodeLookupRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	p := req.Parameters
 	q["BrowseNodeId"] = p.BrowseNodeID

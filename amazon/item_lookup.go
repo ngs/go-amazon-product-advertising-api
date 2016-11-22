@@ -89,7 +89,8 @@ func (res *ItemLookupResponse) Error() error {
 	return nil
 }
 
-func (req *ItemLookupRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *ItemLookupRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	if string(req.Parameters.Condition) != "" {
 		q["Condition"] = string(req.Parameters.Condition)

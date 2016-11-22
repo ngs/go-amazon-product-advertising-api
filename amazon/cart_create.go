@@ -46,7 +46,8 @@ func (res *CartCreateResponse) Error() error {
 	return nil
 }
 
-func (req *CartCreateRequest) buildQuery() map[string]interface{} {
+// Query returns query for sending request
+func (req *CartCreateRequest) Query() map[string]interface{} {
 	q := map[string]interface{}{}
 	q["ResponseGroup"] = req.Parameters.ResponseGroups
 	q["Item"] = req.Parameters.Items.Query()
