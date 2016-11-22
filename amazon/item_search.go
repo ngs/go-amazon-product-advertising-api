@@ -1,9 +1,6 @@
 package amazon
 
-import (
-	"encoding/xml"
-	"net/http"
-)
+import "encoding/xml"
 
 // ItemSearchResponseGroup represents constants those are capable ResponseGroups parameter
 type ItemSearchResponseGroup string
@@ -310,7 +307,7 @@ func (req *ItemSearchRequest) Query() map[string]interface{} {
 }
 
 func (req *ItemSearchRequest) httpMethod() string {
-	return http.MethodGet
+	return "GET"
 }
 
 func (req *ItemSearchRequest) operation() string {

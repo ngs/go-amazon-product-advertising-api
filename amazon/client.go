@@ -191,11 +191,15 @@ func (client *Client) DoRequest(op OperationRequest, responseObject interface{})
 	method := op.httpMethod()
 	var res *http.Response
 	var err error
-	if method == http.MethodGet {
+
+	switch strings.ToUpper(method) {
+	case "GET":
 		res, err = http.Get(url)
-	} else if method == http.MethodPost {
+		break
+	case "POST":
 		res, err = http.PostForm(client.Endpoint(), client.fillQuery(op))
-	} else {
+		break
+	default:
 		return nil, fmt.Errorf("Unsupported HTTP method: %v", method)
 	}
 	if err != nil {

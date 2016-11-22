@@ -1,9 +1,6 @@
 package amazon
 
-import (
-	"encoding/xml"
-	"net/http"
-)
+import "encoding/xml"
 
 // BrowseNodeLookupResponseGroup represents constants those are capable ResponseGroups parameter
 type BrowseNodeLookupResponseGroup string
@@ -62,7 +59,7 @@ func (req *BrowseNodeLookupRequest) Query() map[string]interface{} {
 }
 
 func (req *BrowseNodeLookupRequest) httpMethod() string {
-	return http.MethodGet
+	return "GET"
 }
 
 func (req *BrowseNodeLookupRequest) operation() string {

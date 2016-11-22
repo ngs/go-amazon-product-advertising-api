@@ -2,7 +2,6 @@ package amazon
 
 import (
 	"encoding/xml"
-	"net/http"
 	"strings"
 )
 
@@ -123,7 +122,7 @@ func (req *ItemLookupRequest) Query() map[string]interface{} {
 }
 
 func (req *ItemLookupRequest) httpMethod() string {
-	return http.MethodGet
+	return "GET"
 }
 
 func (req *ItemLookupRequest) operation() string {

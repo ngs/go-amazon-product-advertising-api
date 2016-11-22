@@ -1,9 +1,6 @@
 package amazon
 
-import (
-	"encoding/xml"
-	"net/http"
-)
+import "encoding/xml"
 
 // CartAddResponseGroup represents constants those are capable ResponseGroups parameter
 type CartAddResponseGroup string
@@ -58,7 +55,7 @@ func (req *CartAddRequest) Query() map[string]interface{} {
 }
 
 func (req *CartAddRequest) httpMethod() string {
-	return http.MethodGet
+	return "GET"
 }
 
 func (req *CartAddRequest) operation() string {

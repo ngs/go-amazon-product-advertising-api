@@ -2,7 +2,6 @@ package amazon
 
 import (
 	"encoding/xml"
-	"net/http"
 	"strings"
 )
 
@@ -105,7 +104,7 @@ func (req *SimilarityLookupRequest) Query() map[string]interface{} {
 }
 
 func (req *SimilarityLookupRequest) httpMethod() string {
-	return http.MethodGet
+	return "GET"
 }
 
 func (req *SimilarityLookupRequest) operation() string {

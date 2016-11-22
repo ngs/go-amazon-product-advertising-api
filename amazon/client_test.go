@@ -3,7 +3,6 @@ package amazon
 import (
 	"encoding/xml"
 	"errors"
-	"net/http"
 	"os"
 	"reflect"
 	"testing"
@@ -142,7 +141,7 @@ func (mop *mockOperation) Query() map[string]interface{} {
 
 func (mop *mockOperation) httpMethod() string {
 	if mop.method == "" {
-		return http.MethodGet
+		return "GET"
 	}
 	return mop.method
 }
@@ -195,7 +194,7 @@ func TestDoPostRequest(t *testing.T) {
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{
-		method: http.MethodPost,
+		method: "POST",
 	}
 	mockResp := mockResponse{}
 	res, err := client.DoRequest(mockOp, &mockResp)
@@ -211,7 +210,7 @@ func TestDoInvalidMethodRequest(t *testing.T) {
 	client, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	client.AssociateTag = "ngsio-22"
 	mockOp := &mockOperation{
-		method: http.MethodDelete,
+		method: "DELETE",
 	}
 	mockResp := mockResponse{}
 	res, err := client.DoRequest(mockOp, &mockResp)
