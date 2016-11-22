@@ -37,8 +37,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%d results found\n\n", res.TotalResults())
-	for _, item := range res.Items() {
+	fmt.Printf("%d results found\n\n", res.Items.TotalResults)
+	for _, item := range res.Items.Item {
 		fmt.Printf(`-------------------------------
 [Title] %v
 [URL]   %v
