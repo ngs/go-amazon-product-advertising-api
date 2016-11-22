@@ -49,20 +49,20 @@ func TestSimilarityLookupSignedURL(t *testing.T) {
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
 	for _, test := range []Test{
-		Test{expectedSimilarityLookupSignedURL, signedURL},
-		Test{"ngsio-22", parsed.Query().Get("AssociateTag")},
-		Test{"AK", parsed.Query().Get("AWSAccessKeyId")},
-		Test{"ngsio-22", parsed.Query().Get("AssociateTag")},
-		Test{"New", parsed.Query().Get("Condition")},
-		Test{"foo,bar,baz", parsed.Query().Get("ItemId")},
-		Test{"Amazon", parsed.Query().Get("MerchantId")},
-		Test{"SimilarityLookup", parsed.Query().Get("Operation")},
-		Test{"Accessories,BrowseNodes,EditorialReview,Images,Large,ItemAttributes,ItemIds,Medium,Offers,OfferSummary,PromotionSummary,Reviews,SalesRank,Similarities,Small,Tracks,Variations,VariationSummary", parsed.Query().Get("ResponseGroup")},
-		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"yQtyToXWmhs80nzcFa5RBmb1MDv4Wi0wFeNKruxNw2A=", parsed.Query().Get("Signature")},
-		Test{"Intersection", parsed.Query().Get("SimilarityType")},
-		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
-		Test{"2013-08-01", parsed.Query().Get("Version")},
+		{expectedSimilarityLookupSignedURL, signedURL},
+		{"ngsio-22", parsed.Query().Get("AssociateTag")},
+		{"AK", parsed.Query().Get("AWSAccessKeyId")},
+		{"ngsio-22", parsed.Query().Get("AssociateTag")},
+		{"New", parsed.Query().Get("Condition")},
+		{"foo,bar,baz", parsed.Query().Get("ItemId")},
+		{"Amazon", parsed.Query().Get("MerchantId")},
+		{"SimilarityLookup", parsed.Query().Get("Operation")},
+		{"Accessories,BrowseNodes,EditorialReview,Images,Large,ItemAttributes,ItemIds,Medium,Offers,OfferSummary,PromotionSummary,Reviews,SalesRank,Similarities,Small,Tracks,Variations,VariationSummary", parsed.Query().Get("ResponseGroup")},
+		{"AWSECommerceService", parsed.Query().Get("Service")},
+		{"yQtyToXWmhs80nzcFa5RBmb1MDv4Wi0wFeNKruxNw2A=", parsed.Query().Get("Signature")},
+		{"Intersection", parsed.Query().Get("SimilarityType")},
+		{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
+		{"2013-08-01", parsed.Query().Get("Version")},
 	} {
 		test.Compare(t)
 	}
@@ -112,7 +112,7 @@ func TestSimilarityLookupDo(t *testing.T) {
 	}
 	// fmt.Println(res.Items.Item[0])
 	for _, test := range []Test{
-		Test{10, len(res.Items.Item)},
+		{10, len(res.Items.Item)},
 	} {
 		test.Compare(t)
 	}

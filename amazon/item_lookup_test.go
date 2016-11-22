@@ -58,24 +58,24 @@ func TestItemLookupSignedURL(t *testing.T) {
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
 	for _, test := range []Test{
-		Test{expectedItemLookupSignedURL, signedURL},
-		Test{"ngsio-22", parsed.Query().Get("AssociateTag")},
-		Test{"New", parsed.Query().Get("Condition")},
-		Test{"ISBN", parsed.Query().Get("IdType")},
-		Test{"False", parsed.Query().Get("IncludeReviewsSummary")},
-		Test{"foo,bar,baz", parsed.Query().Get("ItemId")},
-		Test{"Amazon", parsed.Query().Get("MerchantId")},
-		Test{"ItemLookup", parsed.Query().Get("Operation")},
-		Test{"10", parsed.Query().Get("RelatedItemPage")},
-		Test{"DigitalMusicArranger", parsed.Query().Get("RelationshipType")},
-		Test{"Accessories,BrowseNodes,EditorialReview,Images,ItemAttributes,ItemIds,Large,Medium,OfferFull,Offers,PromotionSummary,OfferSummary,RelatedItems,Reviews,SalesRank,Similarities,Small,Tracks,VariationImages,Variations,VariationSummary", parsed.Query().Get("ResponseGroup")},
-		Test{"Books", parsed.Query().Get("SearchIndex")},
-		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"wclnww68OCjD6o/5kLECcP0YRGiiODPpasHaaTyzc4Y=", parsed.Query().Get("Signature")},
-		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
-		Test{"10", parsed.Query().Get("TruncateReviewsAt")},
-		Test{"2", parsed.Query().Get("VariationPage")},
-		Test{"2013-08-01", parsed.Query().Get("Version")},
+		{expectedItemLookupSignedURL, signedURL},
+		{"ngsio-22", parsed.Query().Get("AssociateTag")},
+		{"New", parsed.Query().Get("Condition")},
+		{"ISBN", parsed.Query().Get("IdType")},
+		{"False", parsed.Query().Get("IncludeReviewsSummary")},
+		{"foo,bar,baz", parsed.Query().Get("ItemId")},
+		{"Amazon", parsed.Query().Get("MerchantId")},
+		{"ItemLookup", parsed.Query().Get("Operation")},
+		{"10", parsed.Query().Get("RelatedItemPage")},
+		{"DigitalMusicArranger", parsed.Query().Get("RelationshipType")},
+		{"Accessories,BrowseNodes,EditorialReview,Images,ItemAttributes,ItemIds,Large,Medium,OfferFull,Offers,PromotionSummary,OfferSummary,RelatedItems,Reviews,SalesRank,Similarities,Small,Tracks,VariationImages,Variations,VariationSummary", parsed.Query().Get("ResponseGroup")},
+		{"Books", parsed.Query().Get("SearchIndex")},
+		{"AWSECommerceService", parsed.Query().Get("Service")},
+		{"wclnww68OCjD6o/5kLECcP0YRGiiODPpasHaaTyzc4Y=", parsed.Query().Get("Signature")},
+		{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
+		{"10", parsed.Query().Get("TruncateReviewsAt")},
+		{"2", parsed.Query().Get("VariationPage")},
+		{"2013-08-01", parsed.Query().Get("Version")},
 	} {
 		test.Compare(t)
 	}
@@ -125,7 +125,7 @@ func TestItemLookupDo(t *testing.T) {
 	}
 	// fmt.Println(res.Items.Item[0])
 	for _, test := range []Test{
-		Test{10, len(res.Items.Item)},
+		{10, len(res.Items.Item)},
 	} {
 		test.Compare(t)
 	}

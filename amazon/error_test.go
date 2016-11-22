@@ -9,5 +9,5 @@ func TestError(t *testing.T) {
 
 func TestErrors(t *testing.T) {
 	Test{"", Errors{ErrorNode: []Error{}}.Error()}.Compare(t)
-	Test{"Error foo: bar", Errors{ErrorNode: []Error{Error{Code: "foo", Message: "bar"}}}.Error()}.Compare(t)
+	Test{"Error foo: bar", Errors{ErrorNode: []Error{{Code: "foo", Message: "bar"}}}.Error()}.Compare(t)
 }

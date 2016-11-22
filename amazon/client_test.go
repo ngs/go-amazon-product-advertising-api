@@ -39,10 +39,10 @@ func (test Test) DeepEqual(t *testing.T) {
 func TestNew(t *testing.T) {
 	client, _ := New("AK", "SK", "ngsio-22", "JP")
 	for _, test := range []Test{
-		Test{"AK", client.AccessKeyID},
-		Test{"SK", client.SecretAccessKey},
-		Test{"ngsio-22", client.AssociateTag},
-		Test{RegionJapan, client.Region},
+		{"AK", client.AccessKeyID},
+		{"SK", client.SecretAccessKey},
+		{"ngsio-22", client.AssociateTag},
+		{RegionJapan, client.Region},
 	} {
 		test.Compare(t)
 	}
@@ -95,10 +95,10 @@ func TestNewFromEnvionment(t *testing.T) {
 	os.Setenv("AWS_ASSOCIATE_TAG", "ngsio-22")
 	client, _ := NewFromEnvionment()
 	for _, test := range []Test{
-		Test{"AK", client.AccessKeyID},
-		Test{"SK", client.SecretAccessKey},
-		Test{"ngsio-22", client.AssociateTag},
-		Test{RegionJapan, client.Region},
+		{"AK", client.AccessKeyID},
+		{"SK", client.SecretAccessKey},
+		{"ngsio-22", client.AssociateTag},
+		{RegionJapan, client.Region},
 	} {
 		test.Compare(t)
 	}
@@ -109,8 +109,8 @@ func TestClientEndpoint(t *testing.T) {
 	insecureClient, _ := New("AK", "SK", "ngsio-22", RegionJapan)
 	insecureClient.Secure = false
 	for _, test := range []Test{
-		Test{"https://webservices.amazon.co.jp/onca/xml", secureClient.Endpoint()},
-		Test{"http://webservices.amazon.co.jp/onca/xml", insecureClient.Endpoint()},
+		{"https://webservices.amazon.co.jp/onca/xml", secureClient.Endpoint()},
+		{"http://webservices.amazon.co.jp/onca/xml", insecureClient.Endpoint()},
 	} {
 		test.Compare(t)
 	}
@@ -134,8 +134,8 @@ func (mop *mockOperation) buildQuery() map[string]interface{} {
 		"falsy":  false,
 		"truthy": true,
 		"map": []map[string]string{
-			map[string]string{"foo1": "bar1", "baz1": "qux1"},
-			map[string]string{"foo2": "bar2", "baz2": "qux2"},
+			{"foo1": "bar1", "baz1": "qux1"},
+			{"foo2": "bar2", "baz2": "qux2"},
 		},
 	}
 }

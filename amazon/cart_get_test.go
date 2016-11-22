@@ -34,18 +34,18 @@ func TestCartGetSignedURL(t *testing.T) {
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
 	for _, test := range []Test{
-		Test{expectedCartGetSignedURL, signedURL},
-		Test{"AK", parsed.Query().Get("AWSAccessKeyId")},
-		Test{"ngsio-22", parsed.Query().Get("AssociateTag")},
-		Test{"+ak+v8qGeDkkdQ/w0o+5uA2heQI=", parsed.Query().Get("HMAC")},
-		Test{"351-9409673-0414064", parsed.Query().Get("CartId")},
-		Test{"CYOXSP4DGCG16", parsed.Query().Get("CartItemId")},
-		Test{"CartGet", parsed.Query().Get("Operation")},
-		Test{"Cart,CartNewReleases,CartSimilarities,CartTopSellers", parsed.Query().Get("ResponseGroup")},
-		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"KhpXLgLTedbMUSW3AnKGndR/6PHVTXHiGD5miR3VeHs=", parsed.Query().Get("Signature")},
-		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
-		Test{"2013-08-01", parsed.Query().Get("Version")},
+		{expectedCartGetSignedURL, signedURL},
+		{"AK", parsed.Query().Get("AWSAccessKeyId")},
+		{"ngsio-22", parsed.Query().Get("AssociateTag")},
+		{"+ak+v8qGeDkkdQ/w0o+5uA2heQI=", parsed.Query().Get("HMAC")},
+		{"351-9409673-0414064", parsed.Query().Get("CartId")},
+		{"CYOXSP4DGCG16", parsed.Query().Get("CartItemId")},
+		{"CartGet", parsed.Query().Get("Operation")},
+		{"Cart,CartNewReleases,CartSimilarities,CartTopSellers", parsed.Query().Get("ResponseGroup")},
+		{"AWSECommerceService", parsed.Query().Get("Service")},
+		{"KhpXLgLTedbMUSW3AnKGndR/6PHVTXHiGD5miR3VeHs=", parsed.Query().Get("Signature")},
+		{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
+		{"2013-08-01", parsed.Query().Get("Version")},
 	} {
 		test.Compare(t)
 	}
@@ -94,7 +94,7 @@ func TestCartGetDo(t *testing.T) {
 		t.Errorf("Expected nil but got %v", err)
 	}
 	for _, test := range []Test{
-		Test{"354-9729779-1559716", res.Cart.ID},
+		{"354-9729779-1559716", res.Cart.ID},
 		// TODO: write more tests
 	} {
 		test.Compare(t)

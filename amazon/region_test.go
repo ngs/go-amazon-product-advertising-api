@@ -4,18 +4,18 @@ import "testing"
 
 func TestRegionEndpoint(t *testing.T) {
 	for _, test := range []Test{
-		Test{"webservices.amazon.com.br", RegionBrazil.Endpoint()},
-		Test{"webservices.amazon.ca", RegionCanada.Endpoint()},
-		Test{"webservices.amazon.cn", RegionChina.Endpoint()},
-		Test{"webservices.amazon.de", RegionGermany.Endpoint()},
-		Test{"webservices.amazon.es", RegionSpain.Endpoint()},
-		Test{"webservices.amazon.fr", RegionFrance.Endpoint()},
-		Test{"webservices.amazon.in", RegionIndia.Endpoint()},
-		Test{"webservices.amazon.it", RegionItaly.Endpoint()},
-		Test{"webservices.amazon.co.jp", RegionJapan.Endpoint()},
-		Test{"webservices.amazon.com.mx", RegionMexico.Endpoint()},
-		Test{"webservices.amazon.co.uk", RegionUK.Endpoint()},
-		Test{"webservices.amazon.com", RegionUS.Endpoint()},
+		{"webservices.amazon.com.br", RegionBrazil.Endpoint()},
+		{"webservices.amazon.ca", RegionCanada.Endpoint()},
+		{"webservices.amazon.cn", RegionChina.Endpoint()},
+		{"webservices.amazon.de", RegionGermany.Endpoint()},
+		{"webservices.amazon.es", RegionSpain.Endpoint()},
+		{"webservices.amazon.fr", RegionFrance.Endpoint()},
+		{"webservices.amazon.in", RegionIndia.Endpoint()},
+		{"webservices.amazon.it", RegionItaly.Endpoint()},
+		{"webservices.amazon.co.jp", RegionJapan.Endpoint()},
+		{"webservices.amazon.com.mx", RegionMexico.Endpoint()},
+		{"webservices.amazon.co.uk", RegionUK.Endpoint()},
+		{"webservices.amazon.com", RegionUS.Endpoint()},
 	} {
 		test.Compare(t)
 	}
@@ -23,19 +23,19 @@ func TestRegionEndpoint(t *testing.T) {
 
 func TestRegionHTTPSEndpoint(t *testing.T) {
 	for _, test := range []Test{
-		Test{"https://webservices.amazon.com.br/onca/xml", RegionBrazil.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.ca/onca/xml", RegionCanada.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.cn/onca/xml", RegionChina.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.de/onca/xml", RegionGermany.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.es/onca/xml", RegionSpain.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.fr/onca/xml", RegionFrance.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.in/onca/xml", RegionIndia.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.it/onca/xml", RegionItaly.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.co.jp/onca/xml", RegionJapan.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.com.mx/onca/xml", RegionMexico.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.co.uk/onca/xml", RegionUK.HTTPSEndpoint()},
-		Test{"https://webservices.amazon.com/onca/xml", RegionUS.HTTPSEndpoint()},
-		Test{"", Region("foo").HTTPSEndpoint()},
+		{"https://webservices.amazon.com.br/onca/xml", RegionBrazil.HTTPSEndpoint()},
+		{"https://webservices.amazon.ca/onca/xml", RegionCanada.HTTPSEndpoint()},
+		{"https://webservices.amazon.cn/onca/xml", RegionChina.HTTPSEndpoint()},
+		{"https://webservices.amazon.de/onca/xml", RegionGermany.HTTPSEndpoint()},
+		{"https://webservices.amazon.es/onca/xml", RegionSpain.HTTPSEndpoint()},
+		{"https://webservices.amazon.fr/onca/xml", RegionFrance.HTTPSEndpoint()},
+		{"https://webservices.amazon.in/onca/xml", RegionIndia.HTTPSEndpoint()},
+		{"https://webservices.amazon.it/onca/xml", RegionItaly.HTTPSEndpoint()},
+		{"https://webservices.amazon.co.jp/onca/xml", RegionJapan.HTTPSEndpoint()},
+		{"https://webservices.amazon.com.mx/onca/xml", RegionMexico.HTTPSEndpoint()},
+		{"https://webservices.amazon.co.uk/onca/xml", RegionUK.HTTPSEndpoint()},
+		{"https://webservices.amazon.com/onca/xml", RegionUS.HTTPSEndpoint()},
+		{"", Region("foo").HTTPSEndpoint()},
 	} {
 		test.Compare(t)
 	}
@@ -43,19 +43,19 @@ func TestRegionHTTPSEndpoint(t *testing.T) {
 
 func TestRegionHTTPEndpoint(t *testing.T) {
 	for _, test := range []Test{
-		Test{"http://webservices.amazon.com.br/onca/xml", RegionBrazil.HTTPEndpoint()},
-		Test{"http://webservices.amazon.ca/onca/xml", RegionCanada.HTTPEndpoint()},
-		Test{"http://webservices.amazon.cn/onca/xml", RegionChina.HTTPEndpoint()},
-		Test{"http://webservices.amazon.de/onca/xml", RegionGermany.HTTPEndpoint()},
-		Test{"http://webservices.amazon.es/onca/xml", RegionSpain.HTTPEndpoint()},
-		Test{"http://webservices.amazon.fr/onca/xml", RegionFrance.HTTPEndpoint()},
-		Test{"http://webservices.amazon.in/onca/xml", RegionIndia.HTTPEndpoint()},
-		Test{"http://webservices.amazon.it/onca/xml", RegionItaly.HTTPEndpoint()},
-		Test{"http://webservices.amazon.co.jp/onca/xml", RegionJapan.HTTPEndpoint()},
-		Test{"http://webservices.amazon.com.mx/onca/xml", RegionMexico.HTTPEndpoint()},
-		Test{"http://webservices.amazon.co.uk/onca/xml", RegionUK.HTTPEndpoint()},
-		Test{"http://webservices.amazon.com/onca/xml", RegionUS.HTTPEndpoint()},
-		Test{"", Region("foo").HTTPEndpoint()},
+		{"http://webservices.amazon.com.br/onca/xml", RegionBrazil.HTTPEndpoint()},
+		{"http://webservices.amazon.ca/onca/xml", RegionCanada.HTTPEndpoint()},
+		{"http://webservices.amazon.cn/onca/xml", RegionChina.HTTPEndpoint()},
+		{"http://webservices.amazon.de/onca/xml", RegionGermany.HTTPEndpoint()},
+		{"http://webservices.amazon.es/onca/xml", RegionSpain.HTTPEndpoint()},
+		{"http://webservices.amazon.fr/onca/xml", RegionFrance.HTTPEndpoint()},
+		{"http://webservices.amazon.in/onca/xml", RegionIndia.HTTPEndpoint()},
+		{"http://webservices.amazon.it/onca/xml", RegionItaly.HTTPEndpoint()},
+		{"http://webservices.amazon.co.jp/onca/xml", RegionJapan.HTTPEndpoint()},
+		{"http://webservices.amazon.com.mx/onca/xml", RegionMexico.HTTPEndpoint()},
+		{"http://webservices.amazon.co.uk/onca/xml", RegionUK.HTTPEndpoint()},
+		{"http://webservices.amazon.com/onca/xml", RegionUS.HTTPEndpoint()},
+		{"", Region("foo").HTTPEndpoint()},
 	} {
 		test.Compare(t)
 	}

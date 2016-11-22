@@ -30,17 +30,17 @@ func TestCartClearSignedURL(t *testing.T) {
 	signedURL := client.SignedURL(op)
 	parsed, _ := url.Parse(signedURL)
 	for _, test := range []Test{
-		Test{expectedCartClearSignedURL, signedURL},
-		Test{"AK", parsed.Query().Get("AWSAccessKeyId")},
-		Test{"ngsio-22", parsed.Query().Get("AssociateTag")},
-		Test{"+ak+v8qGeDkkdQ/w0o+5uA2heQI=", parsed.Query().Get("HMAC")},
-		Test{"351-9409673-0414064", parsed.Query().Get("CartId")},
-		Test{"CartClear", parsed.Query().Get("Operation")},
-		Test{"Cart", parsed.Query().Get("ResponseGroup")},
-		Test{"AWSECommerceService", parsed.Query().Get("Service")},
-		Test{"IhwJobQIwyjG13bmsehXb6znZvOj8Iz4OGtVaffotMo=", parsed.Query().Get("Signature")},
-		Test{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
-		Test{"2013-08-01", parsed.Query().Get("Version")},
+		{expectedCartClearSignedURL, signedURL},
+		{"AK", parsed.Query().Get("AWSAccessKeyId")},
+		{"ngsio-22", parsed.Query().Get("AssociateTag")},
+		{"+ak+v8qGeDkkdQ/w0o+5uA2heQI=", parsed.Query().Get("HMAC")},
+		{"351-9409673-0414064", parsed.Query().Get("CartId")},
+		{"CartClear", parsed.Query().Get("Operation")},
+		{"Cart", parsed.Query().Get("ResponseGroup")},
+		{"AWSECommerceService", parsed.Query().Get("Service")},
+		{"IhwJobQIwyjG13bmsehXb6znZvOj8Iz4OGtVaffotMo=", parsed.Query().Get("Signature")},
+		{"2016-11-16T12:34:00Z", parsed.Query().Get("Timestamp")},
+		{"2013-08-01", parsed.Query().Get("Version")},
 	} {
 		test.Compare(t)
 	}
@@ -89,7 +89,7 @@ func TestCartClearDo(t *testing.T) {
 		t.Errorf("Expected nil but got %v", err)
 	}
 	for _, test := range []Test{
-		Test{"353-7649034-4766017", res.Cart.ID},
+		{"353-7649034-4766017", res.Cart.ID},
 	} {
 		test.Compare(t)
 	}
