@@ -1,58 +1,70 @@
 package amazon
 
-import "net/http"
+import (
+	"encoding/xml"
+	"net/http"
+	"strings"
+)
 
 // SimilarityLookupResponseGroup represents constants those are capable ResponseGroups parameter
 type SimilarityLookupResponseGroup string
 
 const (
-	// SimilarityLookupResponseGroupBrowseNodes is a constant for BrowseNodes response group
+	// SimilarityLookupResponseGroupAccessories constant "Accessories"
+	SimilarityLookupResponseGroupAccessories SimilarityLookupResponseGroup = "Accessories"
+	// SimilarityLookupResponseGroupBrowseNodes constant "BrowseNodes"
 	SimilarityLookupResponseGroupBrowseNodes SimilarityLookupResponseGroup = "BrowseNodes"
-	// SimilarityLookupResponseGroupPromotionDetails is a constant for PromotionDetails response group
-	SimilarityLookupResponseGroupPromotionDetails SimilarityLookupResponseGroup = "PromotionDetails"
-	// SimilarityLookupResponseGroupEditorialReview is a constant for EditorialReview response group
+	// SimilarityLookupResponseGroupEditorialReview constant "EditorialReview"
 	SimilarityLookupResponseGroupEditorialReview SimilarityLookupResponseGroup = "EditorialReview"
-	// SimilarityLookupResponseGroupPromotionSummary is a constant for PromotionSummary response group
-	SimilarityLookupResponseGroupPromotionSummary SimilarityLookupResponseGroup = "PromotionSummary"
-	// SimilarityLookupResponseGroupImages is a constant for Images response group
+	// SimilarityLookupResponseGroupImages constant "Images"
 	SimilarityLookupResponseGroupImages SimilarityLookupResponseGroup = "Images"
-	// SimilarityLookupResponseGroupReviews is a constant for Reviews response group
-	SimilarityLookupResponseGroupReviews SimilarityLookupResponseGroup = "Reviews"
-	// SimilarityLookupResponseGroupItemAttributes is a constant for ItemAttributes response group
-	SimilarityLookupResponseGroupItemAttributes SimilarityLookupResponseGroup = "ItemAttributes"
-	// SimilarityLookupResponseGroupSalesRankItemIds is a constant for SalesRankItemIds response group
-	SimilarityLookupResponseGroupSalesRankItemIds SimilarityLookupResponseGroup = "SalesRankItemIds"
-	// SimilarityLookupResponseGroupSimilarities is a constant for Similarities response group
-	SimilarityLookupResponseGroupSimilarities SimilarityLookupResponseGroup = "Similarities"
-	// SimilarityLookupResponseGroupLarge is a constant for Large response group
+	// SimilarityLookupResponseGroupLarge constant "Large"
 	SimilarityLookupResponseGroupLarge SimilarityLookupResponseGroup = "Large"
-	// SimilarityLookupResponseGroupSmall is a constant for Small response group
-	SimilarityLookupResponseGroupSmall SimilarityLookupResponseGroup = "Small"
-	// SimilarityLookupResponseGroupListmaniaLists is a constant for ListmaniaLists response group
-	SimilarityLookupResponseGroupListmaniaLists SimilarityLookupResponseGroup = "ListmaniaLists"
-	// SimilarityLookupResponseGroupSubjects is a constant for Subjects response group
-	SimilarityLookupResponseGroupSubjects SimilarityLookupResponseGroup = "Subjects"
-	// SimilarityLookupResponseGroupMedium is a constant for Medium response group
+	// SimilarityLookupResponseGroupItemAttributes constant "ItemAttributes"
+	SimilarityLookupResponseGroupItemAttributes SimilarityLookupResponseGroup = "ItemAttributes"
+	// SimilarityLookupResponseGroupItemIds constant "ItemIds"
+	SimilarityLookupResponseGroupItemIds SimilarityLookupResponseGroup = "ItemIds"
+	// SimilarityLookupResponseGroupMedium constant "Medium"
 	SimilarityLookupResponseGroupMedium SimilarityLookupResponseGroup = "Medium"
-	// SimilarityLookupResponseGroupTracks is a constant for Tracks response group
-	SimilarityLookupResponseGroupTracks SimilarityLookupResponseGroup = "Tracks"
-	// SimilarityLookupResponseGroupOfferFull is a constant for OfferFull response group
-	SimilarityLookupResponseGroupOfferFull SimilarityLookupResponseGroup = "OfferFull"
-	// SimilarityLookupResponseGroupVariationMinimum is a constant for VariationMinimum response group
-	SimilarityLookupResponseGroupVariationMinimum SimilarityLookupResponseGroup = "VariationMinimum"
-	// SimilarityLookupResponseGroupOfferListings is a constant for OfferListings response group
-	SimilarityLookupResponseGroupOfferListings SimilarityLookupResponseGroup = "OfferListings"
-	// SimilarityLookupResponseGroupVariations is a constant for Variations response group
-	SimilarityLookupResponseGroupVariations SimilarityLookupResponseGroup = "Variations"
-	// SimilarityLookupResponseGroupOffers is a constant for Offers response group
+	// SimilarityLookupResponseGroupOffers constant "Offers"
 	SimilarityLookupResponseGroupOffers SimilarityLookupResponseGroup = "Offers"
-	// SimilarityLookupResponseGroupVariationSummary is a constant for VariationSummary response group
+	// SimilarityLookupResponseGroupOfferSummary constant "OfferSummary"
+	SimilarityLookupResponseGroupOfferSummary SimilarityLookupResponseGroup = "OfferSummary"
+	// SimilarityLookupResponseGroupPromotionSummary constant "PromotionSummary"
+	SimilarityLookupResponseGroupPromotionSummary SimilarityLookupResponseGroup = "PromotionSummary"
+	// SimilarityLookupResponseGroupReviews constant "Reviews"
+	SimilarityLookupResponseGroupReviews SimilarityLookupResponseGroup = "Reviews"
+	// SimilarityLookupResponseGroupSalesRank constant "SalesRank"
+	SimilarityLookupResponseGroupSalesRank SimilarityLookupResponseGroup = "SalesRank"
+	// SimilarityLookupResponseGroupSimilarities constant "Similarities"
+	SimilarityLookupResponseGroupSimilarities SimilarityLookupResponseGroup = "Similarities"
+	// SimilarityLookupResponseGroupSmall constant "Small"
+	SimilarityLookupResponseGroupSmall SimilarityLookupResponseGroup = "Small"
+	// SimilarityLookupResponseGroupTracks constant "Tracks"
+	SimilarityLookupResponseGroupTracks SimilarityLookupResponseGroup = "Tracks"
+	// SimilarityLookupResponseGroupVariations constant "Variations"
+	SimilarityLookupResponseGroupVariations SimilarityLookupResponseGroup = "Variations"
+	// SimilarityLookupResponseGroupVariationSummary constant "VariationSummary"
 	SimilarityLookupResponseGroupVariationSummary SimilarityLookupResponseGroup = "VariationSummary"
+)
+
+// SimilarityType typed constant for SimilarityType parameter
+type SimilarityType string
+
+const (
+	// SimilarityTypeIntersection constant "Intersection"
+	SimilarityTypeIntersection SimilarityType = "Intersection"
+	// SimilarityTypeRandom constant "Random"
+	SimilarityTypeRandom SimilarityType = "Random"
 )
 
 // SimilarityLookupParameters represents parameters for SimilarityLookup operation request
 type SimilarityLookupParameters struct {
 	ResponseGroups []SimilarityLookupResponseGroup
+	Condition      Condition
+	ItemIDs        []string
+	MerchantID     string
+	SimilarityType SimilarityType
 }
 
 // SimilarityLookupRequest represents request for SimilarityLookup operation
@@ -63,11 +75,31 @@ type SimilarityLookupRequest struct {
 
 // SimilarityLookupResponse represents response for SimilarityLookup operation
 type SimilarityLookupResponse struct {
-	Error error
+	XMLName xml.Name `xml:"SimilarityLookupResponse"`
+	Items   Items    `xml:"Items"`
+}
+
+// Error returns Error found
+func (res *SimilarityLookupResponse) Error() error {
+	if e := res.Items.Request.Errors; e != nil {
+		return e
+	}
+	return nil
 }
 
 func (req *SimilarityLookupRequest) buildQuery() map[string]interface{} {
 	q := map[string]interface{}{}
+	if string(req.Parameters.Condition) != "" {
+		q["Condition"] = req.Parameters.Condition
+	}
+	if req.Parameters.MerchantID != "" {
+		q["MerchantId"] = req.Parameters.MerchantID
+	}
+	if string(req.Parameters.SimilarityType) != "" {
+		q["SimilarityType"] = string(req.Parameters.SimilarityType)
+	}
+	q["ItemId"] = strings.Join(req.Parameters.ItemIDs, ",")
+	q["ResponseGroup"] = req.Parameters.ResponseGroups
 	return q
 }
 
@@ -83,6 +115,9 @@ func (req *SimilarityLookupRequest) operation() string {
 func (req *SimilarityLookupRequest) Do() (*SimilarityLookupResponse, error) {
 	respObj := SimilarityLookupResponse{}
 	if _, err := req.Client.DoRequest(req, &respObj); err != nil {
+		return nil, err
+	}
+	if err := respObj.Error(); err != nil {
 		return nil, err
 	}
 	return &respObj, nil
