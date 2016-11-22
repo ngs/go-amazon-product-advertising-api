@@ -57,3 +57,14 @@ go run item_search.go
 ```
 
 [Amazon Product Advertising API]: https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
+
+## Author
+
+[Atsushi Nagase]
+
+## License
+
+See [LICENSE]
+
+[Atsushi Nagase]: https://ngs.io
+[LICENSE]: LICENSE
