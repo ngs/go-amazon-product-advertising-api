@@ -208,32 +208,20 @@ func (client *Client) DoRequest(op OperationRequest, responseObject interface{})
 	if data, _ := ioutil.ReadAll(res.Body); data != nil {
 		// fmt.Println(string(data))
 		if err = xml.Unmarshal(data, responseObject); err != nil {
-			if e := newItemSearchErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newBrowseNodeLookupErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newItemLookupErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newSimilarityLookupErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newCartAddErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newCartClearErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newCartCreateErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newCartGetErrorResponse(data); e != nil {
-				return nil, e
-			}
-			if e := newCartModifyErrorResponse(data); e != nil {
-				return nil, e
+			for _, fn := range []func([]byte) error{
+				newItemSearchErrorResponse,
+				newBrowseNodeLookupErrorResponse,
+				newItemLookupErrorResponse,
+				newSimilarityLookupErrorResponse,
+				newCartAddErrorResponse,
+				newCartClearErrorResponse,
+				newCartCreateErrorResponse,
+				newCartGetErrorResponse,
+				newCartModifyErrorResponse,
+			} {
+				if e := fn(data); e != nil {
+					return nil, e
+				}
 			}
 			return nil, err
 		}
