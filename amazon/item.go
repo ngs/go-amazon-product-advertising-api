@@ -2,6 +2,7 @@ package amazon
 
 import (
 	"encoding/xml"
+	"fmt"
 	"time"
 )
 
@@ -80,15 +81,21 @@ type Date struct {
 
 // UnmarshalXML parse time
 func (c *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	const shortForm = "2006-01-02" // yyyy-mm-dd date format
 	var v string
 	d.DecodeElement(&v, &start)
-	parse, err := time.Parse(shortForm, v)
-	if err != nil {
-		return err
+	for _, shortForm := range []string{
+		"2006-01-02",
+		"2006-01",
+		"2006/01/02",
+		"2006/01",
+	} {
+		parse, err := time.Parse(shortForm, v)
+		if err == nil {
+			*c = Date{parse}
+			return nil
+		}
 	}
-	*c = Date{parse}
-	return nil
+	return fmt.Errorf("Invalid date %v", v)
 }
 
 // ItemAttributes represents ItemAttributes

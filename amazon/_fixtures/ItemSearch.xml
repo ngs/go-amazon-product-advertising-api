@@ -2093,7 +2093,7 @@
         </PackageDimensions>
         <ProductGroup>Book</ProductGroup>
         <ProductTypeName>ABIS_BOOK</ProductTypeName>
-        <PublicationDate>2016-01-22</PublicationDate>
+        <PublicationDate>2016-01</PublicationDate>
         <Publisher>オライリージャパン</Publisher>
         <Studio>オライリージャパン</Studio>
         <Title>Go言語によるWebアプリケーション開発</Title>
