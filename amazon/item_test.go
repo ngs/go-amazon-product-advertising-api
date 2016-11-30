@@ -23,12 +23,12 @@ func TestUnmarshalDate(t *testing.T) {
 
 func TestUnmarshalInvalidDate(t *testing.T) {
 	obj := TestDate{}
-	err := xml.Unmarshal([]byte("<TestDate><Date>2016/11/18</Date></TestDate>"), &obj)
+	err := xml.Unmarshal([]byte("<TestDate><Date>2016*11*18</Date></TestDate>"), &obj)
 	if err == nil {
 		t.Error("Expected not nil but got nil")
 	}
 	Test{
-		`parsing time "2016/11/18" as "2006-01-02": cannot parse "/11/18" as "-"`,
+		`Invalid date 2016*11*18`,
 		err.Error(),
 	}.Compare(t)
 }
