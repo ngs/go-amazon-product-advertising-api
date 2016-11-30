@@ -101,10 +101,16 @@ func (c *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 // ItemAttributes represents ItemAttributes
 type ItemAttributes struct {
 	Author            []string
+	Artist            string
+	Actor             string
+	AspectRatio       string
+	AudienceRating    string
 	Binding           string
 	Creator           Creator
 	EAN               string
 	EANList           EANList
+	CatalogNumberList CatalogNumberList
+	Format            []string
 	IsAdultProduct    bool
 	ISBN              string
 	Label             string
@@ -116,9 +122,14 @@ type ItemAttributes struct {
 	ProductGroup      string
 	ProductTypeName   string
 	PublicationDate   *Date
+	PackageQuantity   int
+	PartNumber        string
+	UPC               string
+	UPCList           UPCList
 	Publisher         string
 	Studio            string
 	Title             string
+	NumberOfDiscs     []int
 }
 
 // Creator represents Creator
@@ -139,8 +150,9 @@ type Languages struct {
 
 // Language represents Language
 type Language struct {
-	Name string
-	Type string
+	Name        string
+	Type        string
+	AudioFormat string
 }
 
 // Price represents Price
@@ -280,4 +292,14 @@ type TopItem struct {
 	DetailPageURL string
 	ProductGroup  string
 	Author        string
+}
+
+// CatalogNumberList represents CatalogNumberList
+type CatalogNumberList struct {
+	Element []string `xml:"CatalogNumberListElement"`
+}
+
+// UPCList represents UPCList
+type UPCList struct {
+	Element []string `xml:"UPCListElement"`
 }
