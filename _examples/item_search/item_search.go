@@ -13,8 +13,9 @@ func main() {
 		log.Fatal(err)
 	}
 	res, err := client.ItemSearch(amazon.ItemSearchParameters{
-		SearchIndex: amazon.SearchIndexBooks,
-		Keywords:    "Go 言語",
+		SearchIndex:    amazon.SearchIndexMusic,
+		ResponseGroups: []amazon.ItemSearchResponseGroup{amazon.ItemSearchResponseGroupLarge},
+		Keywords:       "Pat Metheny",
 	}).Do()
 	if err != nil {
 		log.Fatal(err)
