@@ -415,6 +415,8 @@ func TestItemSearchDo(t *testing.T) {
 		{0, len(res.Items.Item[0].BrowseNodes.BrowseNode[2].Children.BrowseNode[5].Children.BrowseNode)},
 
 		{time.Date(2016, 6, 20, 0, 0, 0, 0, time.UTC).UnixNano(), res.Items.Item[0].ItemAttributes.PublicationDate.UnixNano()},
+		{time.Date(2016, 1, 1, 0, 0, 0, 0, time.UTC).UnixNano(), res.Items.Item[1].ItemAttributes.PublicationDate.UnixNano()},
+		{time.Date(2016, 1, 1, 0, 0, 0, 0, time.UTC).UnixNano(), res.Items.Item[2].ItemAttributes.PublicationDate.UnixNano()},
 	} {
 		test.Compare(t)
 	}

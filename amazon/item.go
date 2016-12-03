@@ -88,6 +88,7 @@ func (c *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 		"2006-01",
 		"2006/01/02",
 		"2006/01",
+		"2006",
 	} {
 		parse, err := time.Parse(shortForm, v)
 		if err == nil {
