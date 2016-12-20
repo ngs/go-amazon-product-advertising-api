@@ -1,0 +1,14 @@
+version: 2
+executorType: docker
+containerInfo:
+  - image: golang:latest
+stages:
+  build:
+    workDir: /go/src/github.com/ngs/go-amazon-product-advertising-api
+    steps:
+      - type: checkout
+      - type: shell
+        name: 'go test'
+        command: |
+          go get -v -t -d ./...
+          go test -v ./...
